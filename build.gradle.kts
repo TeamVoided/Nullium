@@ -30,9 +30,8 @@ modSettings {
     modId(modid)
     modName(mod_name)
 
-    entrypoint("main", "org.teamvoided.template.Template::commonInit")
-    entrypoint("client", "org.teamvoided.template.Template::clientInit")
-    entrypoint("fabric-datagen", "org.teamvoided.template.TemplateData")
+    entrypoint("main", "org.teamvoided.nullium.Nullium::commonInit")
+    entrypoint("fabric-datagen", "org.teamvoided.nullium.data.gen.NulliumData")
     mixinFile("$modid.mixins.json")
 
 //    accessWidener("$modid.accesswidener")

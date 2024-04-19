@@ -1,23 +1,18 @@
-package org.teamvoided.template
+package org.teamvoided.nullium
 
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Suppress("unused")
-object Template {
-    const val MODID = "template"
+object Nullium {
+    const val MODID = "nullium"
 
     @JvmField
-    val log: Logger = LoggerFactory.getLogger(Template::class.simpleName)
+    val log: Logger = LoggerFactory.getLogger(Nullium::class.simpleName)
 
     fun commonInit() {
         log.info("Hello from Common")
     }
-
-    fun clientInit() {
-        log.info("Hello from Client")
-    }
-
     fun id(path: String) = Identifier(MODID, path)
 }

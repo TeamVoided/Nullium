@@ -11,8 +11,6 @@ object Nullium {
     @JvmField
     val log: Logger = LoggerFactory.getLogger(Nullium::class.simpleName)
 
-    fun commonInit() {
-        log.info("Hello from Common")
-    }
+    fun commonInit() { log.info("Nulls your in ium .?.") }
     fun id(path: String) = Identifier(MODID, path)
 }

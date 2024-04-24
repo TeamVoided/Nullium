@@ -94,10 +94,13 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
+    changeLog = " - init"
+
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
     curseDependency("fabric-api", uploadConfig.REQUIRED)
     // Fabric Language Kotlin
     modrinthDependency("Ha28R6CL", uploadConfig.REQUIRED)
     curseDependency("fabric-language-kotlin", uploadConfig.REQUIRED)
+
 }

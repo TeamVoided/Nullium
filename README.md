@@ -14,6 +14,18 @@ for the future updates!
     - Block:
         - `cane_support` (Defines the block that sugarcane can be planted on. Default is \[#dirt, #sand, soul_sand,
           soul_soil])
-        - `cane_hydration` (Defines the block that can placed next to. Default is \[ice, frosted_ice])
+        - `cane_hydration` (Defines the block that can sugarcane be placed next to. Default is \[ice, frosted_ice])
     - Fluid:
-        - `cane_hydration`  (Defines the fluid that can placed next to. Default is \[#water])
+        - `cane_hydration`  (Defines the fluid that can sugarcane be placed next to. Default is \[#water])
+- Big Salmon module.
+  - This module adds a big salmon. But more specifically, it adds the ability to control mob scale
+    with a config
+    file. The config format requires a `LivingEntity` mob id (You can fund this by trying to /summon a mob), a min and max
+    scale values. This will randomly pick between the min and max
+    scale values when spawn the entity. The mod will also rescale existing mobs if added to a new world.
+
+    To disable this feature, just remove all entries from the config file.
+- `/Nullium reload`
+  - This command will reload the all the module config files. This is useful because it means you dont have to restart the
+    game. *Unlike other mods which don't do this. >:)*
+    

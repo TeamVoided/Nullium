@@ -2,11 +2,11 @@ projectTitle = "Nullium"
 modId = "nullium"
 githubRepo = "Teamvoided/Nullium"
 discordServerInviteId = "KZ5Q364hEg"
-authors = [ "DuskAutumnStorm", "TheEderCore" ]
+authors = [ "DuskAutumnStorm", "TheEnderCore" ]
 majorMinecraftVersion = "1.20"
-minecraftVersion = "1.20.5"
-fabricLoaderVersion = "0.15.10"
-fabricApiVersion = "0.97.6+1.20.5"
+minecraftVersion = "1.20.6"
+fabricLoaderVersion = "0.15.11"
+fabricApiVersion = "0.97.8+1.20.6"
 fabricLangKotlinVersion = "1.10.19+kotlin.1.9.23"
 license = "MIT"
 modules = [ ]
@@ -21,4 +21,4 @@ modules = [ ]
     # MOJYARN: Yarn layered on top of the official Mojang mappings
     # CUSTOM: Custom mapping jar. Uses mappings version as file location
     type = "QUILT"
-    version = "1.20.5+build.1"
+    version = "1.20.6+build.6"

@@ -4,9 +4,10 @@
   "package": "org.teamvoided.nullium.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PlaceBlockGoalMixin",
     "SugarCaneBlockMixin",
-    "WitherRoseBlockMixin",
-    "WallMountedBlockMixin"
+    "WallMountedBlockMixin",
+    "WitherRoseBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

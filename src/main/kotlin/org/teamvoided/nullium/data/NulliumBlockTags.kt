@@ -17,6 +17,8 @@ object NulliumBlockTags {
     val SUPPORT_SMALL_TOP = create("support/small/top")
     @JvmField
     val SUPPORT_SMALL_BOTTOM = create("support/small/bottom")
+    @JvmField
+    val ENDERMAN_PLACEABLE = create("enderman_placeable")
 
     private fun create(id: String): TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id(id))
 }

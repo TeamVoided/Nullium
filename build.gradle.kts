@@ -34,8 +34,7 @@ modSettings {
     entrypoint("main", "org.teamvoided.nullium.Nullium::commonInit")
     entrypoint("fabric-datagen", "org.teamvoided.nullium.data.gen.NulliumData")
     mixinFile("$modid.mixins.json")
-
-//    accessWidener("$modid.accesswidener")
+    accessWidener("$modid.accesswidener")
 }
 
 dependencies {

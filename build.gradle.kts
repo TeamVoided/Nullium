@@ -97,7 +97,11 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = " - added big salmon\n - added \"/nullium reload\""
+    changeLog = " - ender eyes locate citys\n" +
+            " - #wither_rose_placable tag added\n" +
+            " - #enderman_placable tag added\n" +
+            " - removed soul sand and soil from #cane_support tag\n" +
+            " - addded #support/small/bottom and #support/small/top tags\n"
 
     versionOverrides = listOf("1.20.5", "1.20.6")
 

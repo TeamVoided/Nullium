@@ -4,9 +4,9 @@
   "package": "org.teamvoided.nullium.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "SugarCaneBlockMixin"
-  ],
-  "client": [
+    "SugarCaneBlockMixin",
+    "WitherRoseBlockMixin",
+    "WallMountedBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

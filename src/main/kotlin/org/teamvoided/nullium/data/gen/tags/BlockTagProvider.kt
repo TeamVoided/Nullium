@@ -8,7 +8,7 @@ import net.minecraft.registry.tag.BlockTags
 import org.teamvoided.nullium.data.NulliumBlockTags
 import java.util.concurrent.CompletableFuture
 
-class BlockTagsProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
+class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider.BlockTagProvider(output, registriesFuture) {
     override fun configure(arg: HolderLookup.Provider) {
         //Cane Tags
@@ -20,5 +20,21 @@ class BlockTagsProvider(output: FabricDataOutput, registriesFuture: CompletableF
             .forceAddTag(BlockTags.SAND)
             .add(Blocks.SOUL_SOIL)
             .add(Blocks.SOUL_SAND)
+
+        getOrCreateTagBuilder(NulliumBlockTags.WITHER_ROSE_PLACEABLE)
+            .forceAddTag(BlockTags.DIRT)
+            .add(Blocks.FARMLAND)
+            .add(Blocks.NETHERRACK)
+            .add(Blocks.SOUL_SOIL)
+            .add(Blocks.SOUL_SAND)
+
+        getOrCreateTagBuilder(NulliumBlockTags.SUPPORT_SMALL_TOP)
+            .forceAddTag(BlockTags.FENCES)
+            .forceAddTag(BlockTags.WALLS)
+
+        getOrCreateTagBuilder(NulliumBlockTags.SUPPORT_SMALL_BOTTOM)
+            .forceAddTag(BlockTags.FENCES)
+            .forceAddTag(BlockTags.WALLS)
+
     }
 }

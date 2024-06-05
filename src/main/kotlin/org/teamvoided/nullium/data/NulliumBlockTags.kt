@@ -11,7 +11,12 @@ object NulliumBlockTags {
     val CANE_SUPPORT = create("cane_support")
     @JvmField
     val CANE_HYDRATION = create("cane_hydration")
-
+    @JvmField
+    val WITHER_ROSE_PLACEABLE = create("wither_rose_placeable")
+    @JvmField
+    val SUPPORT_SMALL_TOP = create("support/small/top")
+    @JvmField
+    val SUPPORT_SMALL_BOTTOM = create("support/small/bottom")
 
     private fun create(id: String): TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id(id))
 }

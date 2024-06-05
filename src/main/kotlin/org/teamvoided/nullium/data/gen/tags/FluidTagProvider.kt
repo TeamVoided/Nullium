@@ -7,7 +7,7 @@ import net.minecraft.registry.tag.FluidTags
 import org.teamvoided.nullium.data.NulliumFluidTags
 import java.util.concurrent.CompletableFuture
 
-class FluidTagsProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
+class FluidTagProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider.FluidTagProvider(o, r) {
     override fun configure(arg: HolderLookup.Provider) {
 

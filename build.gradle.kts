@@ -96,6 +96,7 @@ uploadConfig {
 
     changeLog = " - added big salmon\n - added \"/nullium reload\""
 
+    versionOverrides = listOf("1.20.5", "1.20.6")
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)

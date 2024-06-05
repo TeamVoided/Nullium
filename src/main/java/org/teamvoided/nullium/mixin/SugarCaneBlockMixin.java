@@ -13,7 +13,7 @@ import org.teamvoided.nullium.data.NulliumBlockTags;
 import org.teamvoided.nullium.data.NulliumFluidTags;
 
 @Mixin(SugarCaneBlock.class)
-public class SugarCaneBlockMixin {
+abstract class SugarCaneBlockMixin {
 
     @Inject(method = "canPlaceAt", at = @At("HEAD"), cancellable = true)
     void customPlacement(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {

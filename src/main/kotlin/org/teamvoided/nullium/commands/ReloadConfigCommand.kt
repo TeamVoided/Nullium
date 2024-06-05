@@ -9,7 +9,9 @@ import org.teamvoided.nullium.config.ConfigManager
 
 object ReloadConfigCommand {
     fun init(root: LiteralCommandNode<ServerCommandSource>) {
-        val reload = literal("reload").executes(::reloadAll).build()
+        val reload = literal("reload")
+            .executes(::reloadAll)
+            .build()
 
         root.addChild(reload)
     }

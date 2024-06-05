@@ -15,7 +15,8 @@ object BigSalmon {
                 val properties =
                     NulConfigManager.bigSalmon.data()
                         .getOrElse(entity.type as EntityType<out LivingEntity>) { return@register }
-                val scale = entity.attributes.tracked.firstOrNull { it.attribute == EntityAttributes.GENERIC_SCALE }
+                val scale =
+                    entity.attributes.method_60497().firstOrNull { it.attribute == EntityAttributes.GENERIC_SCALE }
 
                 if (scale == null) {
                     entity.getAttributeInstance(EntityAttributes.GENERIC_SCALE)!!.baseValue = properties.random()

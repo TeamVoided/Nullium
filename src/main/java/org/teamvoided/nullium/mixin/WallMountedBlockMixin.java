@@ -13,7 +13,7 @@ import org.teamvoided.nullium.data.NulliumBlockTags;
 
 @Mixin(WallMountedBlock.class)
 abstract class WallMountedBlockMixin {
-	@Inject(method = "Lnet/minecraft/block/WallMountedBlock;canPlaceAt(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z", at = @At("RETURN"), cancellable = true)
+	@Inject(method = "canPlaceAt(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z", at = @At("RETURN"), cancellable = true)
 	private static void customPlacement(WorldView world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 		if (!cir.getReturnValue()) {
 			if (direction == Direction.DOWN) {

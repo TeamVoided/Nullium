@@ -4,7 +4,7 @@ fabric-loom = "1.6-SNAPSHOT"
 iridium = "3.2.0"
 
 farrow = "1.0.0+arrow.1.2.4"
-server_translations = "2.3.0+1.20.5-rc2"
+server_translations = "2.3.1+1.21-pre2"
 
 [libraries]
 farrow = { module = "net.wiredtomato:farrow", version.ref = "farrow" }

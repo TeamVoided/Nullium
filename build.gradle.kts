@@ -94,7 +94,8 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = " - init"
+    changeLog = " - added big salmon\n - added \"/nullium reload\""
+
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)

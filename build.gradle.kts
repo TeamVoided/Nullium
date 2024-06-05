@@ -23,6 +23,7 @@ val curse_id: String? by project
 
 repositories {
     maven("https://teamvoided.org/releases")
+    maven("https://maven.nucleoid.xyz")
     mavenCentral()
 }
 
@@ -40,6 +41,9 @@ modSettings {
 dependencies {
     modImplementation(fileTree("libs"))
     modImplementation(libs.farrow)
+    modImplementation(libs.server.translations.api)
+    include(libs.server.translations.api)
+
 
 //    modImplementation(libs.reef)
 }

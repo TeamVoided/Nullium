@@ -7,13 +7,13 @@ import net.minecraft.util.Identifier
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.config.ConfigInstance
-import org.teamvoided.nullium.config.ConfigManager
+import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.serlializers.IdentifierSerializer
 import java.io.File
 import kotlin.random.Random
 
-class BigSalmon : ConfigInstance<Map<EntityType<*>, ScaleProperties>> {
-    override val configFile: File = ConfigManager.configDir.resolve("big_salmon.json").toFile()
+class BigSalmonCfg : ConfigInstance<Map<EntityType<*>, BigSalmonCfg.ScaleProperties>> {
+    override val configFile: File = NulConfigManager.configDir.resolve("big_salmon.json").toFile()
 
     private var data = defaultData()
 
@@ -73,9 +73,10 @@ class BigSalmon : ConfigInstance<Map<EntityType<*>, ScaleProperties>> {
                 EntityType.TROPICAL_FISH to ScaleProperties(0.9, 1.1),
             )
     }
+
+    @Serializable
+    class ScaleProperties(private val min: Double, private val max: Double) {
+        fun random() = Random.nextDouble(min, max)
+    }
 }
 
-@Serializable
-class ScaleProperties(private val min: Double, private val max: Double) {
-    fun random() = Random.nextDouble(min, max)
-}

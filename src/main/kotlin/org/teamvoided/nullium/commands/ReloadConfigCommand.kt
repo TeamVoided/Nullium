@@ -4,30 +4,28 @@ import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
 import net.minecraft.server.command.CommandManager.literal
 import net.minecraft.server.command.ServerCommandSource
-import net.minecraft.text.Text
-import org.teamvoided.nullium.config.ConfigManager
+import org.teamvoided.nullium.config.NulConfigManager
+import org.teamvoided.nullium.util.childOf
+import org.teamvoided.nullium.util.cmd
+import org.teamvoided.nullium.util.tFeedback
 
 object ReloadConfigCommand {
-    fun init(root: LiteralCommandNode<ServerCommandSource>) {
+    @Suppress("UNUSED_VARIABLE")
+    fun register(root: LiteralCommandNode<ServerCommandSource>) {
         val reload = literal("reload")
             .executes(::reloadAll)
             .build()
-
-        root.addChild(reload)
+            .childOf(root)
     }
 
-    fun reloadAll(it: CommandContext<ServerCommandSource>): Int {
-        val modulesLoaded = ConfigManager.loadAll()
-        return if (modulesLoaded == 0) {
-            it.source.feedback(Text.of("All modules successfully reloaded!"))
+    private fun reloadAll(it: CommandContext<ServerCommandSource>): Int {
+        val failedModules = NulConfigManager.loadAll()
+        return if (failedModules == 0) {
+            it.source.tFeedback(cmd("reload", "success"))
             1
         } else {
-            it.source.feedback(Text.of("Failed to reload $modulesLoaded modules!"))
+            it.source.tFeedback(cmd("reload", "failed"), failedModules)
             0
         }
-    }
-
-    fun ServerCommandSource.feedback(text: Text, broadcastToOps: Boolean = false) {
-        this.sendFeedback({ text }, broadcastToOps)
     }
 }

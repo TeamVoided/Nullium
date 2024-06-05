@@ -5,11 +5,12 @@ import net.minecraft.server.command.CommandManager.literal
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.commands.ReloadConfigCommand
 
+object NulCommandRegistry {
+    fun init() = CommandRegistrationCallback.EVENT.register { dispatcher, _, _ ->
+        val nulliumNode = literal(MODID).build()
+        dispatcher.root.addChild(nulliumNode)
 
-fun registerCommands() = CommandRegistrationCallback.EVENT.register { dispatcher, _, _ ->
-    val nulliumNode = literal(MODID).build()
-    dispatcher.root.addChild(nulliumNode)
 
-
-    ReloadConfigCommand.init(nulliumNode)
+        ReloadConfigCommand.register(nulliumNode)
+    }
 }

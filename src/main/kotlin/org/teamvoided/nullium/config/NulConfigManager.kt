@@ -5,24 +5,26 @@ import kotlinx.serialization.encodeToString
 import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
-import org.teamvoided.nullium.config.module.BigSalmon
+import org.teamvoided.nullium.config.module.BigSalmonCfg
+import java.nio.file.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
-object ConfigManager {
-    val configDir = FabricLoader.getInstance().configDir.resolve(MODID)
+@Suppress("TooGenericExceptionCaught", "SwallowedException")
+object NulConfigManager {
+    val configDir: Path = FabricLoader.getInstance().configDir.resolve(MODID)
 
     private val infoFile = configDir.resolve("internal_info")
     private var info = Info()
     fun info(): Info = info.copy()
 
-    val bigSalmon = BigSalmon()
+    val bigSalmon = BigSalmonCfg()
     const val CONFIG_VERSION = 1.0
 
 
-    init {
+    fun init() {
         if (!configDir.exists()) configDir.createDirectories()
         loadAll()
     }
@@ -31,21 +33,12 @@ object ConfigManager {
     fun loadAll(): Int {
         load()
 
-
-        val bigSalmon = bigSalmon.load()
-
-        return listOf(bigSalmon).count { !it }
+        return listOf(
+            bigSalmon.load()
+        ).count { !it }
     }
 
-    /* fun saveAll(): Boolean {
-        bigSalmon.save()
-        save()
-        return true
-
-     } */
-
-
-    fun load() {
+    private fun load() {
         if (!infoFile.exists()) {
             save()
         } else {
@@ -61,7 +54,7 @@ object ConfigManager {
         }
     }
 
-    fun save()  {
+    private fun save() {
         try {
             infoFile.writeText(JSON.encodeToString(info))
         } catch (e: Exception) {

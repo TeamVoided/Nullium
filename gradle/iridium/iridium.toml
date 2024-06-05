@@ -7,7 +7,7 @@ majorMinecraftVersion = "1.20"
 minecraftVersion = "1.20.6"
 fabricLoaderVersion = "0.15.11"
 fabricApiVersion = "0.97.8+1.20.6"
-fabricLangKotlinVersion = "1.10.19+kotlin.1.9.23"
+fabricLangKotlinVersion = "1.11.0+kotlin.2.0.0"
 license = "MIT"
 modules = [ ]
 

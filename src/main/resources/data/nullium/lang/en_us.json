@@ -1,0 +1,4 @@
+{
+  "command.nullium.reload.success": "All modules successfully reloaded!",
+  "command.nullium.reload.failed": "Failed to reload %s modules!"
+}

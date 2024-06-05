@@ -37,5 +37,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(NulliumBlockTags.ENDERMAN_PLACEABLE)
             .forceAddTag(BlockTags.ENDERMAN_HOLDABLE)
 
+        getOrCreateTagBuilder(BlockTags.WALL_POST_OVERRIDE)
+            .forceAddTag(BlockTags.BUTTONS)
+            .add(Blocks.LEVER)
+
     }
 }

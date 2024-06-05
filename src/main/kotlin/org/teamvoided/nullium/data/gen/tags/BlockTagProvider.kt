@@ -18,8 +18,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(NulliumBlockTags.CANE_SUPPORT)
             .forceAddTag(BlockTags.DIRT)
             .forceAddTag(BlockTags.SAND)
-            .add(Blocks.SOUL_SOIL)
-            .add(Blocks.SOUL_SAND)
 
         getOrCreateTagBuilder(NulliumBlockTags.WITHER_ROSE_PLACEABLE)
             .forceAddTag(BlockTags.DIRT)

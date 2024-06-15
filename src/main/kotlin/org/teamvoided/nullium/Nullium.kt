@@ -23,5 +23,5 @@ object Nullium {
         BigSalmon.init()
     }
 
-    fun id(path: String) = Identifier.method_60655(MODID, path)
+    fun id(path: String) = Identifier.of(MODID, path)
 }

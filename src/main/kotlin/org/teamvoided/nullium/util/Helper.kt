@@ -1,6 +1,9 @@
 package org.teamvoided.nullium.util
 
 import com.mojang.brigadier.tree.CommandNode
+import net.minecraft.item.Item
+import net.minecraft.item.Items
+import net.minecraft.registry.Registries
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
 import org.teamvoided.nullium.Nullium.MODID
@@ -16,3 +19,6 @@ fun <S> CommandNode<S>.childOf(node: CommandNode<S>): CommandNode<S> {
     node.addChild(this)
     return this
 }
+
+fun Item.id() = Registries.ITEM.getId(this)
+fun Item.isAir() = this == Items.AIR

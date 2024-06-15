@@ -6,6 +6,8 @@ import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.config.module.BigSalmonCfg
+import org.teamvoided.nullium.config.module.BlacksmithCfg
+import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
@@ -21,6 +23,9 @@ object NulConfigManager {
     fun info(): Info = info.copy()
 
     val bigSalmon = BigSalmonCfg()
+
+    @JvmStatic
+    val blacksmith = BlacksmithCfg()
     const val CONFIG_VERSION = 1.0
 
 
@@ -34,7 +39,8 @@ object NulConfigManager {
         load()
 
         return listOf(
-            bigSalmon.load()
+            bigSalmon.load(),
+            blacksmith.load()
         ).count { !it }
     }
 
@@ -67,4 +73,6 @@ object NulConfigManager {
         constructor(version: Double) : this("DONT TOUCH! Internal config file! Will break if you do!", version)
         constructor() : this(CONFIG_VERSION)
     }
+
+    fun getSubCfgFile(name: String): File = configDir.resolve(name).toFile()
 }

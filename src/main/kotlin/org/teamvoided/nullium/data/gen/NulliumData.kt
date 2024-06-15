@@ -6,6 +6,7 @@ import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.data.gen.tags.BlockTagProvider
 import org.teamvoided.nullium.data.gen.tags.FluidTagProvider
+import org.teamvoided.nullium.data.gen.tags.ItemTagProvider
 import org.teamvoided.nullium.data.gen.tags.StructureTagProvider
 
 class NulliumData : DataGeneratorEntrypoint {
@@ -13,8 +14,11 @@ class NulliumData : DataGeneratorEntrypoint {
         log.info("Hello from DataGen")
         val pack = gen.createPack()
 
+
+        pack.addProvider(::ItemTagProvider)
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::FluidTagProvider)
+
         pack.addProvider(::StructureTagProvider)
     }
 

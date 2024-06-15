@@ -1,5 +1,6 @@
 @file:Suppress("PropertyName", "VariableNaming")
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -40,6 +41,7 @@ modSettings {
 dependencies {
     modImplementation(fileTree("libs"))
     modImplementation(libs.farrow)
+    include(libs.farrow)
     modImplementation(libs.server.translations.api)
     include(libs.server.translations.api)
 
@@ -48,6 +50,8 @@ dependencies {
 }
 
 loom {
+    splitEnvironmentSourceSets()
+
     runs {
         create("DataGen") {
             client()
@@ -76,8 +80,8 @@ tasks {
         options.release.set(targetJavaVersion)
     }
 
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = targetJavaVersion.toString()
+    withType<KotlinCompile>().all {
+        compilerOptions.jvmTarget = JvmTarget.JVM_21
     }
 
     java {

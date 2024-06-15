@@ -13,7 +13,7 @@ import java.io.File
 import kotlin.random.Random
 
 class BigSalmonCfg : ConfigInstance<Map<EntityType<*>, BigSalmonCfg.ScaleProperties>> {
-    override val configFile: File = NulConfigManager.configDir.resolve("big_salmon.json").toFile()
+    override val configFile: File = NulConfigManager.getSubCfgFile("big_salmon.json")
 
     private var data = defaultData()
 

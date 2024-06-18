@@ -1,6 +1,6 @@
 package org.teamvoided.nullium.config.module
 
-import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
 import org.teamvoided.nullium.config.ConfigInstance
 
 class SwitchboardCfg : ConfigInstance<SwitchboardCfg.Companion.SwitchboardData> {

@@ -14,6 +14,7 @@ import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import org.teamvoided.nullium.Nullium.MODID
+import java.util.function.Supplier
 
 fun tText(text: String, vararg data: Any) = Text.translatable(text, *data)
 
@@ -27,6 +28,12 @@ fun <S> CommandNode<S>.childOf(node: CommandNode<S>): CommandNode<S> {
     return this
 }
 
+// generic
+
+fun <T> T.supply() = Supplier { this }
+
+
+//mc
 fun Item.id() = Registries.ITEM.getId(this)
 fun Item.isAir() = this == Items.AIR
 

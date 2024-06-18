@@ -5,9 +5,9 @@ import kotlinx.serialization.encodeToString
 import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
-import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.config.module.BlacksmithCfg
 import org.teamvoided.nullium.config.module.MiscellaneousCfg
+import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.config.module.SwitchboardCfg
 import java.io.File
 import java.nio.file.Path

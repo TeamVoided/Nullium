@@ -11,7 +11,7 @@ class SwitchboardCfg : ConfigInstance<SwitchboardCfg.Companion.SwitchboardData> 
     companion object {
         @Serializable
         data class SwitchboardData(
-            val enableBigSalmon: Boolean,
+            val enableMobScale: Boolean,
             @JvmField
             val enableHolderman: Boolean,
             @JvmField

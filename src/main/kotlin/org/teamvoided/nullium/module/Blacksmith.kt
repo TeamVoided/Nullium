@@ -1,14 +1,37 @@
 package org.teamvoided.nullium.module
 
 import net.minecraft.component.DataComponentTypes
+import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
+import net.minecraft.item.ToolMaterials
+import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.EnchantmentTags
 import org.teamvoided.nullium.config.NulConfigManager.blacksmith
 import org.teamvoided.nullium.config.data.IdentifierType
+import org.teamvoided.nullium.data.NulliumMaterialTags
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
+import org.teamvoided.nullium.util.supply
 
 object Blacksmith {
+
+    fun repairOverrides() {
+        ToolMaterials.WOOD.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_WOOD).supply()
+        ToolMaterials.STONE.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_STONE).supply()
+        ToolMaterials.GOLD.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_GOLD).supply()
+        ToolMaterials.IRON.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_IRON).supply()
+        ToolMaterials.DIAMOND.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_DIAMOND).supply()
+        ToolMaterials.NETHERITE.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
+
+        ArmorMaterials.LEATHER.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_LEATHER).supply()
+        ArmorMaterials.CHAIN.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_CHAIN).supply()
+        ArmorMaterials.IRON.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_IRON).supply()
+        ArmorMaterials.GOLD.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_GOLD).supply()
+        ArmorMaterials.DIAMOND.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_DIAMOND).supply()
+        ArmorMaterials.NETHERITE.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
+    }
+
+
     @JvmStatic
     fun calculateCost(stack: ItemStack): Int {
         val cfg = blacksmith.data()

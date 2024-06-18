@@ -1,2 +1,7 @@
 accessWidener v2 named
 accessible class net/minecraft/entity/mob/EndermanEntity$PlaceBlockGoal
+
+accessible field net/minecraft/item/ToolMaterials repairIngredient Ljava/util/function/Supplier;
+mutable field net/minecraft/item/ToolMaterials repairIngredient Ljava/util/function/Supplier;
+accessible field net/minecraft/item/ArmorMaterial repairIngredient Ljava/util/function/Supplier;
+mutable field net/minecraft/item/ArmorMaterial repairIngredient Ljava/util/function/Supplier;

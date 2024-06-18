@@ -9,7 +9,7 @@ import net.minecraft.item.ThrowablePotionItem
 import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import org.teamvoided.nullium.config.NulConfigManager
-import org.teamvoided.nullium.module.BigSalmon
+import org.teamvoided.nullium.module.MobScale
 
 object NulFabricEvents {
 
@@ -30,6 +30,6 @@ object NulFabricEvents {
 
     private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
         val cfg = NulConfigManager.switchboard.data()
-        if (cfg.enableBigSalmon) BigSalmon.init(entity)
+        if (cfg.enableBigSalmon) MobScale.init(entity)
     }
 }

@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "org.teamvoided.nullium.mixin",
   "compatibilityLevel": "JAVA_17",
+  "plugin": "org.teamvoided.nullium.mixin.NulliumMixinPlugin",
   "mixins": [
     "AnvilScreenHandlerMixin",
     "PlaceBlockGoalMixin",

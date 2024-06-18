@@ -3,12 +3,10 @@ package org.teamvoided.nullium.module
 import net.minecraft.block.Blocks
 import net.minecraft.entity.mob.EndermanEntity
 import net.minecraft.item.BlockItem
-import net.minecraft.loot.LootTable
-import net.minecraft.loot.context.LootContextParameterSet
-import net.minecraft.loot.context.LootContextType
 import net.minecraft.loot.context.LootContextTypes
-import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
+import org.teamvoided.nullium.util.LootContextParameterSet
+import org.teamvoided.nullium.util.getLootTable
 
 object HolderMan {
     @JvmStatic
@@ -26,8 +24,4 @@ object HolderMan {
             }
         }
     }
-
-    fun ServerWorld.getLootTable(key: RegistryKey<LootTable>): LootTable = this.server.method_58576().getLootTable(key)
-    fun LootContextParameterSet(world: ServerWorld, type: LootContextType): LootContextParameterSet =
-        LootContextParameterSet.Builder(world).build(type)
 }

@@ -21,8 +21,8 @@ data class MobScaleData(
             ScaleEntry(EntityType.SALMON, 0.8, 1.2),
             ScaleEntry(EntityType.COD, 0.9, 1.1),
             ScaleEntry(EntityType.TROPICAL_FISH, 0.9, 1.1),
-            ScaleEntry(EntityType.SQUID, listOf(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5)),
-            ScaleEntry(EntityType.GLOW_SQUID, 0.4)
+            ScaleEntry(EntityType.SQUID, listOf(1.0, 1.0, 1.0, 1.0, 1.0, 0.5)),
+            ScaleEntry(EntityType.GLOW_SQUID, 0.7)
         )
     )
 }
@@ -30,7 +30,7 @@ data class MobScaleData(
 
 @Serializable
 class ScaleEntry(
-    @Serializable(with = EntityTypeSerializer::class) val entityType: EntityType<out @Contextual Entity>,
+    @Serializable(with = EntityTypeSerializer::class) val entity: EntityType<out @Contextual Entity>,
     val properties: ScaleProperties
 ) {
     constructor(type: LivingType, min: Double, max: Double) : this(type, RandomScaleProperty(min, max))

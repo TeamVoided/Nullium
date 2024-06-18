@@ -101,13 +101,12 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = " - ender eyes locate citys\n" +
-            " - #wither_rose_placable tag added\n" +
-            " - #enderman_placable tag added\n" +
-            " - removed soul sand and soil from #cane_support tag\n" +
-            " - addded #support/small/bottom and #support/small/top tags\n"
+    changeLog = " - ender eyes locate citys"
 
-    versionOverrides = listOf("1.20.5", "1.20.6")
+//    versionOverrides = listOf("1.20.5", "1.20.6")
+
+
+    // Mark that farrow is embeded
 
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)

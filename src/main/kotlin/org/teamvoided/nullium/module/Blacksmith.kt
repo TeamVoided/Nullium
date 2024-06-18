@@ -1,12 +1,10 @@
 package org.teamvoided.nullium.module
 
-import arrow.core.left
-import arrow.core.right
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.EnchantmentTags
 import org.teamvoided.nullium.config.NulConfigManager.blacksmith
-import org.teamvoided.nullium.util.isAir
+import org.teamvoided.nullium.config.data.IdentifierType
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
 
@@ -15,11 +13,15 @@ object Blacksmith {
     fun calculateCost(stack: ItemStack): Int {
         val cfg = blacksmith.data()
         val data = cfg.materialRepairCosts
-            .mapKeys { p -> p.key.item().let { if (it.isAir()) p.key.itemTag().left() else it.right() } }
-            .filter { p -> p.key.fold({ stack.isIn(it) }, { it == stack.item }) }
+            .filter {
+                when (it.type) {
+                    IdentifierType.ITEM -> it.id.item() == stack.item
+                    IdentifierType.TAG -> stack.isIn(it.id.itemTag())
+                }
+            }
             .toList()
             .firstOrNull()
-            ?.second ?: cfg.defaultRepairCost
+            ?.data ?: cfg.defaultRepairCost
 
         var enchantmentCosts = 0
         val enchantments = stack.get(DataComponentTypes.ENCHANTMENTS)

@@ -5,8 +5,10 @@ import kotlinx.serialization.encodeToString
 import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
-import org.teamvoided.nullium.config.module.BigSalmonCfg
+import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.config.module.BlacksmithCfg
+import org.teamvoided.nullium.config.module.MiscellaneousCfg
+import org.teamvoided.nullium.config.module.SwitchboardCfg
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
@@ -22,25 +24,39 @@ object NulConfigManager {
     private var info = Info()
     fun info(): Info = info.copy()
 
-    val bigSalmon = BigSalmonCfg()
-
-    @JvmStatic
-    val blacksmith = BlacksmithCfg()
     const val CONFIG_VERSION = 1.0
+    val switchboard = SwitchboardCfg()
+
+
+    lateinit var miscellaneous: MiscellaneousCfg private set
+    lateinit var bigSalmon: MobScaleCfg private set
+    lateinit var blacksmith: BlacksmithCfg private set
 
 
     fun init() {
         if (!configDir.exists()) configDir.createDirectories()
+
+        miscellaneous = MiscellaneousCfg()
+        bigSalmon = MobScaleCfg()
+        blacksmith = BlacksmithCfg()
         loadAll()
+    }
+
+    @JvmStatic
+    fun loadSwitch() {
+        if (!configDir.exists()) configDir.createDirectories()
+        switchboard.load()
     }
 
 
     fun loadAll(): Int {
         load()
+        switchboard.load()
 
         return listOf(
             bigSalmon.load(),
-            blacksmith.load()
+            blacksmith.load(),
+            miscellaneous.load()
         ).count { !it }
     }
 

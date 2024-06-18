@@ -31,8 +31,6 @@ public abstract class AnvilScreenHandlerMixin {
 
 	@Inject(method = "onTakeOutput", at = @At("TAIL"))
 	private void onTakeOutput(PlayerEntity player, ItemStack stack, CallbackInfo ci) {
-		var cost = stack.getOrDefault(DataComponentTypes.REPAIR_COST, 0);
-		stack.set(DataComponentTypes.LORE, new LoreComponent(List.of(Text.of("Repair Cost: " + cost))));
 		isRepairing = false;
 	}
 
@@ -46,6 +44,7 @@ public abstract class AnvilScreenHandlerMixin {
 				return Blacksmith.calculateCost(copyItem);
 			}
 		}
+		isRepairing = false;
 		return original;
 	}
 

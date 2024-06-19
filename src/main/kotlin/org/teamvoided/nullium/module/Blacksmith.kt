@@ -8,7 +8,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.EnchantmentTags
 import org.teamvoided.nullium.config.NulConfigManager.blacksmith
 import org.teamvoided.nullium.config.data.IdentifierType
-import org.teamvoided.nullium.data.NulliumMaterialTags
+import org.teamvoided.nullium.data.tags.NulliumMaterialTags
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
 import org.teamvoided.nullium.util.supply

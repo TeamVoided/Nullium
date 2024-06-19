@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.teamvoided.nullium.data.NulliumBlockTags;
-import org.teamvoided.nullium.data.NulliumFluidTags;
+import org.teamvoided.nullium.data.tags.NulliumBlockTags;
+import org.teamvoided.nullium.data.tags.NulliumFluidTags;
 
 @Mixin(SugarCaneBlock.class)
 abstract class SugarCaneBlockMixin {

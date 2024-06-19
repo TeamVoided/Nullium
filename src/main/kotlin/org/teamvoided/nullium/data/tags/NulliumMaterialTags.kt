@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.data
+package org.teamvoided.nullium.data.tags
 
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys

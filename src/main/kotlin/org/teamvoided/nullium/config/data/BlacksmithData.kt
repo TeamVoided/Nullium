@@ -3,7 +3,7 @@ package org.teamvoided.nullium.config.data
 import kotlinx.serialization.Serializable
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
-import org.teamvoided.nullium.data.NulliumMaterialTags
+import org.teamvoided.nullium.data.tags.NulliumMaterialTags
 import org.teamvoided.nullium.serlializers.IdentifierSerializer
 import org.teamvoided.nullium.util.id
 

@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.item.Items
 import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.tag.ItemTags
-import org.teamvoided.nullium.data.NulliumMaterialTags
+import org.teamvoided.nullium.data.tags.NulliumMaterialTags
 import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :

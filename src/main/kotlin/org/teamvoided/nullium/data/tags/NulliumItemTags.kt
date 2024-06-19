@@ -1,12 +1,11 @@
 package org.teamvoided.nullium.data.tags
 
-import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
 import org.teamvoided.nullium.Nullium.id
+import org.teamvoided.nullium.util.tag
 
 object NulliumItemTags {
 
 
-    private fun create(id: String): TagKey<Item> = TagKey.of(RegistryKeys.ITEM, id(id))
+    private fun create(id: String) = RegistryKeys.ITEM.tag(id(id))
 }

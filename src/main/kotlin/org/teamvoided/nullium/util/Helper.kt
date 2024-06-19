@@ -9,10 +9,13 @@ import net.minecraft.loot.LootTable
 import net.minecraft.loot.context.LootContextParameterSet
 import net.minecraft.loot.context.LootContextType
 import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
+import net.minecraft.util.Identifier
 import org.teamvoided.nullium.Nullium.MODID
 import java.util.function.Supplier
 
@@ -34,6 +37,11 @@ fun <T> T.supply() = Supplier { this }
 
 
 //mc
+
+fun <T, Y: Registry<T>> RegistryKey<Y>.key(id: Identifier): RegistryKey<T> = RegistryKey.of(this, id)
+fun <T, Y: Registry<T>> RegistryKey<Y>.tag(id: Identifier): TagKey<T> = TagKey.of(this, id)
+
+
 fun Item.id() = Registries.ITEM.getId(this)
 fun Item.isAir() = this == Items.AIR
 

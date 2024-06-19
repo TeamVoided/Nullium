@@ -6,10 +6,14 @@ authors = [ "DuskAutumnStorm", "TheEnderCore" ]
 majorMinecraftVersion = "1.21"
 minecraftVersion = "1.21"
 fabricLoaderVersion = "0.15.11"
-fabricApiVersion = "0.100.1+1.21"
+fabricApiVersion = "0.100.3+1.21"
 fabricLangKotlinVersion = "1.11.0+kotlin.2.0.0"
 license = "MIT"
 modules = [ ]
+modDescription = "A collection of many small server-side features"
+# Modmenu badges, values can be: [ library, deprecated ]
+badges = [ ]
+disableKotlin = false
 
 [mappings]
     # You have 7 mapping types

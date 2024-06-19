@@ -1,8 +1,7 @@
-rootProject.name = "Nullium"
 pluginManagement {
     repositories {
-        maven("https://maven.fabricmc.net/") { name = "Fabric" }
         maven("https://maven.teamvoided.org/releases")
+        maven("https://maven.fabricmc.net/") { name = "Fabric" }
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()

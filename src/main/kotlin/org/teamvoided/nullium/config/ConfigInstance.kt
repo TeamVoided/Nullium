@@ -6,7 +6,7 @@ import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.log
 import java.io.File
 
-interface ConfigInstance<T : Any> {
+interface ConfigInstance<T> {
     val name: String
     val configFile: File
         get() = NulConfigManager.getSubCfgFile("${name.lowercase()}.json")

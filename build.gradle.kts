@@ -14,11 +14,8 @@ plugins {
 
 group = property("maven_group")!!
 version = property("mod_version")!!
-base.archivesName.set(property("archives_base_name") as String)
-description = property("description") as String
+base.archivesName.set(modSettings.modId())
 
-val modid: String by project
-val mod_name: String by project
 val modrinth_id: String? by project
 val curse_id: String? by project
 
@@ -29,24 +26,18 @@ repositories {
 }
 
 modSettings {
-    modId(modid)
-    modName(mod_name)
-
     entrypoint("main", "org.teamvoided.nullium.Nullium::commonInit")
     entrypoint("fabric-datagen", "org.teamvoided.nullium.data.gen.NulliumData")
-    mixinFile("$modid.mixins.json")
-    accessWidener("$modid.accesswidener")
+    mixinFile("${modId()}.mixins.json")
+    accessWidener("${modId()}.accesswidener")
 }
 
 dependencies {
     modImplementation(fileTree("libs"))
-    modImplementation(libs.farrow)
-    include(libs.farrow)
     modImplementation(libs.server.translations.api)
     include(libs.server.translations.api)
-
-
-//    modImplementation(libs.reef)
+//    modImplementation(libs.farrow)
+//    include(libs.farrow)
 }
 
 loom {
@@ -58,7 +49,7 @@ loom {
             ideConfigGenerated(true)
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
-            vmArg("-Dfabric-api.datagen.modid=${modid}")
+            vmArg("-Dfabric-api.datagen.modid=${modSettings.modId()}")
             runDir("build/datagen")
         }
 
@@ -101,7 +92,7 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = " - ender eyes locate citys"
+    changeLog = " - small update :)"
 
 //    versionOverrides = listOf("1.20.5", "1.20.6")
 

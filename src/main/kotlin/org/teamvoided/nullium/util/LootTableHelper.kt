@@ -6,6 +6,7 @@ import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition
 import net.minecraft.loot.condition.LootCondition
+import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.condition.SurvivesExplosionLootCondition
 import net.minecraft.loot.context.LootContextType
 import net.minecraft.loot.entry.ItemEntry
@@ -63,6 +64,7 @@ class LootPoolDSL(private val builder: LootPool.Builder) {
 
     fun item(item: ItemConvertible, init: LeafEntryDSL.() -> Unit) = apply { builder.with(itemEntry(item, init)) }
     fun item(item: ItemConvertible, weight: Int) = apply { builder.with(itemEntry(item) { weight(weight) }) }
+    fun item(item: ItemConvertible) = apply { builder.with(itemEntry(item) { }) }
 
     fun lootTable(loot: LootTable, init: LeafEntryDSL.() -> Unit) = apply { builder.with(lootTableEntry(loot, init)) }
     fun lootTable(loot: RegistryKey<LootTable>, init: LeafEntryDSL.() -> Unit) =
@@ -80,12 +82,14 @@ inline fun itemEntry(item: ItemConvertible, init: LeafEntryDSL.() -> Unit): Leaf
     return dsl.get()
 }
 
+fun lootTableEntry(loot: LootTable) = lootTableEntry(loot) {}
 inline fun lootTableEntry(loot: LootTable, init: LeafEntryDSL.() -> Unit): LeafEntry.Builder<*> {
     val dsl = LeafEntryDSL(LootTableEntry.method_57631(loot))
     dsl.init()
     return dsl.get()
 }
 
+fun lootTableEntry(loot: RegistryKey<LootTable>) = lootTableEntry(loot) {}
 inline fun lootTableEntry(loot: RegistryKey<LootTable>, init: LeafEntryDSL.() -> Unit): LeafEntry.Builder<*> {
     val dsl = LeafEntryDSL(LootTableEntry.method_428(loot))
     dsl.init()
@@ -100,6 +104,8 @@ class LeafEntryDSL(private val builder: LeafEntry.Builder<*>) {
     fun conditionally(condition: LootCondition.Builder) = apply { builder.conditionally(condition) }
     fun get() = builder
 }
+
+fun randomChance(chance: Float) =   RandomChanceLootCondition.method_932(chance)
 
 fun survivesExplosion(): LootCondition.Builder = SurvivesExplosionLootCondition.builder()
 
@@ -132,5 +138,6 @@ class StatePredicateBuilderDSL(private val builder: StatePredicate.Builder) {
     fun exactMatch(property: Property<Boolean>, value: Boolean) = apply { builder.exactMatch(property, value) }
     fun <T> exactMatch(property: Property<T>, value: T) where T : Comparable<T>, T : StringIdentifiable =
         apply { builder.exactMatch(property, value) }
+
     fun get() = builder
 }

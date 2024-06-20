@@ -17,9 +17,13 @@ class SwitchboardCfg : ConfigInstance<SwitchboardCfg.Companion.SwitchboardData> 
             @JvmField
             val enableBlacksmith: Boolean,
             val enableStackablePotions: Boolean,
+            val cakeDrops: Boolean,
+            val barterUpgrades: Boolean,
         ) {
 
             constructor() : this(
+                true,
+                true,
                 true,
                 true,
                 true,

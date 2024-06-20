@@ -1,53 +1,62 @@
 package org.teamvoided.nullium.init
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents
+import net.fabricmc.fabric.api.loot.v2.LootTableSource
+import net.minecraft.block.Blocks
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
 import net.minecraft.item.PotionItem
 import net.minecraft.item.ThrowablePotionItem
+import net.minecraft.loot.LootTable
 import net.minecraft.registry.Registries
-import net.minecraft.resource.AutoCloseableResourceManager
-import net.minecraft.server.MinecraftServer
+import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
 import org.teamvoided.nullium.config.NulConfigManager
+import org.teamvoided.nullium.data.loot.NulliumInjections
 import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.MobScale
+import org.teamvoided.nullium.util.lootPool
+import org.teamvoided.nullium.util.lootTableEntry
 
 object NulFabricEvents {
+    val cfg = NulConfigManager.switchboard.data()
 
     fun init() {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
-        ServerWorldEvents.LOAD.register(::onWorldLoad)
-    }
-
-    private fun onWorldLoad(server: MinecraftServer, world: ServerWorld) {
-        val cfg = NulConfigManager.switchboard.data()
+//        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
+//        ServerWorldEvents.LOAD.register(::onWorldLoad)
+        LootTableEvents.MODIFY.register(::modifyLootTable)
         if (cfg.enableBlacksmith) Blacksmith.repairOverrides()
     }
 
-    private fun onEndDataPackReload(server: MinecraftServer, ignored: AutoCloseableResourceManager, success: Boolean) {
-        if (!success) return
-        val cfg = NulConfigManager.switchboard.data()
-        if (cfg.enableBlacksmith) Blacksmith.repairOverrides()
+//    private fun onWorldLoad(server: MinecraftServer, world: ServerWorld) {
+//    }
+//
+//    private fun onEndDataPackReload(server: MinecraftServer, ignored: AutoCloseableResourceManager, success: Boolean) {
+//        if (!success) return
+//    }
+
+    private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
+        if (cfg.enableMobScale) MobScale.init(entity)
+    }
+
+    private fun modifyLootTable(table: RegistryKey<LootTable>, builder: LootTable.Builder, ignored: LootTableSource) {
+        if (cfg.cakeDrops && table == Blocks.CAKE.lootTableId) {
+            builder.pool(lootPool { lootTableEntry(NulliumInjections.CAKE_DROPS) })
+        }
+//        if (cfg.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+//            builder.pool(lootPool { lootTableEntry(NulliumInjections.BARTER_UPGRADES) })
+//        }
     }
 
     private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {
-        val cfg = NulConfigManager.switchboard.data()
         if (cfg.enableStackablePotions) { // Myb move to custom file
             Registries.ITEM.filter { it is PotionItem && it !is ThrowablePotionItem }.forEach { item ->
                 c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
             }
         }
-    }
-
-
-    private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
-        val cfg = NulConfigManager.switchboard.data()
-        if (cfg.enableMobScale) MobScale.init(entity)
     }
 }

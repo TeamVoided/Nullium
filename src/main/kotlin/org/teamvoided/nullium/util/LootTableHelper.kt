@@ -14,6 +14,7 @@ import net.minecraft.loot.entry.LeafEntry
 import net.minecraft.loot.entry.LootPoolEntry
 import net.minecraft.loot.entry.LootTableEntry
 import net.minecraft.loot.function.LootFunction
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.LootNumberProvider
 import net.minecraft.predicate.StatePredicate
 import net.minecraft.registry.RegistryKey
@@ -59,6 +60,7 @@ inline fun lootPool(init: LootPoolDSL.() -> Unit): LootPool {
 
 class LootPoolDSL(private val builder: LootPool.Builder) {
     fun rolls(rolls: LootNumberProvider) = apply { builder.rolls(rolls) }
+    fun rolls(rolls: Number) = apply { builder.rolls(ConstantLootNumberProvider.create(rolls.toFloat())) }
     fun bonusRolls(bonusRolls: LootNumberProvider) = apply { builder.bonusRolls(bonusRolls) }
     fun with(entry: LootPoolEntry.Builder<*>) = apply { builder.with(entry) }
 

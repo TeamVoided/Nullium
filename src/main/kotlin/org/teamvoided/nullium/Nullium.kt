@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.NulCommandRegistry
 import org.teamvoided.nullium.init.NulFabricEvents
+import org.teamvoided.nullium.module.NulMiscellaneous
 
 @Suppress("unused")
 object Nullium {
@@ -26,6 +27,7 @@ object Nullium {
         NulConfigManager.init()
         NulCommandRegistry.init()
         NulFabricEvents.init()
+        NulMiscellaneous.init()
     }
 
     fun id(path: String) = Identifier.of(MODID, path)

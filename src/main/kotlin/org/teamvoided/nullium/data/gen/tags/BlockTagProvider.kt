@@ -15,6 +15,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(NulliumBlockTags.CANE_HYDRATION)
             .add(Blocks.ICE)
             .add(Blocks.FROSTED_ICE)
+
         getOrCreateTagBuilder(NulliumBlockTags.CANE_SUPPORT)
             .forceAddTag(BlockTags.DIRT)
             .forceAddTag(BlockTags.SAND)

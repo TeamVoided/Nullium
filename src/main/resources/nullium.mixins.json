@@ -6,6 +6,7 @@
   "plugin": "org.teamvoided.nullium.mixin.NulliumMixinPlugin",
   "mixins": [
     "AnvilScreenHandlerMixin",
+    "GlowingFoodComponentsMixin",
     "PlaceBlockGoalMixin",
     "SugarCaneBlockMixin",
     "WallMountedBlockMixin",

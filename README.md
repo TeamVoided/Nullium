@@ -28,7 +28,7 @@ Everything is configurable, so you can disable any of the features you don't wan
 - Composable items now can be added through the config file, this also allows you to override vanilla chances
 - Existing compostable items can be removed via the config
 
-### Miscellaneous features
+### Miscellaneous features:
 - Stackable potions, non throwable potions stack to 16
 - Glow Berries now give you the glowing status effect
 - Cakes can be picked up if they have no bites takes from them

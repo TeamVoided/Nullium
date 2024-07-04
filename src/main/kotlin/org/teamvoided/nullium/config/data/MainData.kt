@@ -32,9 +32,11 @@ data class MainData(
         @JvmField
         val enableGlowBerriesGlow: Boolean,
         @JvmField
-        val enableCopperBulbRevert: Boolean
+        val enableCopperBulbRevert: Boolean,
+        val enableCompostable: Boolean
     ) {
         constructor() : this(
+            true,
             true,
             true,
             true,

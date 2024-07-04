@@ -6,10 +6,7 @@ import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.log
-import org.teamvoided.nullium.config.module.BlacksmithCfg
-import org.teamvoided.nullium.config.module.MainCfg
-import org.teamvoided.nullium.config.module.MiscellaneousCfg
-import org.teamvoided.nullium.config.module.MobScaleCfg
+import org.teamvoided.nullium.config.module.*
 import org.teamvoided.nullium.util.getTimeFileName
 import java.io.File
 import java.nio.file.Path
@@ -29,9 +26,11 @@ object NulConfigManager {
     @JvmStatic
     val main = MainCfg()
 
-    val miscellaneous: MiscellaneousCfg by lazy { MiscellaneousCfg() }
     val bigSalmon: MobScaleCfg by lazy { MobScaleCfg() }
     val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
+    val compostable: CompostableCfg by lazy { CompostableCfg() }
+
+//    val miscellaneous: MiscellaneousCfg by lazy { MiscellaneousCfg() }
 
     fun init() {
         if (!configDir.exists()) configDir.createDirectories()
@@ -54,7 +53,8 @@ object NulConfigManager {
         return listOf(
             bigSalmon.load(),
             blacksmith.load(),
-            miscellaneous.load()
+            compostable.load(),
+//            miscellaneous.load()
         ).count { !it }
     }
 
@@ -82,7 +82,7 @@ object NulConfigManager {
                     log.error(
                         buildString {
                             append("\n")
-                            append("\tCurrent config versions is :$CONFIG_VERSION, version loaded from file:${info.version}\n")
+                            append("\tCurrent config versions is [$CONFIG_VERSION], version loaded from file [${info.version}]\n")
                             append("\tConfig version dose not match the version the mod supports!\n")
                             append("\tYour config will be backed up and new config will be generated.")
                         }

@@ -7,12 +7,16 @@ import org.teamvoided.nullium.serlializers.IdentifierSerializer
 import org.teamvoided.nullium.util.id
 
 @Serializable
-data class CompostableData(val compostEntries: List<Entry>) {
+data class CompostableData(
+    val compostEntries: List<Entry>,
+    val entriesToRemove: List<@Serializable(with = IdentifierSerializer::class) Identifier>
+) {
     constructor() : this(
         listOf(
             Entry(Items.GOLDEN_APPLE.id(), 1f),
             Entry(Items.GOLDEN_CARROT.id(), 1f)
-        )
+        ),
+        listOf(Items.GOLD_INGOT.id())
     )
 
     @Serializable

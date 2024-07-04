@@ -10,9 +10,15 @@ object Compostable {
         val cfg = NulConfigManager.main.data.stopping
 
         if (cfg.enableCompostable) {
-            NulConfigManager.compostable.data.compostEntries.forEach { (id, layerChance) ->
+            val comparable = NulConfigManager.compostable.data
+            comparable.compostEntries.forEach { (id, layerChance) ->
                 id.item().let {
-                    if (!it.isAir()) ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.putIfAbsent(it, layerChance)
+                    if (!it.isAir()) ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(it, layerChance)
+                }
+            }
+            comparable.entriesToRemove.forEach { id ->
+                id.item().let {
+                    if (!it.isAir()) ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.removeFloat(it)
                 }
             }
         }

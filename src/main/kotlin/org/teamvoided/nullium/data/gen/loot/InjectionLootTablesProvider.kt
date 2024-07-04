@@ -46,7 +46,8 @@ object InjectionLootTablesProvider {
                     lootTable {
                         pool {
                             item(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE) {
-                                conditionally(randomChance(0.5f))
+                                // 1 in 3.3 stacks of golden ingots
+                                conditionally(randomChance(0.006f))
                             }
                         }
                     }

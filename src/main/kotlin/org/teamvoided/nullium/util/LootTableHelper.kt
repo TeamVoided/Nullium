@@ -4,23 +4,22 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemConvertible
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition
-import net.minecraft.loot.condition.LootCondition
-import net.minecraft.loot.condition.RandomChanceLootCondition
-import net.minecraft.loot.condition.SurvivesExplosionLootCondition
+import net.minecraft.loot.condition.*
 import net.minecraft.loot.context.LootContextType
-import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.entry.LeafEntry
-import net.minecraft.loot.entry.LootPoolEntry
-import net.minecraft.loot.entry.LootTableEntry
+import net.minecraft.loot.entry.*
 import net.minecraft.loot.function.LootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.LootNumberProvider
 import net.minecraft.predicate.StatePredicate
+import net.minecraft.predicate.entity.LocationPredicate
+import net.minecraft.registry.HolderLookup
+import net.minecraft.registry.HolderSet
 import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.state.property.Property
 import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
+import net.minecraft.world.biome.Biome
 import java.util.function.Consumer
 
 inline fun lootTable(init: LootTableDSL.() -> Unit): LootTable.Builder {
@@ -68,9 +67,15 @@ class LootPoolDSL(private val builder: LootPool.Builder) {
     fun item(item: ItemConvertible, weight: Int) = apply { builder.with(itemEntry(item) { weight(weight) }) }
     fun item(item: ItemConvertible) = apply { builder.with(itemEntry(item) { }) }
 
+    fun empty() = apply { builder.with(EmptyEntry.builder()) }
+    fun empty(weight: Int) = apply { builder.with(EmptyEntry.builder().weight(weight)) }
+
     fun lootTable(loot: LootTable, init: LeafEntryDSL.() -> Unit) = apply { builder.with(lootTableEntry(loot, init)) }
     fun lootTable(loot: RegistryKey<LootTable>, init: LeafEntryDSL.() -> Unit) =
         apply { builder.with(lootTableEntry(loot, init)) }
+
+    fun lootTable(loot: RegistryKey<LootTable>, weight: Int) =
+        apply { builder.with(lootTableEntry(loot) { weight(weight) }) }
 
     fun conditionally(condition: LootCondition.Builder) = apply { builder.conditionally(condition) }
     fun build(): LootPool = builder.build()
@@ -104,10 +109,22 @@ class LeafEntryDSL(private val builder: LeafEntry.Builder<*>) {
     fun quality(quality: Int) = apply { builder.quality(quality) }
 
     fun conditionally(condition: LootCondition.Builder) = apply { builder.conditionally(condition) }
+    fun locationCheck(biome: HolderSet.NamedSet<Biome>) = apply {
+        builder.conditionally(LocationCheckLootCondition.builder(LocationPredicate.Builder.create().method_9024(biome)))
+    }
+
+    fun HolderLookup.RegistryLookup<Biome>.biomeTagCheck(biome: TagKey<Biome>) = apply {
+        builder.conditionally(
+            LocationCheckLootCondition.builder(
+                LocationPredicate.Builder.create().method_9024(this@biomeTagCheck.getTagOrThrow(biome))
+            )
+        )
+    }
+
     fun get() = builder
 }
 
-fun randomChance(chance: Float) =   RandomChanceLootCondition.method_932(chance)
+fun randomChance(chance: Float) = RandomChanceLootCondition.method_932(chance)
 
 fun survivesExplosion(): LootCondition.Builder = SurvivesExplosionLootCondition.builder()
 

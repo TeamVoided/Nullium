@@ -11,24 +11,26 @@ import org.teamvoided.nullium.config.data.IdentifierType
 import org.teamvoided.nullium.data.tags.NulliumMaterialTags
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
+import org.teamvoided.nullium.util.set
 import org.teamvoided.nullium.util.supply
 
 object Blacksmith {
 
     fun repairOverrides() {
-        ToolMaterials.WOOD.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_WOOD).supply()
-        ToolMaterials.STONE.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_STONE).supply()
-        ToolMaterials.GOLD.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_GOLD).supply()
-        ToolMaterials.IRON.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_IRON).supply()
-        ToolMaterials.DIAMOND.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_DIAMOND).supply()
-        ToolMaterials.NETHERITE.repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
+        ToolMaterials.WOOD.set(NulliumMaterialTags.REPAIR_WOOD)
+        ToolMaterials.STONE.set(NulliumMaterialTags.REPAIR_STONE)
+        ToolMaterials.GOLD.set(NulliumMaterialTags.REPAIR_GOLD)
+        ToolMaterials.IRON.set(NulliumMaterialTags.REPAIR_IRON)
+        ToolMaterials.DIAMOND.set(NulliumMaterialTags.REPAIR_DIAMOND)
+        ToolMaterials.NETHERITE.set(NulliumMaterialTags.REPAIR_NETHERITE)
 
         ArmorMaterials.LEATHER.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_LEATHER).supply()
         ArmorMaterials.CHAIN.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_CHAIN).supply()
         ArmorMaterials.IRON.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_IRON).supply()
         ArmorMaterials.GOLD.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_GOLD).supply()
         ArmorMaterials.DIAMOND.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_DIAMOND).supply()
-        ArmorMaterials.NETHERITE.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
+        ArmorMaterials.NETHERITE.value().repairIngredient =
+            Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
     }
 
 

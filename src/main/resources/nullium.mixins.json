@@ -6,12 +6,13 @@
   "plugin": "org.teamvoided.nullium.mixin.NulliumMixinPlugin",
   "mixins": [
     "AnvilScreenHandlerMixin",
+    "EndermanEntityMixin",
     "GlowingFoodComponentsMixin",
     "PlaceBlockGoalMixin",
     "SugarCaneBlockMixin",
     "WallMountedBlockMixin",
-    "WitherRoseBlockMixin",
-    "EndermanEntityMixin"
+    "WaxedCopperBulbBlockMixin",
+    "WitherRoseBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

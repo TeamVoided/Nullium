@@ -23,7 +23,7 @@ class NulliumData : DataGeneratorEntrypoint {
         pack.addProvider(::StructureTagProvider)
         //loot tables
         pack.addProvider(::EntityLootTablesProvider)
-        InjectionLootTablesProvider.lootTables().forEach(pack::addProvider)
+        InjectionLootTablesProvider.lootTables().forEach{ pack.addProvider(it) }
     }
 
     override fun buildRegistry(gen: RegistrySetBuilder) {

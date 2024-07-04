@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.nullium.Nullium.log
+import org.teamvoided.nullium.data.gen.loot.EntityLootTablesProvider
 import org.teamvoided.nullium.data.gen.loot.InjectionLootTablesProvider
 import org.teamvoided.nullium.data.gen.tags.BlockTagProvider
 import org.teamvoided.nullium.data.gen.tags.FluidTagProvider
@@ -21,6 +22,7 @@ class NulliumData : DataGeneratorEntrypoint {
         pack.addProvider(::FluidTagProvider)
         pack.addProvider(::StructureTagProvider)
         //loot tables
+        pack.addProvider(::EntityLootTablesProvider)
         InjectionLootTablesProvider.lootTables().forEach(pack::addProvider)
     }
 

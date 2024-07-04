@@ -19,7 +19,7 @@ interface ConfigInstance<T> {
 
     fun load(): Boolean {
         return if (!configFile.exists()) {
-            log.warn("Blacksmith config file not found, creating default!")
+            log.warn("$name config file not found, creating default!")
             save()
             false
         } else {
@@ -28,11 +28,11 @@ interface ConfigInstance<T> {
                 if (serializer() == null) throw Error("No serializer for $name")
                 imported = configFile.readText().let { JSON.decodeFromString(serializer()!!, it) }
             } catch (e: IllegalArgumentException) {
-                log.error("Failed to load Blacksmith config file", e)
+                log.error("Failed to load $name config file", e)
                 return false
             }
             data = imported
-            log.info("Loaded Blacksmith config file")
+            log.info("Loaded $name config file")
             true
         }
     }

@@ -10,13 +10,10 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.teamvoided.nullium.module.HolderMan;
 
-@Debug(export = true)
-@SuppressWarnings("unused")
 @Mixin(EndermanEntity.class)
 abstract class EndermanEntityMixin extends MobEntity {
 

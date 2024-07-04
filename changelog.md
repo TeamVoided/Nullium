@@ -19,6 +19,10 @@
 - rewrote the config (There are now more scaling options)
 - 1/6 Squids will be a baby
 - Glow squid now always are 30% smaller
+### Compostable Module:
+- Golden apples and carrots can now be composted, they will always adda layer to the composter
+- Composable items now can be added through the config file, this also allows you to override vanilla chances
+- Existing compostable items can be removed via the config
 ### Miscellaneous features
 - Stackable potions, non throwable potions stack to 16
 - Glow Berries now give you the glowing status effect

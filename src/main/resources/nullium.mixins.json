@@ -10,7 +10,8 @@
     "PlaceBlockGoalMixin",
     "SugarCaneBlockMixin",
     "WallMountedBlockMixin",
-    "WitherRoseBlockMixin"
+    "WitherRoseBlockMixin",
+    "EndermanEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

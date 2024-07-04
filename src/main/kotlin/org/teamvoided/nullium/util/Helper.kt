@@ -1,6 +1,9 @@
 package org.teamvoided.nullium.util
 
 import com.mojang.brigadier.tree.CommandNode
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttributeInstance
 import net.minecraft.item.Item
@@ -22,7 +25,7 @@ import java.util.function.Supplier
 fun tText(text: String, vararg data: Any) = Text.translatable(text, *data)
 
 fun ServerCommandSource.tFeedback(text: String, vararg args: Any, broadcast: Boolean = false) =
-    this.sendFeedback({tText(text, *args)}, broadcast)
+    this.sendFeedback({ tText(text, *args) }, broadcast)
 
 fun cmd(vararg data: String) = "command.$MODID.${data.joinToString(".")}"
 
@@ -35,11 +38,15 @@ fun <S> CommandNode<S>.childOf(node: CommandNode<S>): CommandNode<S> {
 
 fun <T> T.supply() = Supplier { this }
 
-
+fun getNow() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+fun getTimeFileName(): String {
+    val time = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    return "${time.date}=${time.time.toString().replace(":", "-")}"
+}
 //mc
 
-fun <T, Y: Registry<T>> RegistryKey<Y>.key(id: Identifier): RegistryKey<T> = RegistryKey.of(this, id)
-fun <T, Y: Registry<T>> RegistryKey<Y>.tag(id: Identifier): TagKey<T> = TagKey.of(this, id)
+fun <T, Y : Registry<T>> RegistryKey<Y>.key(id: Identifier): RegistryKey<T> = RegistryKey.of(this, id)
+fun <T, Y : Registry<T>> RegistryKey<Y>.tag(id: Identifier): TagKey<T> = TagKey.of(this, id)
 
 
 fun Item.id() = Registries.ITEM.getId(this)

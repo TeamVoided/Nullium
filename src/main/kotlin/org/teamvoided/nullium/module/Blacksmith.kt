@@ -4,7 +4,6 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ToolMaterials
-import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.EnchantmentTags
 import org.teamvoided.nullium.config.NulConfigManager.blacksmith
 import org.teamvoided.nullium.config.data.IdentifierType
@@ -12,7 +11,6 @@ import org.teamvoided.nullium.data.tags.NulliumMaterialTags
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
 import org.teamvoided.nullium.util.set
-import org.teamvoided.nullium.util.supply
 
 object Blacksmith {
 

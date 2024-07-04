@@ -40,13 +40,13 @@ object InjectionLootTablesProvider {
                     }
                 )
             },
-            simpleLootTableProvider(LootContextTypes.BARTER) { gen ->
+            simpleLootTableProvider(LootContextTypes.ENTITY) { gen ->
                 gen.accept(
                     NulliumInjections.BARTER_UPGRADES,
                     lootTable {
                         pool {
                             item(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE) {
-                                conditionally(randomChance(0.04f))
+                                conditionally(randomChance(0.5f))
                             }
                         }
                     }
@@ -63,6 +63,7 @@ object InjectionLootTablesProvider {
                 override fun generate(gen: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
                     fn(gen)
                 }
+                override fun getName(): String = "Injection|${super.getName()}"
             }
         }
     }

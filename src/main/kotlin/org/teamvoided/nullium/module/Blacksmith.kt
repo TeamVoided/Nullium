@@ -24,13 +24,12 @@ object Blacksmith {
         ToolMaterials.DIAMOND.set(NulliumMaterialTags.REPAIR_DIAMOND)
         ToolMaterials.NETHERITE.set(NulliumMaterialTags.REPAIR_NETHERITE)
 
-        ArmorMaterials.LEATHER.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_LEATHER).supply()
-        ArmorMaterials.CHAIN.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_CHAIN).supply()
-        ArmorMaterials.IRON.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_IRON).supply()
-        ArmorMaterials.GOLD.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_GOLD).supply()
-        ArmorMaterials.DIAMOND.value().repairIngredient = Ingredient.ofTag(NulliumMaterialTags.REPAIR_DIAMOND).supply()
-        ArmorMaterials.NETHERITE.value().repairIngredient =
-            Ingredient.ofTag(NulliumMaterialTags.REPAIR_NETHERITE).supply()
+        ArmorMaterials.LEATHER.set(NulliumMaterialTags.REPAIR_LEATHER)
+        ArmorMaterials.CHAIN.set(NulliumMaterialTags.REPAIR_CHAIN)
+        ArmorMaterials.IRON.set(NulliumMaterialTags.REPAIR_IRON)
+        ArmorMaterials.GOLD.set(NulliumMaterialTags.REPAIR_GOLD)
+        ArmorMaterials.DIAMOND.set(NulliumMaterialTags.REPAIR_DIAMOND)
+        ArmorMaterials.NETHERITE.set(NulliumMaterialTags.REPAIR_NETHERITE)
     }
 
 

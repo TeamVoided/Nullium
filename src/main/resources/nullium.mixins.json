@@ -11,7 +11,7 @@
     "PlaceBlockGoalMixin",
     "SugarCaneBlockMixin",
     "WallMountedBlockMixin",
-    "WaxedCopperBulbBlockMixin",
+    "CopperBulbBlockMixin",
     "WitherRoseBlockMixin"
   ],
   "injectors": {

@@ -11,7 +11,7 @@ import org.teamvoided.nullium.util.getLootTable
 
 object HolderMan {
     @JvmStatic
-    fun getBlocks(world: ServerWorld, end: EndermanEntity) {
+    fun getBlocks(world: ServerWorld, enderman: EndermanEntity) {
         val states = world.getLootTable(NulliumLootTables.ENDERMAN_HOLDS)
             .generateLoot(LootContextParameterSet(world, LootContextTypes.EMPTY))
             .mapNotNull {
@@ -21,7 +21,7 @@ object HolderMan {
 
         if (states.isNotEmpty()) {
             states.random().let {
-                if (!it.isAir) end.carriedBlock = it
+                if (!it.isAir) enderman.carriedBlock = it
             }
         }
     }

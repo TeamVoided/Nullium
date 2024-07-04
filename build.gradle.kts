@@ -92,9 +92,7 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
-    changeLog = " - small update :)"
-
-//    versionOverrides = listOf("1.20.5", "1.20.6")
+    changeLog = File("changelog.md").readText()
 
 
     // Mark that farrow is embeded

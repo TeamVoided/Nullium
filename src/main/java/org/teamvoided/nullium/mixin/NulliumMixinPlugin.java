@@ -28,6 +28,7 @@ public class NulliumMixinPlugin implements IMixinConfigPlugin {
 			case "org.teamvoided.nullium.mixin.PlaceBlockGoalMixin",
                  "org.teamvoided.nullium.mixin.EndermanEntityMixinE" -> cfg.stopping.enableHolderman;
             case "org.teamvoided.nullium.mixin.GlowingFoodComponentsMixin" -> cfg.stopping.enableGlowBerriesGlow;
+			case "org.teamvoided.nullium.mixin.CopperBulbBlockMixin" -> cfg.stopping.enableCopperBulbRevert;
 			default -> true;
 		};
 	}

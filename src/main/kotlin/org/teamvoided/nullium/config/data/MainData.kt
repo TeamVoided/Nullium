@@ -23,16 +23,19 @@ data class MainData(
 
     @Serializable
     data class Stopping(
+        val enableStackablePotions: Boolean,
         val enableMobScale: Boolean,
         @JvmField
         val enableHolderman: Boolean,
         @JvmField
         val enableBlacksmith: Boolean,
-        val enableStackablePotions: Boolean,
         @JvmField
         val enableGlowBerriesGlow: Boolean,
+        @JvmField
+        val enableCopperBulbRevert: Boolean
     ) {
         constructor() : this(
+            true,
             true,
             true,
             true,

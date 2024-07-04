@@ -4,12 +4,12 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.teamvoided.nullium.config.NulConfigManager;
-import org.teamvoided.nullium.config.module.SwitchboardCfg;
+import org.teamvoided.nullium.config.data.MainData;
 
 public class NulliumMixinPlugin implements IMixinConfigPlugin {
 
 	public NulliumMixinPlugin() {
-		NulConfigManager.loadSwitch();
+		NulConfigManager.loadMain();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class NulliumMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		SwitchboardCfg.Companion.SwitchboardData cfg = NulConfigManager.INSTANCE.getSwitchboard().data();
+		MainData cfg = NulConfigManager.INSTANCE.getMain().data();
 		return switch (mixinClassName) {
 			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.enableBlacksmith;
 			case "org.teamvoided.nullium.mixin.PlaceBlockGoalMixin" -> cfg.enableHolderman;

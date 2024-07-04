@@ -21,7 +21,7 @@ import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
 
 object NulFabricEvents {
-    val cfg = NulConfigManager.switchboard.data()
+    val cfg = NulConfigManager.main.data()
 
     fun init() {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)

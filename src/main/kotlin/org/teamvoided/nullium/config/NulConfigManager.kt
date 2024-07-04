@@ -5,53 +5,51 @@ import kotlinx.serialization.encodeToString
 import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
+import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.config.module.BlacksmithCfg
+import org.teamvoided.nullium.config.module.MainCfg
 import org.teamvoided.nullium.config.module.MiscellaneousCfg
 import org.teamvoided.nullium.config.module.MobScaleCfg
-import org.teamvoided.nullium.config.module.SwitchboardCfg
+import org.teamvoided.nullium.util.getTimeFileName
 import java.io.File
 import java.nio.file.Path
-import kotlin.io.path.createDirectories
-import kotlin.io.path.exists
-import kotlin.io.path.readText
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 @Suppress("TooGenericExceptionCaught", "SwallowedException")
 object NulConfigManager {
     val configDir: Path = FabricLoader.getInstance().configDir.resolve(MODID)
+    val backupDir: Path = FabricLoader.getInstance().configDir.resolve(MODID).resolve("backup")
 
     private val infoFile = configDir.resolve("internal_info")
-    private var info = Info()
-    fun info(): Info = info.copy()
+    var info = Info()
+        private set
 
-    const val CONFIG_VERSION = 1.0
-    val switchboard = SwitchboardCfg()
+    const val CONFIG_VERSION = 1.1
 
+    @JvmStatic
+    val main = MainCfg()
 
-    lateinit var miscellaneous: MiscellaneousCfg private set
-    lateinit var bigSalmon: MobScaleCfg private set
-    lateinit var blacksmith: BlacksmithCfg private set
-
+    val miscellaneous: MiscellaneousCfg by lazy { MiscellaneousCfg() }
+    val bigSalmon: MobScaleCfg by lazy { MobScaleCfg() }
+    val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
 
     fun init() {
         if (!configDir.exists()) configDir.createDirectories()
-
-        miscellaneous = MiscellaneousCfg()
-        bigSalmon = MobScaleCfg()
-        blacksmith = BlacksmithCfg()
         loadAll()
     }
 
     @JvmStatic
-    fun loadSwitch() {
+    fun loadMain() {
         if (!configDir.exists()) configDir.createDirectories()
-        switchboard.load()
+        loadInfo()
+
+        main.load()
     }
 
 
     fun loadAll(): Int {
-        load()
-        switchboard.load()
+        loadInfo()
+        main.load()
 
         return listOf(
             bigSalmon.load(),
@@ -60,13 +58,37 @@ object NulConfigManager {
         ).count { !it }
     }
 
-    private fun load() {
+    private fun backupAndClear() {
+        if (!backupDir.exists()) backupDir.createDirectories()
+
+        var datedBackup = backupDir.resolve(getTimeFileName())
+        if (!datedBackup.exists()) datedBackup.createDirectories()
+        else {
+            datedBackup = backupDir.resolve(datedBackup.name + "-1")
+            datedBackup.createDirectories()
+        }
+        configDir.toFile().listFiles()?.forEach { file ->
+            file.renameTo(datedBackup.resolve(file.name).toFile())
+        }
+    }
+
+    private fun loadInfo() {
         if (!infoFile.exists()) {
             save()
         } else {
             try {
                 info = infoFile.readText().let { JSON.decodeFromString(it) }
                 if (info.version != CONFIG_VERSION) {
+                    log.error(
+                        buildString {
+                            append("\n")
+                            append("\tCurrent config versions is :$CONFIG_VERSION, version loaded from file:${info.version}\n")
+                            append("\tConfig version dose not match the version the mod supports!\n")
+                            append("\tYour config will be backed up and new config will be generated.")
+                        }
+                    )
+                    backupAndClear()
+
                     info = Info()
                     save()
                 }

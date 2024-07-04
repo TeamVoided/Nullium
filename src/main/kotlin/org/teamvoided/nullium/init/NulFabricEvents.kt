@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.item.PotionItem
 import net.minecraft.item.ThrowablePotionItem
 import net.minecraft.loot.LootTable
+import net.minecraft.loot.LootTables
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
@@ -18,7 +19,6 @@ import org.teamvoided.nullium.data.loot.NulliumInjections
 import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
-import org.teamvoided.nullium.util.lootTableEntry
 
 object NulFabricEvents {
     val cfg = NulConfigManager.switchboard.data()
@@ -45,11 +45,12 @@ object NulFabricEvents {
 
     private fun modifyLootTable(table: RegistryKey<LootTable>, builder: LootTable.Builder, ignored: LootTableSource) {
         if (cfg.cakeDrops && table == Blocks.CAKE.lootTableId) {
-            builder.pool(lootPool { lootTableEntry(NulliumInjections.CAKE_DROPS) })
+            builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
-//        if (cfg.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
-//            builder.pool(lootPool { lootTableEntry(NulliumInjections.BARTER_UPGRADES) })
-//        }
+
+        if (cfg.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+            builder.pool(lootPool { lootTable(NulliumInjections.BARTER_UPGRADES) {} })
+        }
     }
 
     private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {

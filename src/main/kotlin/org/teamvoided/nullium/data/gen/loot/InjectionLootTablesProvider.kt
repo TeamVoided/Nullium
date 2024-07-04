@@ -40,7 +40,7 @@ object InjectionLootTablesProvider {
                     }
                 )
             },
-            simpleLootTableProvider(LootContextTypes.ENTITY) { gen ->
+            simpleLootTableProvider(LootContextTypes.BARTER) { gen ->
                 gen.accept(
                     NulliumInjections.BARTER_UPGRADES,
                     lootTable {

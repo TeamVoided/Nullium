@@ -29,7 +29,7 @@ object NulFabricEvents {
 //        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
 //        ServerWorldEvents.LOAD.register(::onWorldLoad)
         LootTableEvents.MODIFY.register(::modifyLootTable)
-        if (cfg.enableBlacksmith) Blacksmith.repairOverrides()
+        if (cfg.stopping.enableBlacksmith) Blacksmith.repairOverrides()
     }
 
 //    private fun onWorldLoad(server: MinecraftServer, world: ServerWorld) {
@@ -40,21 +40,21 @@ object NulFabricEvents {
 //    }
 
     private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
-        if (cfg.enableMobScale) MobScale.init(entity)
+        if (cfg.stopping.enableMobScale) MobScale.init(entity)
     }
 
     private fun modifyLootTable(table: RegistryKey<LootTable>, builder: LootTable.Builder, ignored: LootTableSource) {
-        if (cfg.cakeDrops && table == Blocks.CAKE.lootTableId) {
+        if (cfg.reloadable.cakeDrops && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
 
-        if (cfg.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+        if (cfg.reloadable.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
             builder.pool(lootPool { lootTable(NulliumInjections.BARTER_UPGRADES) {} })
         }
     }
 
     private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {
-        if (cfg.enableStackablePotions) { // Myb move to custom file
+        if (cfg.stopping.enableStackablePotions) { // Myb move to custom file
             Registries.ITEM.filter { it is PotionItem && it !is ThrowablePotionItem }.forEach { item ->
                 c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
             }

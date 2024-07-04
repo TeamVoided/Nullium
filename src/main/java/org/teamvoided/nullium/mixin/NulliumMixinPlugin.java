@@ -22,11 +22,12 @@ public class NulliumMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		MainData cfg = NulConfigManager.INSTANCE.getMain().data();
+		MainData cfg = NulConfigManager.getMain().data();
 		return switch (mixinClassName) {
-			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.enableBlacksmith;
-			case "org.teamvoided.nullium.mixin.PlaceBlockGoalMixin" -> cfg.enableHolderman;
-			case "org.teamvoided.nullium.mixin.GlowingFoodComponentsMixin" -> cfg.enableGlowBerriesGlow;
+			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.stopping.enableBlacksmith;
+			case "org.teamvoided.nullium.mixin.PlaceBlockGoalMixin",
+                 "org.teamvoided.nullium.mixin.EndermanEntityMixinE" -> cfg.stopping.enableHolderman;
+            case "org.teamvoided.nullium.mixin.GlowingFoodComponentsMixin" -> cfg.stopping.enableGlowBerriesGlow;
 			default -> true;
 		};
 	}

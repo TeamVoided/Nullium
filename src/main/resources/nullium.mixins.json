@@ -7,10 +7,13 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "ArmorMaterialsAccessor",
+    "CactusBlockMixin",
     "CopperBulbBlockMixin",
     "EndermanEntityMixin",
     "GlowingFoodComponentsMixin",
+    "NetherWartBlockMixin",
     "PlaceBlockGoalMixin",
+    "RootsBlockMixin",
     "SugarCaneBlockMixin",
     "ToolMaterialsAccessor",
     "WallMountedBlockMixin",

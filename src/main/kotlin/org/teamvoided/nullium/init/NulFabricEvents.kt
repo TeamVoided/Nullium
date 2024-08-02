@@ -21,6 +21,7 @@ import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
 
+@Suppress("UNUSED_PARAMETER")
 object NulFabricEvents {
     val cfg = NulConfigManager.main.data()
 

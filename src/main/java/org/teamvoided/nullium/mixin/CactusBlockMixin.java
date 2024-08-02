@@ -16,6 +16,7 @@ import org.teamvoided.nullium.data.tags.NulliumBlockTags;
 @Mixin(CactusBlock.class)
 public class CactusBlockMixin {
 
+    @SuppressWarnings("deprecation")
     @Inject(method = "canPlaceAt", at = @At("RETURN"), cancellable = true)
     private void nullium$customPlacement(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (world.getBlockState(pos.down()).isIn(NulliumBlockTags.CACTUS_SUPPORT)

@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableSource
 import net.minecraft.block.Blocks
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
+import net.minecraft.item.Items
 import net.minecraft.item.PotionItem
 import net.minecraft.item.ThrowablePotionItem
 import net.minecraft.loot.LootTable
@@ -26,18 +27,10 @@ object NulFabricEvents {
     fun init() {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
-//        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
-//        ServerWorldEvents.LOAD.register(::onWorldLoad)
         LootTableEvents.MODIFY.register(::modifyLootTable)
         if (cfg.stopping.enableBlacksmith) Blacksmith.repairOverrides()
     }
 
-//    private fun onWorldLoad(server: MinecraftServer, world: ServerWorld) {
-//    }
-//
-//    private fun onEndDataPackReload(server: MinecraftServer, ignored: AutoCloseableResourceManager, success: Boolean) {
-//        if (!success) return
-//    }
 
     private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
         if (cfg.stopping.enableMobScale) MobScale.init(entity)
@@ -54,10 +47,33 @@ object NulFabricEvents {
     }
 
     private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {
-        if (cfg.stopping.enableStackablePotions) { // Myb move to custom file
+        if (cfg.stopping.enableStackablePotions) {
             Registries.ITEM.filter { it is PotionItem && it !is ThrowablePotionItem }.forEach { item ->
                 c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
             }
         }
+
+//        cfg.stopping.enableStackableSaddles
+        if (true) c.modify(Items.SADDLE) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
+
+//        cfg.stopping.enableStackableHorseArmor
+        if (true) {
+            listOf(
+                Items.LEATHER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR, Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR
+            ).forEach { item ->
+                c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
+            }
+        }
+
+//        cfg.stopping.enableStackableMusicDiscs
+        if (true) {
+            Registries.ITEM.filter { it.components.get(DataComponentTypes.JUKEBOX_PLAYABLE) != null }.forEach { item ->
+                c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
+            }
+        }
+
+//        cfg.stopping.enableStackableSaddles
+        if (true) c.modify(Items.MINECART) { it.put(DataComponentTypes.MAX_STACK_SIZE, 4) }
+
     }
 }

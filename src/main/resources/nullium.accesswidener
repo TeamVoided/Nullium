@@ -1,2 +1,3 @@
 accessWidener v2 named
 accessible class net/minecraft/entity/mob/EndermanEntity$PlaceBlockGoal
+accessible field net/minecraft/block/entity/SculkCatalystBlockEntity catalystListener Lnet/minecraft/block/entity/SculkCatalystBlockEntity$CatalystListener;

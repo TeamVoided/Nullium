@@ -9,6 +9,7 @@ import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.NulCommandRegistry
 import org.teamvoided.nullium.init.NulFabricEvents
 import org.teamvoided.nullium.module.NulMiscellaneous
+import org.teamvoided.nullium.module.NulliumGameRules
 
 @Suppress("unused")
 object Nullium {
@@ -28,6 +29,7 @@ object Nullium {
         NulCommandRegistry.init()
         NulFabricEvents.init()
         NulMiscellaneous.init()
+        NulliumGameRules.init()
     }
 
     fun id(path: String) = Identifier.of(MODID, path)

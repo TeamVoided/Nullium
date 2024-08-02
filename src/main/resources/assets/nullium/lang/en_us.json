@@ -16,5 +16,7 @@
   "tag.item.nullium.material.repair.leather": "Repair Material Leather",
   "tag.item.nullium.material.repair.netherite": "Repair Material Netherite",
   "tag.item.nullium.material.repair.stone": "Repair Material Stone",
-  "tag.item.nullium.material.repair.wood": "Repair Material Wood"
+  "tag.item.nullium.material.repair.wood": "Repair Material Wood",
+
+  "gamerule.nullium.sculkSpread": "Spread Sculk"
 }

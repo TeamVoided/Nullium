@@ -6,7 +6,10 @@ import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.log
-import org.teamvoided.nullium.config.module.*
+import org.teamvoided.nullium.config.module.BlacksmithCfg
+import org.teamvoided.nullium.config.module.CompostableCfg
+import org.teamvoided.nullium.config.module.MainCfg
+import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.util.getTimeFileName
 import java.io.File
 import java.nio.file.Path
@@ -21,7 +24,9 @@ object NulConfigManager {
     var info = Info()
         private set
 
-    const val CONFIG_VERSION = 1.1
+    // Version before 1.1 is not supported, so we pretend that it's not real
+    // 1.1 is the version
+    const val CONFIG_VERSION = 1.2
 
     @JvmStatic
     val main = MainCfg()
@@ -68,7 +73,21 @@ object NulConfigManager {
             datedBackup.createDirectories()
         }
         configDir.toFile().listFiles()?.forEach { file ->
-            file.renameTo(datedBackup.resolve(file.name).toFile())
+            if (!file.isDirectory) file.renameTo(datedBackup.resolve(file.name).toFile())
+        }
+    }
+
+    private fun backup() {
+        if (!backupDir.exists()) backupDir.createDirectories()
+
+        var datedBackup = backupDir.resolve(getTimeFileName())
+        if (!datedBackup.exists()) datedBackup.createDirectories()
+        else {
+            datedBackup = backupDir.resolve(datedBackup.name + "-1")
+            datedBackup.createDirectories()
+        }
+        configDir.toFile().listFiles()?.forEach { file ->
+            if (!file.isDirectory) file.copyRecursively(datedBackup.resolve(file.name).toFile())
         }
     }
 
@@ -78,6 +97,13 @@ object NulConfigManager {
         } else {
             try {
                 info = infoFile.readText().let { JSON.decodeFromString(it) }
+                if (info.version == 1.1) {
+                    log.info("Config version is 1.1, backing up and converting to latest version")
+
+                    backup()
+                    infoFile.writeText(JSON.encodeToString(Info()))
+                    return
+                }
                 if (info.version != CONFIG_VERSION) {
                     log.error(
                         buildString {
@@ -105,6 +131,8 @@ object NulConfigManager {
             // Prevent crashing on invalid file
         }
     }
+
+    fun getOldCfgVersion(): Double? = if (info.version == CONFIG_VERSION) null else info.version
 
     @Serializable
     data class Info(val comment: String, val version: Double) {

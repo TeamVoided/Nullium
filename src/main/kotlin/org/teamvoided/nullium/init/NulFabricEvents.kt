@@ -29,36 +29,34 @@ object NulFabricEvents {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
         LootTableEvents.MODIFY.register(::modifyLootTable)
-        if (cfg.stopping.enableBlacksmith) Blacksmith.repairOverrides()
+        if (cfg.enableBlacksmith()) Blacksmith.repairOverrides()
     }
 
 
     private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
-        if (cfg.stopping.enableMobScale) MobScale.init(entity)
+        if (cfg.enableMobScale()) MobScale.init(entity)
     }
 
     private fun modifyLootTable(table: RegistryKey<LootTable>, builder: LootTable.Builder, ignored: LootTableSource) {
-        if (cfg.reloadable.cakeDrops && table == Blocks.CAKE.lootTableId) {
+        if (cfg.getCakeDrops() && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
 
-        if (cfg.reloadable.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+        if (cfg.getBarterUpgrades() && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
             builder.pool(lootPool { lootTable(NulliumInjections.BARTER_UPGRADES) {} })
         }
     }
 
     private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {
-        if (cfg.stopping.enableStackablePotions) {
+        if (cfg.enableStackablePotions()) {
             Registries.ITEM.filter { it is PotionItem && it !is ThrowablePotionItem }.forEach { item ->
                 c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
             }
         }
 
-//        cfg.stopping.enableStackableSaddles
-        if (true) c.modify(Items.SADDLE) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
+        if (cfg.enableStackableSaddles()) c.modify(Items.SADDLE) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
 
-//        cfg.stopping.enableStackableHorseArmor
-        if (true) {
+        if (cfg.enableStackableHorseArmor()) {
             listOf(
                 Items.LEATHER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR, Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR
             ).forEach { item ->
@@ -66,15 +64,13 @@ object NulFabricEvents {
             }
         }
 
-//        cfg.stopping.enableStackableMusicDiscs
-        if (true) {
+        if (cfg.enableStackableMusicDiscs()) {
             Registries.ITEM.filter { it.components.get(DataComponentTypes.JUKEBOX_PLAYABLE) != null }.forEach { item ->
                 c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
             }
         }
 
-//        cfg.stopping.enableStackableSaddles
-        if (true) c.modify(Items.MINECART) { it.put(DataComponentTypes.MAX_STACK_SIZE, 4) }
+        if (cfg.enableStackableMinecarts()) c.modify(Items.MINECART) { it.put(DataComponentTypes.MAX_STACK_SIZE, 4) }
 
     }
 }

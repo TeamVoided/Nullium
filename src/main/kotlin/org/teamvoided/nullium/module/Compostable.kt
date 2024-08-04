@@ -7,9 +7,9 @@ import org.teamvoided.nullium.util.item
 
 object Compostable {
     fun init() {
-        val cfg = NulConfigManager.main.data.stopping
+        val cfg = NulConfigManager.main.data
 
-        if (cfg.enableCompostable) {
+        if (cfg.enableCompostable()) {
             val comparable = NulConfigManager.compostable.data
             comparable.compostEntries.forEach { (id, layerChance) ->
                 id.item().let {

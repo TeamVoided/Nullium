@@ -10,15 +10,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.teamvoided.nullium.module.NulliumGameRules;
 
-import java.util.Objects;
+import static org.teamvoided.nullium.module.NulliumGameRules.SCULK_SPREAD;
+import static org.teamvoided.nullium.module.NulliumGameRules.getRuleValue;
 
 @Mixin(SculkCatalystBlockEntity.class)
 public class SculkCatalystBlockEntityMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private static void nullium$spreadGameRule(World world, BlockPos pos, BlockState state, SculkCatalystBlockEntity skulkCatalystBlockEntity, CallbackInfo ci) {
-        var spreadType = Objects.requireNonNull(world.getServer()).getGameRules().get(NulliumGameRules.SCULK_SPREAD).get();
-        if (spreadType == NulliumGameRules.SpreadType.NONE) {
+        if (getRuleValue(world, SCULK_SPREAD).get() == NulliumGameRules.SpreadType.NONE) {
             skulkCatalystBlockEntity.catalystListener.getSculkBehavior().updateCharges(world, pos, world.getRandom(), false);
             ci.cancel();
         }

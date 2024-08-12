@@ -10,10 +10,14 @@ object NulliumGameRules {
     fun init() = Unit
 
     @JvmField
-    var SCULK_SPREAD = register("nullium.sculkSpread", Category.MISC, createEnumRule(SpreadType.ALL))
+    val SCULK_SPREAD = register("nullium.sculkSpread", Category.MISC, createEnumRule(SpreadType.ALL))
+//    @JvmField
+//    val
 
 
     fun <T : GameRules.AbstractGameRule<T>> World.getRule(key: GameRules.Key<T>): T = gameRules.get(key)
+    @JvmStatic
+    fun <T : GameRules.AbstractGameRule<T>> getRuleValue(world: World, key: GameRules.Key<T>): T = world.getRule(key)
 
     enum class SpreadType { NONE, VINES, ALL; }
 }

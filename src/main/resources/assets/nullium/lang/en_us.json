@@ -18,5 +18,7 @@
   "tag.item.nullium.material.repair.stone": "Repair Material Stone",
   "tag.item.nullium.material.repair.wood": "Repair Material Wood",
 
-  "gamerule.nullium.sculkSpread": "Spread Sculk"
+  "gamerule.nullium.sculkSpread": "Spread Sculk",
+  "gamerule.nullium.framersTrampleFarmland": "Framer Villagers Trample Farmland",
+  "gamerule.nullium.featherFallingTramplesFarmland": "Feather Falling Tramples Farmland"
 }

@@ -56,4 +56,4 @@ fun ServerWorld.getLootTable(key: RegistryKey<LootTable>): LootTable = this.serv
 fun LootContextParameterSet(world: ServerWorld, type: LootContextType): LootContextParameterSet =
     LootContextParameterSet.Builder(world).build(type)
 
-fun LivingEntity.attributeAsSet(): Set<EntityAttributeInstance> = this.attributes.method_60497()
+fun LivingEntity.attributeAsSet(): Set<EntityAttributeInstance> = this.attributes.attributesToSync

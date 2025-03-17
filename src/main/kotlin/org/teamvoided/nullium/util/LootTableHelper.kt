@@ -110,13 +110,13 @@ class LeafEntryDSL(private val builder: LeafEntry.Builder<*>) {
 
     fun conditionally(condition: LootCondition.Builder) = apply { builder.conditionally(condition) }
     fun locationCheck(biome: HolderSet.NamedSet<Biome>) = apply {
-        builder.conditionally(LocationCheckLootCondition.builder(LocationPredicate.Builder.create().method_9024(biome)))
+        builder.conditionally(LocationCheckLootCondition.builder(LocationPredicate.Builder.create().biomes(biome)))
     }
 
     fun HolderLookup.RegistryLookup<Biome>.biomeTagCheck(biome: TagKey<Biome>) = apply {
         builder.conditionally(
             LocationCheckLootCondition.builder(
-                LocationPredicate.Builder.create().method_9024(this@biomeTagCheck.getTagOrThrow(biome))
+                LocationPredicate.Builder.create().biomes(this@biomeTagCheck.getTagOrThrow(biome))
             )
         )
     }

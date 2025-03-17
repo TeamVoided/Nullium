@@ -34,9 +34,7 @@ public class FarmlandBlockMixin {
                 if (featherFallingRule && livingEntity instanceof PlayerEntity player) {
                     var item = player.getInventory().armor.getFirst();
                     var ff = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getHolderOrThrow(Enchantments.FEATHER_FALLING);
-                    if (!item.isEmpty() && EnchantmentHelper.method_8225(ff, item) > 0) {
-                        ci.cancel();
-                    }
+                    if (!item.isEmpty() && EnchantmentHelper.getLevel(ff, item) > 0) ci.cancel();
                 }
             }
         }

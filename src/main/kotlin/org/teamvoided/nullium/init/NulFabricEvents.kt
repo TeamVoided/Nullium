@@ -2,8 +2,8 @@ package org.teamvoided.nullium.init
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents
-import net.fabricmc.fabric.api.loot.v2.LootTableSource
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents
+import net.fabricmc.fabric.api.loot.v3.LootTableSource
 import net.minecraft.block.Blocks
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
@@ -12,6 +12,7 @@ import net.minecraft.item.PotionItem
 import net.minecraft.item.ThrowablePotionItem
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
+import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
@@ -37,7 +38,10 @@ object NulFabricEvents {
         if (cfg.enableMobScale()) MobScale.init(entity)
     }
 
-    private fun modifyLootTable(table: RegistryKey<LootTable>, builder: LootTable.Builder, ignored: LootTableSource) {
+    private fun modifyLootTable(
+        table: RegistryKey<LootTable>, builder: LootTable.Builder,
+        ignored: LootTableSource, provider: HolderLookup.Provider
+    ) {
         if (cfg.getCakeDrops() && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }

@@ -29,6 +29,9 @@ object NulliumBlockTags {
     @JvmField
     val NYLIUM_PLANTS_SUPPORT = support("nylium_plants")
 
+    @JvmField
+    val PORTAL_BLOCKS = create("portal_blocks")
+
 
     private fun create(id: String) = RegistryKeys.BLOCK.tag(id(id))
     private fun support(id: String) = create("support/$id")

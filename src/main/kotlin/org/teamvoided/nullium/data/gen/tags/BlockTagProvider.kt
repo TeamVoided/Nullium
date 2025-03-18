@@ -51,6 +51,10 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .forceAddTag(BlockTags.DIRT)
             .add(Blocks.FARMLAND)
 
+        getOrCreateTagBuilder(NulliumBlockTags.PORTAL_BLOCKS)
+            .add(Blocks.OBSIDIAN)
+            .add(Blocks.CRYING_OBSIDIAN)
+
         // Vanilla Tags
         getOrCreateTagBuilder(BlockTags.WALL_POST_OVERRIDE)
             .forceAddTag(BlockTags.BUTTONS)

@@ -94,9 +94,6 @@ uploadConfig {
 
     changeLog = File("changelog.md").readText()
 
-
-    // Mark that farrow is embeded
-
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
     curseDependency("fabric-api", uploadConfig.REQUIRED)

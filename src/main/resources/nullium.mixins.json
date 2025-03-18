@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "org.teamvoided.nullium.mixin.NulliumMixinPlugin",
   "mixins": [
+    "portal.AbstractFireBlockMixin",
+    "portal.AreaHelperMixin",
     "AnvilScreenHandlerMixin",
     "ArmorMaterialsAccessor",
     "CactusBlockMixin",

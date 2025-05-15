@@ -1,6 +1,7 @@
 package org.teamvoided.nullium.init
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.fabricmc.fabric.api.loot.v3.LootTableSource
@@ -17,6 +18,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
 import org.teamvoided.nullium.config.NulConfigManager
+import org.teamvoided.nullium.data.custom.VillagerFood
 import org.teamvoided.nullium.data.loot.NulliumInjections
 import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.MobScale
@@ -31,6 +33,12 @@ object NulFabricEvents {
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
         LootTableEvents.MODIFY.register(::modifyLootTable)
         if (cfg.enableBlacksmith()) Blacksmith.repairOverrides()
+
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { server, serverResourceManager, success ->
+            if (success) {
+                VillagerFood.visitedFoods.clear()
+            }
+        }
     }
 
 
@@ -40,7 +48,7 @@ object NulFabricEvents {
 
     private fun modifyLootTable(
         table: RegistryKey<LootTable>, builder: LootTable.Builder,
-        ignored: LootTableSource, provider: HolderLookup.Provider
+        ignored: LootTableSource, provider: HolderLookup.Provider,
     ) {
         if (cfg.getCakeDrops() && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })

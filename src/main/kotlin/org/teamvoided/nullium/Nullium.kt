@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.NulCommandRegistry
 import org.teamvoided.nullium.init.NulFabricEvents
+import org.teamvoided.nullium.init.NulRegistryKeys
 import org.teamvoided.nullium.module.NulMiscellaneous
 import org.teamvoided.nullium.module.NulliumGameRules
 
@@ -26,6 +27,7 @@ object Nullium {
     fun commonInit() {
         log.info("Nulls your ium!")
         NulConfigManager.init()
+        NulRegistryKeys.init()
         NulCommandRegistry.init()
         NulFabricEvents.init()
         NulMiscellaneous.init()
@@ -33,4 +35,5 @@ object Nullium {
     }
 
     fun id(path: String) = Identifier.of(MODID, path)
+    fun mc(path: String) = Identifier.ofDefault(path)
 }

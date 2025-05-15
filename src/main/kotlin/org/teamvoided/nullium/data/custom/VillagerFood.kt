@@ -16,11 +16,13 @@ import net.minecraft.world.World
 import org.teamvoided.nullium.init.NulRegistryKeys.getVillagerFood
 
 data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
-    fun getAmount(stack: ItemStack) = if (stack.isIn(items)) hungerAmount else null
-    fun canEat(stack: ItemStack) = stack.isIn(items) && hungerAmount > 0
+    fun getAmount(stack: ItemStack) = if (contains(stack)) hungerAmount else null
+    fun canEat(stack: ItemStack) = contains(stack) && hungerAmount > 0
+    fun contains(stack: ItemStack) = stack.isIn(items)
 
     companion object {
         const val ENABLED = true
+        const val FALLBACK = true
 
         val CODEC: Codec<VillagerFood> = RecordCodecBuilder.create<VillagerFood> { instance ->
             instance.group(
@@ -29,41 +31,45 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
             ).apply(instance, ::VillagerFood)
         }
 
+        val visitedFoods = mutableMapOf<Item, VillagerFood>()
+
+        fun World.getFood(stack: ItemStack): VillagerFood? {
+            val food = visitedFoods[stack.item]
+            if (food != null) return food
+
+            for (food in this.getVillagerFood()) {
+                if (stack.isIn(food.items)) {
+                    visitedFoods[stack.item] = food
+                    return food
+                }
+            }
+            return null
+        }
+
         @JvmStatic
         fun canEatFood(original: Integer?, stack: ItemStack, world: World): Integer? {
-            var amount: Int?
-            for (food in world.getVillagerFood()) {
-                amount = food.getAmount(stack)
+            val food = world.getFood(stack)
+            if (food != null) {
+                val amount = food.getAmount(stack)
                 if (amount != null) {
                     return if (amount > 0) amount as Integer else null
                 }
             }
-            if (Registries.ITEM.getId(stack.item).namespace != DEFAULT_NAMESPACE) return original
+            if (FALLBACK && Registries.ITEM.getId(stack.item).namespace != DEFAULT_NAMESPACE) return original
             return null
         }
-
-        val visitedFoods = mutableMapOf<Item, VillagerFood>()
 
         @JvmStatic
         fun getFoodValues(inventory: SimpleInventory, world: World): Int {
             var totalFoodValue = 0
-            base@ for (stack in inventory.stacks) {
-                val item = stack.item
-                val amount = visitedFoods[item]?.hungerAmount
+            for (stack in inventory.stacks) {
+                val amount = world.getFood(stack)?.hungerAmount
                 if (amount != null) {
                     totalFoodValue += (amount * stack.count)
                     continue
                 }
-                for (food in world.getVillagerFood()) {
-                    val amount = food.getAmount(stack)
-                    if (amount != null) {
-                        visitedFoods[item] = food
-                        totalFoodValue += (amount * stack.count)
-                        continue@base
-                    }
-                }
-                if (Registries.ITEM.getId(item).namespace != DEFAULT_NAMESPACE) {
-                    val amount = ITEM_FOOD_VALUES[item]
+                if (FALLBACK && Registries.ITEM.getId(stack.item).namespace != DEFAULT_NAMESPACE) {
+                    val amount = ITEM_FOOD_VALUES[stack.item]
                     if (amount != null) {
                         totalFoodValue += (amount * stack.count)
                     }
@@ -73,11 +79,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         }
 
         @JvmStatic
-        fun canPickUp(stack: ItemStack, world: World): Boolean {
-            for (food in world.getVillagerFood()) {
-                if (food.canEat(stack)) return true
-            }
-            return false
-        }
+        fun canPickUp(stack: ItemStack, world: World): Boolean = world.getFood(stack)?.canEat(stack) == true
+
     }
 }

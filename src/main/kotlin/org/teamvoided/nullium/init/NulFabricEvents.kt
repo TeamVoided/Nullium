@@ -34,10 +34,8 @@ object NulFabricEvents {
         LootTableEvents.MODIFY.register(::modifyLootTable)
         if (cfg.enableBlacksmith()) Blacksmith.repairOverrides()
 
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { server, serverResourceManager, success ->
-            if (success) {
-                VillagerFood.visitedFoods.clear()
-            }
+        ServerLifecycleEvents.START_DATA_PACK_RELOAD.register { server, serverResourceManager ->
+            VillagerFood.visitedFoods.clear()
         }
     }
 

@@ -21,8 +21,11 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
     fun contains(stack: ItemStack) = stack.isIn(items)
 
     companion object {
-        const val ENABLED = true
-        const val FALLBACK = true
+        @JvmField
+        var ENABLED = true
+
+        @JvmField
+        var FALLBACK = true
 
         val CODEC: Codec<VillagerFood> = RecordCodecBuilder.create<VillagerFood> { instance ->
             instance.group(
@@ -55,7 +58,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
                     return if (amount > 0) amount as Integer else null
                 }
             }
-            if (FALLBACK && Registries.ITEM.getId(stack.item).namespace != DEFAULT_NAMESPACE) return original
+            if (FALLBACK && stack.isNotMC()) return original
             return null
         }
 
@@ -68,7 +71,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
                     totalFoodValue += (amount * stack.count)
                     continue
                 }
-                if (FALLBACK && Registries.ITEM.getId(stack.item).namespace != DEFAULT_NAMESPACE) {
+                if (FALLBACK && stack.isNotMC()) {
                     val amount = ITEM_FOOD_VALUES[stack.item]
                     if (amount != null) {
                         totalFoodValue += (amount * stack.count)
@@ -79,7 +82,15 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         }
 
         @JvmStatic
-        fun canPickUp(stack: ItemStack, world: World): Boolean = world.getFood(stack)?.canEat(stack) == true
+        fun canPickUp(stack: ItemStack, world: World, original: Boolean): Boolean {
+            val canPickUp = world.getFood(stack)?.canEat(stack) == true
+            if (canPickUp) return true
+            if (FALLBACK && stack.isNotMC()) {
+                return ITEM_FOOD_VALUES.contains(stack.item)
+            }
+            return if (ITEM_FOOD_VALUES.contains(stack.item)) false else original
+        }
 
+        fun ItemStack.isNotMC() = Registries.ITEM.getId(this.item).namespace != DEFAULT_NAMESPACE
     }
 }

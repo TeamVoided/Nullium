@@ -9,12 +9,10 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.teamvoided.nullium.data.custom.VillagerFood;
 
-@Debug(export = true)
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin extends MerchantEntity {
     public VillagerEntityMixin(EntityType<? extends MerchantEntity> entityType, World world) {
@@ -34,6 +32,6 @@ public abstract class VillagerEntityMixin extends MerchantEntity {
 
     @ModifyReturnValue(method = "canGather", at = @At("RETURN"))
     boolean canPickUpCustom(boolean original, ItemStack stack) {
-        return original || (VillagerFood.ENABLED && VillagerFood.canPickUp(stack, getWorld()));
+        return VillagerFood.ENABLED ? VillagerFood.canPickUp(stack, getWorld(), original) : original;
     }
 }

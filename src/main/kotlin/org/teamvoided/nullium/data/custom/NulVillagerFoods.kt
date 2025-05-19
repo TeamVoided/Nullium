@@ -12,7 +12,7 @@ object NulVillagerFoods {
     val BEETROOT = create("beetroot")
 
     // Nullium
-    val CHICKEN = create("chicken")
+    val PIES = create("pies")
 
     fun create(path: String): RegistryKey<VillagerFood> = RegistryKey.of(NulRegistryKeys.VILLAGER_FOOD, id(path))
 }

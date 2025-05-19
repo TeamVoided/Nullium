@@ -1,12 +1,12 @@
 package org.teamvoided.nullium.data.gen.dyn
 
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.registry.BootstrapContext
 import net.minecraft.registry.HolderSet
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.registry.tag.TagKey
 import org.teamvoided.nullium.data.custom.NulVillagerFoods
 import org.teamvoided.nullium.data.custom.VillagerFood
@@ -19,7 +19,7 @@ object VillagerFoodCreator {
         c.make(NulVillagerFoods.BEETROOT, Items.BEETROOT, 1)
 
 
-        c.make(NulVillagerFoods.CHICKEN, ItemTags.PLANKS, 24)
+        c.make(NulVillagerFoods.PIES, ConventionalItemTags.PIE_FOODS, 4)
 
     }
 

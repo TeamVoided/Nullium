@@ -10,10 +10,7 @@ import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.data.gen.dyn.VillagerFoodCreator
 import org.teamvoided.nullium.data.gen.loot.EntityLootTablesProvider
 import org.teamvoided.nullium.data.gen.loot.InjectionLootTablesProvider
-import org.teamvoided.nullium.data.gen.tags.BlockTagProvider
-import org.teamvoided.nullium.data.gen.tags.FluidTagProvider
-import org.teamvoided.nullium.data.gen.tags.ItemTagProvider
-import org.teamvoided.nullium.data.gen.tags.StructureTagProvider
+import org.teamvoided.nullium.data.gen.tags.*
 import org.teamvoided.nullium.init.NulRegistryKeys
 import java.util.concurrent.CompletableFuture
 
@@ -27,6 +24,7 @@ class NulliumData : DataGeneratorEntrypoint {
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::FluidTagProvider)
         pack.addProvider(::StructureTagProvider)
+        pack.addProvider(::ProfessionTagProvider)
         //loot tables
         pack.addProvider(::EntityLootTablesProvider)
         InjectionLootTablesProvider.lootTables().forEach { pack.addProvider(it) }

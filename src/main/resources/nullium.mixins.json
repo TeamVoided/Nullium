@@ -20,6 +20,7 @@
     "SugarCaneBlockMixin",
     "ToolMaterialsAccessor",
     "VillagerEntityMixin",
+    "VillagerTaskListProviderMixin",
     "WallMountedBlockMixin",
     "WitherRoseBlockMixin",
     "portal.AbstractFireBlockMixin",

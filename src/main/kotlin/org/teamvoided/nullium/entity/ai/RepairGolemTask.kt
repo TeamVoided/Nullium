@@ -27,12 +27,11 @@ class RepairGolemTask : Task<VillagerEntity>(
     override fun shouldRun(world: ServerWorld, villager: VillagerEntity): Boolean {
         if (!world.getBoolRule(GOLEM_REPAIR)) return false
         if (villager.isBaby) return false
-        if (villager.age % 10 != 0 || this.lastEndEntityAge != 0L && this.lastEndEntityAge + 100L > villager.age) {
-            return false
-        }
-
         val profession = VILLAGER_PROFESSION.getId(villager.villagerData.profession)
-        return VILLAGER_PROFESSION.getHolder(profession).get().isIn(REPAIRS_GOLEM)
+        if (!VILLAGER_PROFESSION.getHolder(profession).get().isIn(REPAIRS_GOLEM)) return false
+        if (villager.age % 10 != 0 || this.lastEndEntityAge != 0L && this.lastEndEntityAge + 100L > villager.age) return false
+
+        return true
     }
 
 
@@ -40,7 +39,6 @@ class RepairGolemTask : Task<VillagerEntity>(
         val golem = villager.brain.getMemoryValue(MemoryModuleType.INTERACTION_TARGET)?.getOrNull() ?: return
 
         if (golem is IronGolemEntity && golem.crack != C_fudcfuiw.C_mihhozwa.NONE && villager.distanceTo(golem) <= 2f) {
-            println("repair")
             golem.heal(25.0f)
             golem.playSound(
                 SoundEvents.ENTITY_IRON_GOLEM_REPAIR,
@@ -53,10 +51,6 @@ class RepairGolemTask : Task<VillagerEntity>(
     override fun finishRunning(world: ServerWorld, villager: VillagerEntity, l: Long) {
         villager.getBrain().forget(MemoryModuleType.INTERACTION_TARGET)
         lastEndEntityAge = villager.age.toLong()
-    }
-
-    override fun keepRunning(world: ServerWorld?, entity: VillagerEntity?, time: Long) {
-        super.keepRunning(world, entity, time)
     }
 
     override fun shouldKeepRunning(world: ServerWorld, villager: VillagerEntity, l: Long): Boolean = false

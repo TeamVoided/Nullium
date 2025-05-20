@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin;
+package org.teamvoided.nullium.mixin.villager;
 
 import com.google.common.collect.ImmutableList;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -20,8 +20,12 @@ public class VillagerTaskListProviderMixin {
 
     @ModifyReturnValue(method = "createMeetTasks", at = @At("RETURN"))
     private static ImmutableList<Pair<Integer, ? extends TaskControl<? super VillagerEntity>>> addCustomTasks(ImmutableList<Pair<Integer, ? extends TaskControl<? super VillagerEntity>>> original, VillagerProfession profession, float speed) {
-        List<Pair<Integer, ? extends TaskControl<? super VillagerEntity>>> newList = new ArrayList<>(original);
-        newList.add(crateCustomTasks(profession, speed));
-        return newList.stream().collect(ImmutableList.toImmutableList());
+        var customTasks = crateCustomTasks(profession, speed);
+        if (customTasks != null) {
+            List<Pair<Integer, ? extends TaskControl<? super VillagerEntity>>> newList = new ArrayList<>(original);
+            newList.add(customTasks);
+            return newList.stream().collect(ImmutableList.toImmutableList());
+        }
+        return original;
     }
 }

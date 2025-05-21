@@ -12,6 +12,7 @@
     "EndermanEntityMixin",
     "FarmlandBlockMixin",
     "GlowingFoodComponentsMixin",
+    "MossBlockMixin",
     "NetherWartBlockMixin",
     "PlaceBlockGoalMixin",
     "RootsBlockMixin",
@@ -19,12 +20,12 @@
     "SculkVeinBlockMixin",
     "SugarCaneBlockMixin",
     "ToolMaterialsAccessor",
-    "villager.VillagerEntityMixin",
-    "villager.VillagerTaskListProviderMixin",
     "WallMountedBlockMixin",
     "WitherRoseBlockMixin",
     "portal.AbstractFireBlockMixin",
-    "portal.AreaHelperMixin"
+    "portal.AreaHelperMixin",
+    "villager.VillagerEntityMixin",
+    "villager.VillagerTaskListProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -9,6 +9,7 @@ import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.NulCommandRegistry
 import org.teamvoided.nullium.init.NulFabricEvents
 import org.teamvoided.nullium.init.NulRegistryKeys
+import org.teamvoided.nullium.init.NulFeatures
 import org.teamvoided.nullium.module.NulMiscellaneous
 import org.teamvoided.nullium.module.NulliumGameRules
 
@@ -27,6 +28,7 @@ object Nullium {
     fun commonInit() {
         log.info("Nulls your ium!")
         NulConfigManager.init()
+        NulFeatures.init()
         NulRegistryKeys.init()
         NulCommandRegistry.init()
         NulFabricEvents.init()

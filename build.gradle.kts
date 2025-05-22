@@ -13,13 +13,18 @@ plugins {
 }
 
 repositories {
-    maven("https://teamvoided.org/releases")
-    maven("https://teamvoided.org/snapshots")
-    maven("https://maven.nucleoid.xyz")
-    maven("https://maven.terraformersmc.com/") { name = "Terraformers" }
-    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" }
-    maven("https://api.modrinth.com/maven")
-    mavenCentral()
+    maven("https://teamvoided.org/releases") { content { includeGroup("org.teamvoided") } }
+    maven("https://teamvoided.org/snapshots") { content { includeGroup("org.teamvoided") } }
+    maven("https://maven.nucleoid.xyz") { content { includeGroup("xyz.nucleoid") } }
+    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven"; content { includeGroup("me.fzzyhmstrs") } }
+    maven("https://maven.terraformersmc.com/") {
+        name = "Terraformers"
+        content {
+            includeGroup("com.terraformersmc")
+            includeGroup("dev.emi")
+        }
+    }
+    maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
     mavenCentral()
 }
 
@@ -35,18 +40,13 @@ dependencies {
     // Dependencies
     modImplementation(libs.server.translations.api)
     include(libs.server.translations.api)
-
     modImplementation(libs.fzzy.config)
-
     // QoL
     modImplementation(libs.modmenu)
-
     modCompileOnly("${libs.emi.get()}:api")
     modLocalRuntime(libs.emi)
-
     // Testing
     modImplementation(libs.creative.works)
-
 }
 
 val username = "vDev"

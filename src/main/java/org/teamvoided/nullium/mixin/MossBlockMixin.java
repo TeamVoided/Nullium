@@ -25,7 +25,7 @@ public class MossBlockMixin {
         return original || world.getBlockState(pos.up()).isIn(MOSS_GROWS_UNDER);
     }
 
-    @SuppressWarnings({"unchecked", "OptionalUsedAsFieldOrParameterType"})
+    @SuppressWarnings({"unchecked", "OptionalUsedAsFieldOrParameterType", "rawtypes"})
     @ModifyExpressionValue(method = "method_46685", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;getHolder(Lnet/minecraft/registry/RegistryKey;)Ljava/util/Optional;"))
     private static <T> Optional<Holder.Reference<T>> theSecond(Optional<Holder.Reference<T>> original, Registry registry) {
         if (BETTER_MOSS) {

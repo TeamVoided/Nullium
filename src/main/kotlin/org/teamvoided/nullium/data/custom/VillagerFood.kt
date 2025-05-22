@@ -13,6 +13,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier.DEFAULT_NAMESPACE
 import net.minecraft.util.dynamic.Codecs
 import net.minecraft.world.World
+import org.teamvoided.nullium.config.VILLAGER_FOOD_FALLBACK
 import org.teamvoided.nullium.init.NulRegistryKeys.getVillagerFood
 
 data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
@@ -21,12 +22,6 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
     fun contains(stack: ItemStack) = stack.isIn(items)
 
     companion object {
-        @JvmField
-        var ENABLED = true
-
-        @JvmField
-        var FALLBACK = true
-
         val CODEC: Codec<VillagerFood> = RecordCodecBuilder.create<VillagerFood> { instance ->
             instance.group(
                 RegistryCodecs.homogeneousList<Item>(RegistryKeys.ITEM).fieldOf("items").forGetter { it.items },
@@ -58,7 +53,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
                     return if (amount > 0) amount as Integer else null
                 }
             }
-            if (FALLBACK && stack.isNotMC()) return original
+            if (VILLAGER_FOOD_FALLBACK && stack.isNotMC()) return original
             return null
         }
 
@@ -71,7 +66,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
                     totalFoodValue += (amount * stack.count)
                     continue
                 }
-                if (FALLBACK && stack.isNotMC()) {
+                if (VILLAGER_FOOD_FALLBACK && stack.isNotMC()) {
                     val amount = ITEM_FOOD_VALUES[stack.item]
                     if (amount != null) {
                         totalFoodValue += (amount * stack.count)
@@ -85,7 +80,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         fun canPickUp(stack: ItemStack, world: World, original: Boolean): Boolean {
             val canPickUp = world.getFood(stack)?.canEat(stack) == true
             if (canPickUp) return true
-            if (FALLBACK && stack.isNotMC()) {
+            if (VILLAGER_FOOD_FALLBACK && stack.isNotMC()) {
                 return ITEM_FOOD_VALUES.contains(stack.item)
             }
             return if (ITEM_FOOD_VALUES.contains(stack.item)) false else original

@@ -12,16 +12,14 @@ plugins {
     alias(libs.plugins.iridium.upload)
 }
 
-group = property("maven_group")!!
-version = property("mod_version")!!
-base.archivesName.set(modSettings.modId())
-
-val modrinth_id: String? by project
-val curse_id: String? by project
-
 repositories {
     maven("https://teamvoided.org/releases")
+    maven("https://teamvoided.org/snapshots")
     maven("https://maven.nucleoid.xyz")
+    maven("https://maven.terraformersmc.com/") { name = "Terraformers" }
+    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" }
+    maven("https://api.modrinth.com/maven")
+    mavenCentral()
     mavenCentral()
 }
 
@@ -34,16 +32,42 @@ modSettings {
 
 dependencies {
     modImplementation(fileTree("libs"))
+    // Dependencies
     modImplementation(libs.server.translations.api)
     include(libs.server.translations.api)
-//    modImplementation(libs.farrow)
-//    include(libs.farrow)
+
+    modImplementation(libs.fzzy.config)
+
+    // QoL
+    modImplementation(libs.modmenu)
+
+    modCompileOnly("${libs.emi.get()}:api")
+    modLocalRuntime(libs.emi)
+
+    // Testing
+    modImplementation(libs.creative.works)
+
 }
+
+val username = "vDev"
+val uuid: String? = null
 
 loom {
     splitEnvironmentSourceSets()
-
     runs {
+        named("client") {
+            programArgs("--username", username)
+            uuid?.let { programArgs("--uuid", uuid) }
+        }
+
+        create("TestWorld") {
+            client()
+            ideConfigGenerated(true)
+            runDir("run")
+            programArgs("--quickPlaySingleplayer", "test", "--username", username)
+            uuid?.let { programArgs("--uuid", uuid) }
+        }
+
         create("DataGen") {
             client()
             ideConfigGenerated(true)
@@ -51,13 +75,6 @@ loom {
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
             vmArg("-Dfabric-api.datagen.modid=${modSettings.modId()}")
             runDir("build/datagen")
-        }
-
-        create("TestWorld") {
-            client()
-            ideConfigGenerated(true)
-            runDir("run")
-            programArgs("--quickPlaySingleplayer", "test")
         }
     }
 }
@@ -89,8 +106,8 @@ publishScript {
 
 uploadConfig {
 //    debugMode = true
-    modrinthId = modrinth_id
-    curseId = curse_id
+    modrinthId = "hLiEnDPK"
+    curseId = "1007835"
 
     changeLog = File("changelog.md").readText()
 

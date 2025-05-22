@@ -1,14 +1,28 @@
 [versions]
-kotlin = "2.0.0"
-fabric-loom = "1.6-SNAPSHOT"
-iridium = "3.3.1"
+kotlin = "2.1.20"
+fabric-loom = "1.10-SNAPSHOT"
+iridium = "3.4.0"
 
-#farrow = "1.0.0+arrow.1.2.4"
+# Dependencies
 server_translations = "2.3.1+1.21-pre2"
+fzzy-config = "0.6.9+1.21"
+
+# QoL
+emi = "1.1.22+1.21.1"
+modmenu = "11.0.3"
+
+# Testing
+creative-works = "0.4.0"
 
 [libraries]
-#farrow = { module = "net.wiredtomato:farrow", version.ref = "farrow" }
+# Dependencies
+fzzy-config = { module = "me.fzzyhmstrs:fzzy_config", version.ref = "fzzy-config" }
 server-translations-api = { module = "xyz.nucleoid:server-translations-api", version.ref = "server_translations" }
+# QoL
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+emi = { module = "dev.emi:emi-fabric", version.ref = "emi" }
+# Testing
+creative-works = { module = "org.teamvoided:creative_works", version.ref = "creative-works" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

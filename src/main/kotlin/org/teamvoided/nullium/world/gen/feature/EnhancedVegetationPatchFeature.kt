@@ -56,27 +56,29 @@ open class EnhancedVegetationPatchFeature(codec: Codec<EVPFConfig>) : Feature<EV
                 val notCorner = edge && !corner
                 if (corner || notCorner && (config.extraEdgeColumnChance == 0.0f || random.nextFloat() > config.extraEdgeColumnChance)) continue
                 pos.set(originPos, i, 0, j)
-                var k = 0
-                while (world.testBlockState(pos, canGrowUnder) && k < config.verticalRange
-                ) {
+
+                for (ignored in 0 until config.verticalRange) {
+                    if (!world.testBlockState(pos, canGrowUnder)) break
                     pos.move(surfaceDir)
-                    ++k
                 }
-                k = 0
-                while (world.testBlockState(pos, canGrowUnder.negate()) && k < config.verticalRange) {
+
+                for (ignored in 0 until config.verticalRange) {
+                    if (!world.testBlockState(pos, canGrowUnder.negate())) break
                     pos.move(oppositeDir)
-                    ++k
                 }
-                posCopy.set(pos, config.surface.direction)
-                val blockState = world.getBlockState(posCopy)
-                if (!world.testBlockState(pos, canGrowUnder) ||
-                    !blockState.isSideSolidFullSquare(world, posCopy, config.surface.direction.opposite)
-                ) continue
-                val l = config.depth.get(random) +
-                        (if (config.extraBottomBlockChance > 0.0f && random.nextFloat() < config.extraBottomBlockChance) 1 else 0)
+
+                posCopy.set(pos, surfaceDir)
+
+                if (!world.testBlockState(pos, canGrowUnder)) continue
+                if (!world.getBlockState(posCopy).isSideSolidFullSquare(world, posCopy, oppositeDir)) continue
+                val extraBottomBlocks =
+                    if (config.extraBottomBlockChance > 0.0f && random.nextFloat() < config.extraBottomBlockChance) 1 else 0
+                val depth = config.depth.get(random) + extraBottomBlocks
+
                 val blockPos = posCopy.toImmutable()
-                if (!this.placeGround(world, config, replaceable, random, posCopy, l)) continue
-                vegetationSpaces.add(blockPos)
+                if (this.placeGround(world, config, replaceable, random, posCopy, depth)) {
+                    vegetationSpaces.add(blockPos)
+                }
             }
         }
         return vegetationSpaces

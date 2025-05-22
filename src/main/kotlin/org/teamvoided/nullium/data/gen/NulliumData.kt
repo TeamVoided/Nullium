@@ -16,6 +16,7 @@ import org.teamvoided.nullium.data.gen.world.gen.ConfiguredFeatureCreator
 import org.teamvoided.nullium.init.NulRegistryKeys
 import java.util.concurrent.CompletableFuture
 
+@Suppress("unused")
 class NulliumData : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
         log.info("Hello from DataGen")

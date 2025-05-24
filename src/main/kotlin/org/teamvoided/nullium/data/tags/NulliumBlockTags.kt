@@ -8,11 +8,10 @@ object NulliumBlockTags {
 
     @JvmField
     val SUPPORT_SMALL_TOP = support("small/top")
+
     @JvmField
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")
 
-    @JvmField
-    val CACTUS_SUPPORT = support("cactus")
     @JvmField
     val NETHER_WART_SUPPORT = support("nether_wart")
 

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags
 import net.minecraft.block.Blocks
+import net.minecraft.block.Blocks.LEVER
 import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.tag.BlockTags
 import org.teamvoided.nullium.data.tags.NulliumBlockTags
@@ -77,10 +78,22 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             )
 
 
-        // Vanilla Tags
+
+        supportsSpecial()
+    }
+
+
+    private fun supportsSpecial() {
+        getOrCreateTagBuilder(NulliumBlockTags.SUPPORTS_SMALL_TOP)
+            .forceAddTag(BlockTags.FENCES)
+            .forceAddTag(BlockTags.WALLS)
+
+        getOrCreateTagBuilder(NulliumBlockTags.SUPPORTS_SMALL_BOTTOM)
+            .forceAddTag(BlockTags.FENCES)
+            .forceAddTag(BlockTags.WALLS)
+
         getOrCreateTagBuilder(BlockTags.WALL_POST_OVERRIDE)
             .forceAddTag(BlockTags.BUTTONS)
-            .add(Blocks.LEVER)
-
+            .add(LEVER)
     }
 }

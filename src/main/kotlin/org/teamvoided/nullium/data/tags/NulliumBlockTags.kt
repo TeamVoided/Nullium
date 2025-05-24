@@ -12,8 +12,6 @@ object NulliumBlockTags {
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")
 
     @JvmField
-    val WITHER_ROSE_SUPPORT = support("wither_rose")
-    @JvmField
     val CACTUS_SUPPORT = support("cactus")
     @JvmField
     val NETHER_WART_SUPPORT = support("nether_wart")

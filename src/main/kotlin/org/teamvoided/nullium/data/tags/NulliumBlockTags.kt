@@ -7,9 +7,6 @@ import org.teamvoided.nullium.util.tag
 object NulliumBlockTags {
 
     @JvmField
-    val ENDERMAN_PLACEABLE = create("enderman_placeable")
-
-    @JvmField
     val SUPPORT_SMALL_TOP = support("small/top")
     @JvmField
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")

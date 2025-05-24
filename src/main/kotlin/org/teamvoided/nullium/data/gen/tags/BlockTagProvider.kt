@@ -28,9 +28,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .forceAddTag(BlockTags.FENCES)
             .forceAddTag(BlockTags.WALLS)
 
-        getOrCreateTagBuilder(NulliumBlockTags.ENDERMAN_PLACEABLE)
-            .forceAddTag(BlockTags.ENDERMAN_HOLDABLE)
-
         getOrCreateTagBuilder(NulliumBlockTags.CACTUS_SUPPORT)
             .add(Blocks.CACTUS)
             .forceAddTag(BlockTags.SAND)

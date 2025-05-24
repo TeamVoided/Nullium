@@ -1,5 +1,6 @@
 package org.teamvoided.nullium.init
 
+import me.fzzyhmstrs.fzzy_config.api.ConfigApi
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
@@ -20,6 +21,7 @@ import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 import net.minecraft.server.world.ServerWorld
+import org.teamvoided.nullium.cfg.NulConfig
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.data.custom.VillagerFood
 import org.teamvoided.nullium.data.loot.NulliumInjections
@@ -30,7 +32,8 @@ import org.teamvoided.nullium.util.lootPool
 @Suppress("UNUSED_PARAMETER")
 object NulFabricEvents {
     val cfg = NulConfigManager.main.data()
-
+    @JvmField
+    var config = ConfigApi.registerAndLoadConfig(::NulConfig)
     fun init() {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
@@ -51,11 +54,11 @@ object NulFabricEvents {
         table: RegistryKey<LootTable>, builder: LootTable.Builder,
         ignored: LootTableSource, provider: HolderLookup.Provider,
     ) {
-        if (cfg.getCakeDrops() && table == Blocks.CAKE.lootTableId) {
+        if (config.cakeDrops && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
 
-        if (cfg.getBarterUpgrades() && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+        if (config.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
             builder.pool(lootPool { lootTable(NulliumInjections.BARTER_UPGRADES) {} })
         }
     }

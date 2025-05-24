@@ -28,9 +28,6 @@ data class MainData(
         stopping["glowBerriesGlow"] = data1.stopping.enableGlowBerriesGlow
         stopping["copperBulbRevert"] = data1.stopping.enableCopperBulbRevert
         stopping["compostable"] = data1.stopping.enableCompostable
-
-        reloadable["cakeDrops"] = data1.reloadable.cakeDrops
-        reloadable["barterUpgrades"] = data1.reloadable.barterUpgrades
     }
 
     // 1.1 options
@@ -49,23 +46,11 @@ data class MainData(
     fun enableStackableMinecarts() = stopping["stackableMinecarts"] ?: handleMissingStopping("stackableMinecarts")
 
 
-    // 1.1 options
-    fun getCakeDrops() = reloadable["cakeDrops"] ?: handleMissingReloadable("cakeDrops")
-    fun getBarterUpgrades() = reloadable["barterUpgrades"] ?: handleMissingReloadable("barterUpgrades")
-
 
     private fun handleMissingStopping(name: String): Boolean {
         log.warn("Missing option $name in Stopping category. Using default value and saving config.")
         val default = STOPPING_DEFAULT[name] ?: throw Error("Missing default value for config option $name")
         stopping[name] = default
-        NulConfigManager.main.save()
-        return true
-    }
-
-    private fun handleMissingReloadable(name: String): Boolean {
-        log.warn("Missing option $name in Reloadable category. Using default value and saving config.")
-        val default = RELOADABLE_DEFAULT[name] ?: throw Error("Missing default value for config option $name")
-        reloadable[name] = default
         NulConfigManager.main.save()
         return true
     }

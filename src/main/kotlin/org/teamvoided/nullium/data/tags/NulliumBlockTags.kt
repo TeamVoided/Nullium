@@ -5,13 +5,6 @@ import org.teamvoided.nullium.Nullium.id
 import org.teamvoided.nullium.util.tag
 
 object NulliumBlockTags {
-
-    @JvmField
-    val SUPPORT_SMALL_TOP = support("small/top")
-
-    @JvmField
-    val SUPPORT_SMALL_BOTTOM = support("small/bottom")
-
     @JvmField
     val MOSS_GROWS_UNDER = create("moss_grows_under")
 

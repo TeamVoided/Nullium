@@ -32,8 +32,5 @@ abstract class EndermanEntityMixin extends MobEntity {
             HolderMan.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
         }
         return entityData;
-
     }
-
-
 }

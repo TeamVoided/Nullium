@@ -21,12 +21,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .forceAddTag(BlockTags.FENCES)
             .forceAddTag(BlockTags.WALLS)
 
-        getOrCreateTagBuilder(NulliumBlockTags.NYLIUM_PLANTS_SUPPORT)
-            .forceAddTag(BlockTags.NYLIUM)
-            .add(Blocks.SOUL_SOIL)
-            .forceAddTag(BlockTags.DIRT)
-            .add(Blocks.FARMLAND)
-
         getOrCreateTagBuilder(NulliumBlockTags.PORTAL_BLOCKS)
             .add(Blocks.OBSIDIAN)
             .add(Blocks.CRYING_OBSIDIAN)

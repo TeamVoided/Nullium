@@ -13,9 +13,6 @@ object NulliumBlockTags {
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")
 
     @JvmField
-    val NYLIUM_PLANTS_SUPPORT = support("nylium_plants")
-
-    @JvmField
     val PORTAL_BLOCKS = create("portal_blocks")
 
     @JvmField

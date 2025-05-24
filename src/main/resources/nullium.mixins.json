@@ -6,9 +6,10 @@
   "plugin": "org.teamvoided.nullium.mixin.NulliumMixinPlugin",
   "mixins": [
     "AnvilScreenHandlerMixin",
-    "ArmorMaterialsAccessor",
+    "accessors.ArmorMaterialsAccessor",
     "GlowingFoodComponentsMixin",
-    "ToolMaterialsAccessor",
+    "accessors.SculkCatalystBlockEntityAccessor",
+    "accessors.ToolMaterialsAccessor",
     "block.CopperBulbBlockMixin",
     "block.FarmlandBlockMixin",
     "block.MossBlockMixin",

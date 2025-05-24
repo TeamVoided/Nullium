@@ -1,3 +1,5 @@
+@file:Suppress("CAST_NEVER_SUCCEEDS")
+
 package org.teamvoided.nullium.util
 
 import net.minecraft.item.ArmorMaterial
@@ -6,8 +8,8 @@ import net.minecraft.item.ToolMaterials
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.Holder
 import net.minecraft.registry.tag.TagKey
-import org.teamvoided.nullium.mixin.ArmorMaterialsAccessor
-import org.teamvoided.nullium.mixin.ToolMaterialsAccessor
+import org.teamvoided.nullium.mixin.accessors.ArmorMaterialsAccessor
+import org.teamvoided.nullium.mixin.accessors.ToolMaterialsAccessor
 import java.util.function.Supplier
 
 //Blacksmith Helpers

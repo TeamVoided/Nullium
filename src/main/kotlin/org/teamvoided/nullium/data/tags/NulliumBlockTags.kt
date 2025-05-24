@@ -13,9 +13,6 @@ object NulliumBlockTags {
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")
 
     @JvmField
-    val PORTAL_BLOCKS = create("portal_blocks")
-
-    @JvmField
     val MOSS_GROWS_UNDER = create("moss_grows_under")
 
     private fun create(id: String) = RegistryKeys.BLOCK.tag(id(id))

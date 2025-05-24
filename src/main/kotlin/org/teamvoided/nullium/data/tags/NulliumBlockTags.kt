@@ -7,9 +7,6 @@ import org.teamvoided.nullium.util.tag
 object NulliumBlockTags {
 
     @JvmField
-    val CANE_HYDRATION = create("cane_hydration")
-
-    @JvmField
     val ENDERMAN_PLACEABLE = create("enderman_placeable")
 
     @JvmField
@@ -17,8 +14,6 @@ object NulliumBlockTags {
     @JvmField
     val SUPPORT_SMALL_BOTTOM = support("small/bottom")
 
-    @JvmField
-    val CANE_SUPPORT = support("cane")
     @JvmField
     val WITHER_ROSE_SUPPORT = support("wither_rose")
     @JvmField

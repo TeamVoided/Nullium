@@ -13,14 +13,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     FabricTagProvider.BlockTagProvider(output, registriesFuture) {
     override fun configure(arg: HolderLookup.Provider) {
         //Nullium Tags
-        getOrCreateTagBuilder(NulliumBlockTags.CANE_HYDRATION)
-            .add(Blocks.ICE)
-            .add(Blocks.FROSTED_ICE)
-
-        getOrCreateTagBuilder(NulliumBlockTags.CANE_SUPPORT)
-            .forceAddTag(BlockTags.DIRT)
-            .forceAddTag(BlockTags.SAND)
-
         getOrCreateTagBuilder(NulliumBlockTags.WITHER_ROSE_SUPPORT)
             .forceAddTag(BlockTags.DIRT)
             .add(Blocks.FARMLAND)

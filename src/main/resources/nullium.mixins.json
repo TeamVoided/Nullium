@@ -7,7 +7,6 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "accessors.ArmorMaterialsAccessor",
-    "GlowingFoodComponentsMixin",
     "accessors.SculkCatalystBlockEntityAccessor",
     "accessors.ToolMaterialsAccessor",
     "block.CopperBulbBlockMixin",

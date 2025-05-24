@@ -8,6 +8,9 @@ import net.fabricmc.fabric.api.loot.v3.LootTableSource
 import net.minecraft.block.Blocks
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.FoodComponent
 import net.minecraft.item.Items
 import net.minecraft.item.PotionItem
 import net.minecraft.item.ThrowablePotionItem
@@ -82,5 +85,14 @@ object NulFabricEvents {
 
         if (cfg.enableStackableMinecarts()) c.modify(Items.MINECART) { it.put(DataComponentTypes.MAX_STACK_SIZE, 4) }
 
+        if (cfg.enableGlowBerriesGlow()) c.modify(Items.GLOW_BERRIES) {
+            it.put(
+                DataComponentTypes.FOOD, FoodComponent.Builder()
+                    .hunger(2)
+                    .saturation(0.1f)
+                    .statusEffect(StatusEffectInstance(StatusEffects.GLOWING, 600, 0), 1.0f)
+                    .build()
+            )
+        }
     }
 }

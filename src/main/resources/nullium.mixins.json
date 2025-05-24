@@ -7,17 +7,17 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "ArmorMaterialsAccessor",
-    "CopperBulbBlockMixin",
-    "EndermanEntityMixin",
-    "FarmlandBlockMixin",
     "GlowingFoodComponentsMixin",
-    "MossBlockMixin",
-    "SculkCatalystBlockEntityMixin",
-    "SculkVeinBlockMixin",
     "ToolMaterialsAccessor",
-    "support.WallMountedBlockMixin",
-    "villager.VillagerEntityMixin",
-    "villager.VillagerTaskListProviderMixin"
+    "block.CopperBulbBlockMixin",
+    "block.FarmlandBlockMixin",
+    "block.MossBlockMixin",
+    "block.WallMountedBlockMixin",
+    "block.sculk.SculkCatalystBlockEntityMixin",
+    "block.sculk.SculkVeinBlockMixin",
+    "entity.EndermanEntityMixin",
+    "entity.villager.VillagerEntityMixin",
+    "entity.villager.VillagerTaskListProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

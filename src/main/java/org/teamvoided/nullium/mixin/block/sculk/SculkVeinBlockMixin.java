@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin;
+package org.teamvoided.nullium.mixin.block.sculk;
 
 import net.minecraft.block.sculk.SculkBehavior;
 import net.minecraft.block.sculk.SculkVeinBlock;

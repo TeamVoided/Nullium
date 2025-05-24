@@ -25,9 +25,9 @@ public class NulliumMixinPlugin implements IMixinConfigPlugin {
 		MainData cfg = NulConfigManager.getMain().data();
 		return switch (mixinClassName) {
 			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.enableBlacksmith();
-			case "org.teamvoided.nullium.mixin.EndermanEntityMixin" -> cfg.enableHolderman();
+			case "org.teamvoided.nullium.mixin.entity.EndermanEntityMixin" -> cfg.enableHolderman();
             case "org.teamvoided.nullium.mixin.GlowingFoodComponentsMixin" -> cfg.enableGlowBerriesGlow();
-			case "org.teamvoided.nullium.mixin.CopperBulbBlockMixin" -> cfg.enableCopperBulbRevert();
+			case "org.teamvoided.nullium.mixin.block.CopperBulbBlockMixin" -> cfg.enableCopperBulbRevert();
 			default -> true;
 		};
 	}

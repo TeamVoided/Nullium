@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin;
+package org.teamvoided.nullium.mixin.block;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

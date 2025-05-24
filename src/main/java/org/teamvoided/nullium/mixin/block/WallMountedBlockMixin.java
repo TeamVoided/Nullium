@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin.support;
+package org.teamvoided.nullium.mixin.block;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.block.Block;

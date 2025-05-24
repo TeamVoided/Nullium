@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin;
+package org.teamvoided.nullium.mixin.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;

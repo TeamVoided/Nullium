@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.mixin.villager;
+package org.teamvoided.nullium.mixin.entity.villager;
 
 import com.google.common.collect.ImmutableList;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

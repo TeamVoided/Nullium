@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package org.teamvoided.nullium.data.tags
 
 import net.minecraft.registry.RegistryKeys

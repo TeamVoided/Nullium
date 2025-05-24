@@ -29,7 +29,6 @@ object VillagerFoodCreator {
     }
 
     fun BootstrapContext<VillagerFood>.make(key: RegistryKey<VillagerFood>, itemTag: TagKey<Item>, amount: Int) {
-        val lookup = this.getRegistryLookup(RegistryKeys.ITEM)
-        this.register(key, VillagerFood(lookup.getTagOrThrow(itemTag), amount))
+        this.register(key, VillagerFood(this.getRegistryLookup(RegistryKeys.ITEM).getTagOrThrow(itemTag), amount))
     }
 }

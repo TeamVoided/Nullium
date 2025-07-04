@@ -1,13 +1,11 @@
 package org.teamvoided.nullium.config
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.config.module.BlacksmithCfg
-import org.teamvoided.nullium.config.module.CompostableCfg
 import org.teamvoided.nullium.config.module.MainCfg
 import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.util.getTimeFileName
@@ -33,7 +31,6 @@ object NulConfigManager {
 
     val bigSalmon: MobScaleCfg by lazy { MobScaleCfg() }
     val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
-    val compostable: CompostableCfg by lazy { CompostableCfg() }
 
 //    val miscellaneous: MiscellaneousCfg by lazy { MiscellaneousCfg() }
 
@@ -58,7 +55,6 @@ object NulConfigManager {
         return listOf(
             bigSalmon.load(),
             blacksmith.load(),
-            compostable.load(),
 //            miscellaneous.load()
         ).count { !it }
     }

@@ -27,7 +27,6 @@ data class MainData(
         stopping["blacksmith"] = data1.stopping.enableBlacksmith
         stopping["glowBerriesGlow"] = data1.stopping.enableGlowBerriesGlow
         stopping["copperBulbRevert"] = data1.stopping.enableCopperBulbRevert
-        stopping["compostable"] = data1.stopping.enableCompostable
     }
 
     // 1.1 options
@@ -37,7 +36,6 @@ data class MainData(
     fun enableBlacksmith() = stopping["blacksmith"] ?: handleMissingStopping("blacksmith")
     fun enableGlowBerriesGlow() = stopping["glowBerriesGlow"] ?: handleMissingStopping("glowBerriesGlow")
     fun enableCopperBulbRevert() = stopping["copperBulbRevert"] ?: handleMissingStopping("copperBulbRevert")
-    fun enableCompostable() = stopping["compostable"] ?: handleMissingStopping("compostable")
 
     // 1.2 options
     fun enableStackableSaddles() = stopping["stackableSaddles"] ?: handleMissingStopping("stackableSaddles")
@@ -63,7 +61,6 @@ data class MainData(
             "blacksmith" to true,
             "glowBerriesGlow" to true,
             "copperBulbRevert" to true,
-            "compostable" to true,
             // 1.2 options
             "stackableSaddles" to true,
             "stackableHorseArmor" to true,

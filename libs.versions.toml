@@ -4,7 +4,7 @@ fabric-loom = "1.10-SNAPSHOT"
 iridium = "3.4.0"
 # Dependencies
 server_translations = "2.3.1+1.21-pre2"
-fzzy-config = "0.6.9+1.21"
+fzzy-config = "0.7.0+1.21"
 # QoL
 modmenu = "11.0.3"
 emi = "1.1.22+1.21.1"

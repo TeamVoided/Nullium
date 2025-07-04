@@ -1,6 +1,5 @@
 package org.teamvoided.nullium.init
 
-import me.fzzyhmstrs.fzzy_config.api.ConfigApi
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
@@ -20,29 +19,39 @@ import net.minecraft.loot.LootTables
 import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
+import net.minecraft.resource.AutoCloseableResourceManager
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.world.ServerWorld
-import org.teamvoided.nullium.cfg.NulConfig
+import org.teamvoided.nullium.Nullium.CONFIG
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.data.custom.VillagerFood
 import org.teamvoided.nullium.data.loot.NulliumInjections
 import org.teamvoided.nullium.module.Blacksmith
+import org.teamvoided.nullium.module.Compostable
 import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
 
 @Suppress("UNUSED_PARAMETER")
 object NulFabricEvents {
     val cfg = NulConfigManager.main.data()
-    @JvmField
-    var config = ConfigApi.registerAndLoadConfig(::NulConfig)
+
     fun init() {
+        ServerLifecycleEvents.START_DATA_PACK_RELOAD.register(::onStartDataPackReload)
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
+
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
         LootTableEvents.MODIFY.register(::modifyLootTable)
         if (cfg.enableBlacksmith()) Blacksmith.repairOverrides()
 
-        ServerLifecycleEvents.START_DATA_PACK_RELOAD.register { server, serverResourceManager ->
-            VillagerFood.visitedFoods.clear()
-        }
+    }
+
+    private fun onStartDataPackReload(server: MinecraftServer, manager: AutoCloseableResourceManager) {
+        VillagerFood.visitedFoods.clear()
+    }
+
+    private fun onEndDataPackReload(server: MinecraftServer, manager: AutoCloseableResourceManager, success: Boolean) {
+        Compostable.init()
     }
 
 
@@ -54,11 +63,11 @@ object NulFabricEvents {
         table: RegistryKey<LootTable>, builder: LootTable.Builder,
         ignored: LootTableSource, provider: HolderLookup.Provider,
     ) {
-        if (config.cakeDrops && table == Blocks.CAKE.lootTableId) {
+        if (CONFIG.cakeDrops && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
 
-        if (config.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
+        if (CONFIG.barterUpgrades && table == LootTables.PIGLIN_BARTERING_GAMEPLAY) {
             builder.pool(lootPool { lootTable(NulliumInjections.BARTER_UPGRADES) {} })
         }
     }

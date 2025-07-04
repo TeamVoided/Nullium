@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.teamvoided.nullium.data.custom.VillagerFood;
 
-import static org.teamvoided.nullium.init.NulFabricEvents.config;
+import static org.teamvoided.nullium.Nullium.CONFIG;
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin extends MerchantEntity {
@@ -24,16 +24,16 @@ public abstract class VillagerEntityMixin extends MerchantEntity {
     @SuppressWarnings({"unchecked", "LocalMayBeArgsOnly"})
     @ModifyExpressionValue(method = "consumeAvailableFood", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
     <V> V customCanEatFood(V original, @Local ItemStack stack) {
-        return config.customVillagerFood ? (V) VillagerFood.canEatFood((Integer) original, stack, getWorld()) : original;
+        return CONFIG.customVillagerFood ? (V) VillagerFood.canEatFood((Integer) original, stack, getWorld()) : original;
     }
 
     @ModifyReturnValue(method = "getAvailableFood", at = @At("RETURN"))
     int gatherCustomFoods(int original, @Local SimpleInventory inventory) {
-        return config.customVillagerFood ? VillagerFood.getFoodValues(inventory, getWorld()) : original;
+        return CONFIG.customVillagerFood ? VillagerFood.getFoodValues(inventory, getWorld()) : original;
     }
 
     @ModifyReturnValue(method = "canGather", at = @At("RETURN"))
     boolean canPickUpCustom(boolean original, ItemStack stack) {
-        return config.customVillagerFood ? VillagerFood.canPickUp(stack, getWorld(), original) : original;
+        return CONFIG.customVillagerFood ? VillagerFood.canPickUp(stack, getWorld(), original) : original;
     }
 }

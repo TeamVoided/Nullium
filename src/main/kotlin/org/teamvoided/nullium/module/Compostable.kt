@@ -1,26 +1,32 @@
 package org.teamvoided.nullium.module
 
-import net.minecraft.block.ComposterBlock
-import org.teamvoided.nullium.config.NulConfigManager
+import net.minecraft.block.ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE
+import net.minecraft.item.Item
+import org.teamvoided.nullium.Nullium.CONFIG
 import org.teamvoided.nullium.util.isAir
-import org.teamvoided.nullium.util.item
 
 object Compostable {
+    val defaults = mutableMapOf<Item, Float>()
     fun init() {
-        val cfg = NulConfigManager.main.data
+        if (defaults.isNotEmpty()) {
+            defaults.forEach { (item, layerChance) ->
+                if (layerChance > 0) ITEM_TO_LEVEL_INCREASE_CHANCE.put(item, layerChance)
+                else ITEM_TO_LEVEL_INCREASE_CHANCE.removeFloat(item)
+            }
+            defaults.clear()
+        }
+        if (!CONFIG.compostingChanges) return
 
-        if (cfg.enableCompostable()) {
-            val comparable = NulConfigManager.compostable.data
-            comparable.compostEntries.forEach { (id, layerChance) ->
-                id.item().let {
-                    if (!it.isAir()) ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(it, layerChance)
-                }
+        CONFIG.compostEntries.forEach { (item, layerChance) ->
+            if (!item.isAir()) {
+                val oldChance = ITEM_TO_LEVEL_INCREASE_CHANCE.put(item, layerChance)
+                defaults[item] = oldChance
             }
-            comparable.entriesToRemove.forEach { id ->
-                id.item().let {
-                    if (!it.isAir()) ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.removeFloat(it)
-                }
-            }
+        }
+
+        CONFIG.entriesToRemove.forEach { item ->
+            val oldChance = ITEM_TO_LEVEL_INCREASE_CHANCE.removeFloat(item)
+            defaults.putIfAbsent(item, oldChance)
         }
     }
 }

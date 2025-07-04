@@ -13,8 +13,8 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier.DEFAULT_NAMESPACE
 import net.minecraft.util.dynamic.Codecs
 import net.minecraft.world.World
+import org.teamvoided.nullium.Nullium.CONFIG
 import org.teamvoided.nullium.Nullium.MODID
-import org.teamvoided.nullium.init.NulFabricEvents.config
 import org.teamvoided.nullium.init.NulRegistryKeys.getVillagerFood
 
 data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
@@ -49,7 +49,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         fun canEatFood(original: Integer?, stack: ItemStack, world: World): Integer? {
             val food = world.getFood(stack)
             if (food == null) {
-                return if (config.moddedFoodFallback && stack.isNotMC()) original
+                return if (CONFIG.moddedFoodFallback && stack.isNotMC()) original
                 else null
             }
             val amount = food.getAmount(stack)
@@ -65,7 +65,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
             for (stack in inventory.stacks) {
                 var amount = world.getFood(stack)?.hungerAmount
                 if (amount == null) {
-                    if (config.moddedFoodFallback && stack.isNotMC()) {
+                    if (CONFIG.moddedFoodFallback && stack.isNotMC()) {
                         amount = ITEM_FOOD_VALUES[stack.item]
                     } else continue
                 }
@@ -79,7 +79,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         fun canPickUp(stack: ItemStack, world: World, original: Boolean): Boolean {
             val food = world.getFood(stack)
             if (food != null) return food.canEat(stack)
-            if (config.moddedFoodFallback && stack.isNotMC()) {
+            if (CONFIG.moddedFoodFallback && stack.isNotMC()) {
                 return ITEM_FOOD_VALUES.contains(stack.item)
             }
             return if (ITEM_FOOD_VALUES.contains(stack.item)) false else original

@@ -5,6 +5,13 @@ import me.fzzyhmstrs.fzzy_config.annotations.Comment
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction
 import me.fzzyhmstrs.fzzy_config.config.Config
 import me.fzzyhmstrs.fzzy_config.config.ConfigGroup
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap
+import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedRegistryType
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedNumber.WidgetType
+import net.minecraft.item.Item
+import net.minecraft.item.Items
+import net.minecraft.registry.Registries
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.id
 
@@ -32,4 +39,24 @@ class NulConfig : Config(id(MODID)) {
     @RequiresAction(Action.RELOAD_DATA)
     var barterUpgrades = true
 
+    var composting = ConfigGroup("composting", false)
+
+    @Comment("Controls if composting changes are applied")
+    @RequiresAction(Action.RELOAD_DATA)
+    var compostingChanges = true
+
+    @Comment("Adds or overrides a chance for a composter layer to spawn")
+    @RequiresAction(Action.RELOAD_DATA)
+    var compostEntries = ValidatedMap.Builder<Item, Float>()
+        .keyHandler(ValidatedRegistryType.of(Registries.ITEM))
+        .valueHandler(ValidatedFloat(.5f, 1f, 0.01f, WidgetType.SLIDER))
+        .defaults(
+            Items.GOLDEN_APPLE to 1f,
+            Items.GOLDEN_CARROT to 1f
+        ).build()
+
+    @Comment("Removes an items chance to spawn a composter layer")
+    @ConfigGroup.Pop
+    @RequiresAction(Action.RELOAD_DATA)
+    var entriesToRemove = mutableListOf<Item>()
 }

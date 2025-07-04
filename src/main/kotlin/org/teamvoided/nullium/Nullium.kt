@@ -16,6 +16,7 @@ import org.teamvoided.nullium.module.NulliumGameRules
 @Suppress("unused")
 object Nullium {
     const val MODID = "nullium"
+
     @OptIn(ExperimentalSerializationApi::class)
     val JSON = Json {
         prettyPrint = true

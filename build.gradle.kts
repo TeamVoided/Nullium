@@ -47,7 +47,7 @@ dependencies {
     modLocalRuntime(libs.emi)
     // Testing
     modImplementation(libs.creative.works)
-    modImplementation("org.teamvoided:voidlib:0.1.0-alpha.1")
+//    modImplementation("org.teamvoided:voidlib:0.1.0-alpha.1")
 }
 
 val username = "vDev"

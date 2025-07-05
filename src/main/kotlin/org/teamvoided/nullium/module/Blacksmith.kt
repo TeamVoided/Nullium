@@ -8,6 +8,7 @@ import net.minecraft.registry.tag.EnchantmentTags
 import org.teamvoided.nullium.config.NulConfigManager.blacksmith
 import org.teamvoided.nullium.config.data.IdentifierType
 import org.teamvoided.nullium.data.tags.NulliumMaterialTags
+import org.teamvoided.nullium.init.NulFabricEvents.cfg
 import org.teamvoided.nullium.util.item
 import org.teamvoided.nullium.util.itemTag
 import org.teamvoided.nullium.util.set
@@ -15,6 +16,7 @@ import org.teamvoided.nullium.util.set
 object Blacksmith {
 
     fun repairOverrides() {
+        if (!cfg.enableBlacksmith()) return
         ToolMaterials.WOOD.set(NulliumMaterialTags.REPAIR_WOOD)
         ToolMaterials.STONE.set(NulliumMaterialTags.REPAIR_STONE)
         ToolMaterials.GOLD.set(NulliumMaterialTags.REPAIR_GOLD)

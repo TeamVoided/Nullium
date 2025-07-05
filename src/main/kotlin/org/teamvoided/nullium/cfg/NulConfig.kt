@@ -17,6 +17,8 @@ import org.teamvoided.nullium.Nullium.id
 
 @Suppress("unused")
 class NulConfig : Config(id(MODID)) {
+
+    // region VillagerChanges
     var villagerChanges = ConfigGroup("villager_changes", false)
 
     @JvmField
@@ -25,20 +27,9 @@ class NulConfig : Config(id(MODID)) {
     @ConfigGroup.Pop
     @Comment("If enabled, will do a check for modded items that don't have registered a custom Villager Food")
     var moddedFoodFallback = true
+    // endregion
 
-
-    @JvmField
-    @Comment("If enabled moss will be able to spread inder blocks in the #nullium:moss_grows_under tag")
-    var betterMoss = true
-
-    @Comment("If enabled full cakes will drop them self's")
-    @RequiresAction(Action.RELOAD_DATA)
-    var cakeDrops = true
-
-    @Comment("If enabled, Netherite Upgrade Smithing Template will be added to bartering")
-    @RequiresAction(Action.RELOAD_DATA)
-    var barterUpgrades = true
-
+    // region Composting
     var composting = ConfigGroup("composting", false)
 
     @Comment("Controls if composting changes are applied")
@@ -59,4 +50,22 @@ class NulConfig : Config(id(MODID)) {
     @ConfigGroup.Pop
     @RequiresAction(Action.RELOAD_DATA)
     var entriesToRemove = mutableListOf<Item>()
+    // endregion
+
+    // region Item
+    @Comment("If enabled glow berries, when eaten will apply glowing")
+    var glowBerriesGlowing = true
+    // endregion
+
+    @JvmField
+    @Comment("If enabled moss will be able to spread inder blocks in the #nullium:moss_grows_under tag")
+    var betterMoss = true
+
+    @Comment("If enabled full cakes will drop them self's")
+    @RequiresAction(Action.RELOAD_DATA)
+    var cakeDrops = true
+
+    @Comment("If enabled, Netherite Upgrade Smithing Template will be added to bartering")
+    @RequiresAction(Action.RELOAD_DATA)
+    var barterUpgrades = true
 }

@@ -23,7 +23,6 @@ import org.teamvoided.nullium.Nullium.CONFIG
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.data.custom.VillagerFood
 import org.teamvoided.nullium.data.loot.NulliumInjections
-import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.Compostable
 import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
@@ -39,7 +38,6 @@ object NulFabricEvents {
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
         LootTableEvents.MODIFY.register(::modifyLootTable)
-        if (cfg.enableBlacksmith()) Blacksmith.repairOverrides()
 
     }
 
@@ -70,7 +68,7 @@ object NulFabricEvents {
     }
 
     private fun modifyDefaultItemComponent(ctx: DefaultItemComponentEvents.ModifyContext) {
-        if (cfg.enableGlowBerriesGlow()) ctx.modify(Items.GLOW_BERRIES) {
+        if (CONFIG.glowBerriesGlowing) ctx.modify(Items.GLOW_BERRIES) {
             it.put(
                 DataComponentTypes.FOOD, FoodComponent.Builder()
                     .hunger(2)

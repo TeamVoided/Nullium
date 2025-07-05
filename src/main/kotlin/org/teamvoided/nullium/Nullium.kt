@@ -10,8 +10,10 @@ import org.teamvoided.nullium.cfg.NulConfig
 import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.NulCommandRegistry
 import org.teamvoided.nullium.init.NulFabricEvents
+import org.teamvoided.nullium.init.NulFabricEvents.cfg
 import org.teamvoided.nullium.init.NulFeatures
 import org.teamvoided.nullium.init.NulRegistryKeys
+import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.Compostable
 import org.teamvoided.nullium.module.NulliumGameRules
 
@@ -42,6 +44,7 @@ object Nullium {
         NulFabricEvents.init()
         // Mod init
         Compostable.init()
+        Blacksmith.repairOverrides()
     }
 
     fun id(path: String) = Identifier.of(MODID, path)

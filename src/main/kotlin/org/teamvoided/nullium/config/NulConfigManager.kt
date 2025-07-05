@@ -32,7 +32,6 @@ object NulConfigManager {
     val bigSalmon: MobScaleCfg by lazy { MobScaleCfg() }
     val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
 
-//    val miscellaneous: MiscellaneousCfg by lazy { MiscellaneousCfg() }
 
     fun init() {
         if (!configDir.exists()) configDir.createDirectories()
@@ -55,7 +54,6 @@ object NulConfigManager {
         return listOf(
             bigSalmon.load(),
             blacksmith.load(),
-//            miscellaneous.load()
         ).count { !it }
     }
 

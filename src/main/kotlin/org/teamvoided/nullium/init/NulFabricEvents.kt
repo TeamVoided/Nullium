@@ -12,12 +12,9 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Items
-import net.minecraft.item.PotionItem
-import net.minecraft.item.ThrowablePotionItem
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.LootTables
 import net.minecraft.registry.HolderLookup
-import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 import net.minecraft.resource.AutoCloseableResourceManager
 import net.minecraft.server.MinecraftServer
@@ -72,32 +69,8 @@ object NulFabricEvents {
         }
     }
 
-    private fun modifyDefaultItemComponent(c: DefaultItemComponentEvents.ModifyContext) {
-        if (cfg.enableStackablePotions()) {
-            Registries.ITEM.filter { it is PotionItem && it !is ThrowablePotionItem }.forEach { item ->
-                c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
-            }
-        }
-
-        if (cfg.enableStackableSaddles()) c.modify(Items.SADDLE) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
-
-        if (cfg.enableStackableHorseArmor()) {
-            listOf(
-                Items.LEATHER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR, Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR
-            ).forEach { item ->
-                c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
-            }
-        }
-
-        if (cfg.enableStackableMusicDiscs()) {
-            Registries.ITEM.filter { it.components.get(DataComponentTypes.JUKEBOX_PLAYABLE) != null }.forEach { item ->
-                c.modify(item) { it.put(DataComponentTypes.MAX_STACK_SIZE, 16) }
-            }
-        }
-
-        if (cfg.enableStackableMinecarts()) c.modify(Items.MINECART) { it.put(DataComponentTypes.MAX_STACK_SIZE, 4) }
-
-        if (cfg.enableGlowBerriesGlow()) c.modify(Items.GLOW_BERRIES) {
+    private fun modifyDefaultItemComponent(ctx: DefaultItemComponentEvents.ModifyContext) {
+        if (cfg.enableGlowBerriesGlow()) ctx.modify(Items.GLOW_BERRIES) {
             it.put(
                 DataComponentTypes.FOOD, FoodComponent.Builder()
                     .hunger(2)

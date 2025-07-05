@@ -21,7 +21,6 @@ data class MainData(
     )
 
     constructor(data1: MainData1_1) : this() {
-        stopping["stackablePotions"] = data1.stopping.enableStackablePotions
         stopping["mobScale"] = data1.stopping.enableMobScale
         stopping["holderman"] = data1.stopping.enableHolderman
         stopping["blacksmith"] = data1.stopping.enableBlacksmith
@@ -30,20 +29,11 @@ data class MainData(
     }
 
     // 1.1 options
-    fun enableStackablePotions() = stopping["stackablePotions"] ?: handleMissingStopping("stackablePotions")
     fun enableMobScale() = stopping["mobScale"] ?: handleMissingStopping("mobScale")
     fun enableHolderman() = stopping["holderman"] ?: handleMissingStopping("holderman")
     fun enableBlacksmith() = stopping["blacksmith"] ?: handleMissingStopping("blacksmith")
     fun enableGlowBerriesGlow() = stopping["glowBerriesGlow"] ?: handleMissingStopping("glowBerriesGlow")
     fun enableCopperBulbRevert() = stopping["copperBulbRevert"] ?: handleMissingStopping("copperBulbRevert")
-
-    // 1.2 options
-    fun enableStackableSaddles() = stopping["stackableSaddles"] ?: handleMissingStopping("stackableSaddles")
-    fun enableStackableHorseArmor() = stopping["stackableHorseArmor"] ?: handleMissingStopping("stackableHorseArmor")
-    fun enableStackableMusicDiscs() = stopping["stackableMusicDiscs"] ?: handleMissingStopping("stackableMusicDiscs")
-    fun enableStackableMinecarts() = stopping["stackableMinecarts"] ?: handleMissingStopping("stackableMinecarts")
-
-
 
     private fun handleMissingStopping(name: String): Boolean {
         log.warn("Missing option $name in Stopping category. Using default value and saving config.")
@@ -55,17 +45,11 @@ data class MainData(
     companion object {
         val STOPPING_DEFAULT = mutableMapOf(
             // 1.1 options
-            "stackablePotions" to true,
             "mobScale" to true,
             "holderman" to true,
             "blacksmith" to true,
             "glowBerriesGlow" to true,
             "copperBulbRevert" to true,
-            // 1.2 options
-            "stackableSaddles" to true,
-            "stackableHorseArmor" to true,
-            "stackableMusicDiscs" to true,
-            "stackableMinecarts" to true,
         )
         val RELOADABLE_DEFAULT = mutableMapOf(
             // 1.1 options

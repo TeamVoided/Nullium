@@ -25,7 +25,6 @@ public class NulliumMixinPlugin implements IMixinConfigPlugin {
 		MainData cfg = NulConfigManager.getMain().data();
 		return switch (mixinClassName) {
 			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.enableBlacksmith();
-			case "org.teamvoided.nullium.mixin.entity.EndermanEntityMixin" -> cfg.enableHolderman();
 			default -> true;
 		};
 	}

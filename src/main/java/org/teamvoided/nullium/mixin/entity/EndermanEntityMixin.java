@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.teamvoided.nullium.module.HolderMan;
 
+import static org.teamvoided.nullium.Nullium.CONFIG;
+
 @SuppressWarnings("unused")
 @Mixin(EndermanEntity.class)
 abstract class EndermanEntityMixin extends MobEntity {
@@ -29,8 +31,10 @@ abstract class EndermanEntityMixin extends MobEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         entityData = super.initialize(world, difficulty, spawnReason, entityData);
-        if (this.getCarriedBlock() == null && !SpawnReason.isSpawner(spawnReason)) {
-            HolderMan.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
+        if (CONFIG.endermanBlocksSpawn) {
+            if (this.getCarriedBlock() == null && !SpawnReason.isSpawner(spawnReason)) {
+                HolderMan.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
+            }
         }
         return entityData;
     }

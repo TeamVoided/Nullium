@@ -29,6 +29,10 @@ class NulConfig : Config(id(MODID)) {
     var moddedFoodFallback = true
     // endregion
 
+    @JvmField
+    @Comment("If enabled, Endermen can spawn holding a block")
+    var endermanBlocksSpawn = true
+
     // region Composting
     var composting = ConfigGroup("composting", false)
 

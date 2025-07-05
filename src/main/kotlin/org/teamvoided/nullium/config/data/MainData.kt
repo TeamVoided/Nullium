@@ -22,13 +22,11 @@ data class MainData(
 
     constructor(data1: MainData1_1) : this() {
         stopping["mobScale"] = data1.stopping.enableMobScale
-        stopping["holderman"] = data1.stopping.enableHolderman
         stopping["blacksmith"] = data1.stopping.enableBlacksmith
     }
 
     // 1.1 options
     fun enableMobScale() = stopping["mobScale"] ?: handleMissingStopping("mobScale")
-    fun enableHolderman() = stopping["holderman"] ?: handleMissingStopping("holderman")
     fun enableBlacksmith() = stopping["blacksmith"] ?: handleMissingStopping("blacksmith")
 
     private fun handleMissingStopping(name: String): Boolean {
@@ -42,7 +40,6 @@ data class MainData(
         val STOPPING_DEFAULT = mutableMapOf(
             // 1.1 options
             "mobScale" to true,
-            "holderman" to true,
             "blacksmith" to true,
         )
     }

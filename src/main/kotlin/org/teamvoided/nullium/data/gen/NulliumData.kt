@@ -9,7 +9,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.data.gen.dyn.VillagerFoodCreator
-import org.teamvoided.nullium.data.gen.loot.EntityLootTablesProvider
+import org.teamvoided.nullium.data.gen.loot.EquipmentLootTablesProvider
 import org.teamvoided.nullium.data.gen.loot.InjectionLootTablesProvider
 import org.teamvoided.nullium.data.gen.tags.*
 import org.teamvoided.nullium.data.gen.world.gen.ConfiguredFeatureCreator
@@ -29,7 +29,7 @@ class NulliumData : DataGeneratorEntrypoint {
         pack.addProvider(::StructureTagProvider)
         pack.addProvider(::ProfessionTagProvider)
         //loot tables
-        pack.addProvider(::EntityLootTablesProvider)
+        pack.addProvider(::EquipmentLootTablesProvider)
         InjectionLootTablesProvider.lootTables().forEach { pack.addProvider(it) }
 
         //special

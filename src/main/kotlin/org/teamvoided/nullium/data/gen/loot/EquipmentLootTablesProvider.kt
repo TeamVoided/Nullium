@@ -14,8 +14,8 @@ import org.teamvoided.nullium.util.lootTable
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class EntityLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<HolderLookup.Provider>) :
-    SimpleFabricLootTableProvider(o, r, LootContextTypes.ENTITY) {
+class EquipmentLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(o, r, LootContextTypes.EQUIPMENT) {
     override fun generate(gen: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         val biomes = r.get().getLookupOrThrow(RegistryKeys.BIOME)
         gen.accept(NulliumLootTables.ENDERMAN_HOLDS,

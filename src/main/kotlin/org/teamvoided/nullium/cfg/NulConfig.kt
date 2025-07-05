@@ -57,9 +57,15 @@ class NulConfig : Config(id(MODID)) {
     var glowBerriesGlowing = true
     // endregion
 
+    // region Block
+    @JvmField
+    @Comment("If enabled coper bulbs will revert to the way functioned in the snapshots")
+    var copperBulbRevert = true
+
     @JvmField
     @Comment("If enabled moss will be able to spread inder blocks in the #nullium:moss_grows_under tag")
     var betterMoss = true
+    // endregion
 
     @Comment("If enabled full cakes will drop them self's")
     @RequiresAction(Action.RELOAD_DATA)

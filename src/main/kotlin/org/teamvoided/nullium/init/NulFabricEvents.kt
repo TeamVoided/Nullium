@@ -34,11 +34,9 @@ object NulFabricEvents {
     fun init() {
         ServerLifecycleEvents.START_DATA_PACK_RELOAD.register(::onStartDataPackReload)
         ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(::onEndDataPackReload)
-
         ServerEntityEvents.ENTITY_LOAD.register(::onEntityLoad)
         DefaultItemComponentEvents.MODIFY.register(::modifyDefaultItemComponent)
         LootTableEvents.MODIFY.register(::modifyLootTable)
-
     }
 
     private fun onStartDataPackReload(server: MinecraftServer, manager: AutoCloseableResourceManager) {

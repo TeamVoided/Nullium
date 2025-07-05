@@ -17,23 +17,19 @@ data class MainData(
         "If you change a value the Stopping category, you will need to restart your game (or server).",
         STOPPING_DEFAULT,
         "If you change anything in Reloadable category, you will need to run /reload",
-        RELOADABLE_DEFAULT
+        mutableMapOf()
     )
 
     constructor(data1: MainData1_1) : this() {
         stopping["mobScale"] = data1.stopping.enableMobScale
         stopping["holderman"] = data1.stopping.enableHolderman
         stopping["blacksmith"] = data1.stopping.enableBlacksmith
-        stopping["glowBerriesGlow"] = data1.stopping.enableGlowBerriesGlow
-        stopping["copperBulbRevert"] = data1.stopping.enableCopperBulbRevert
     }
 
     // 1.1 options
     fun enableMobScale() = stopping["mobScale"] ?: handleMissingStopping("mobScale")
     fun enableHolderman() = stopping["holderman"] ?: handleMissingStopping("holderman")
     fun enableBlacksmith() = stopping["blacksmith"] ?: handleMissingStopping("blacksmith")
-    fun enableGlowBerriesGlow() = stopping["glowBerriesGlow"] ?: handleMissingStopping("glowBerriesGlow")
-    fun enableCopperBulbRevert() = stopping["copperBulbRevert"] ?: handleMissingStopping("copperBulbRevert")
 
     private fun handleMissingStopping(name: String): Boolean {
         log.warn("Missing option $name in Stopping category. Using default value and saving config.")
@@ -48,13 +44,6 @@ data class MainData(
             "mobScale" to true,
             "holderman" to true,
             "blacksmith" to true,
-            "glowBerriesGlow" to true,
-            "copperBulbRevert" to true,
-        )
-        val RELOADABLE_DEFAULT = mutableMapOf(
-            // 1.1 options
-            "cakeDrops" to true,
-            "barterUpgrades" to true
         )
     }
 }

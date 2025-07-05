@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static org.teamvoided.nullium.Nullium.CONFIG;
+
 @Mixin(WaxedCopperBulbBlock.class)
 public abstract class CopperBulbBlockMixin extends Block {
     @Shadow
@@ -24,6 +26,7 @@ public abstract class CopperBulbBlockMixin extends Block {
 
     @Inject(method = "neighborUpdate", at = @At("HEAD"), cancellable = true)
     void nullium$customNeighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci) {
+        if (!CONFIG.copperBulbRevert) return;
         if (world instanceof ServerWorld serverWorld) {
             serverWorld.scheduleBlockTick(pos, this, 1);
         }
@@ -32,6 +35,7 @@ public abstract class CopperBulbBlockMixin extends Block {
 
     @Inject(method = "onBlockAdded", at = @At("HEAD"), cancellable = true)
     void nullium$customOnBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
+        if (!CONFIG.copperBulbRevert) return;
         if (oldState.getBlock() != state.getBlock() && world instanceof ServerWorld serverWorld) {
             serverWorld.scheduleBlockTick(pos, this, 1);
         }
@@ -40,6 +44,7 @@ public abstract class CopperBulbBlockMixin extends Block {
 
     @Override
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
+        if (!CONFIG.copperBulbRevert) return;
         this.setState(state, world, pos);
     }
 }

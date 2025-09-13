@@ -8,6 +8,7 @@ import net.minecraft.registry.HolderLookup
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.nullium.Nullium.log
+import org.teamvoided.nullium.data.gen.dyn.MobScalerCreator
 import org.teamvoided.nullium.data.gen.dyn.VillagerFoodCreator
 import org.teamvoided.nullium.data.gen.loot.EquipmentLootTablesProvider
 import org.teamvoided.nullium.data.gen.loot.InjectionLootTablesProvider
@@ -38,8 +39,9 @@ class NulliumData : DataGeneratorEntrypoint {
 
     override fun buildRegistry(gen: RegistrySetBuilder) {
         gen.add(RegistryKeys.CONFIGURED_FEATURE, ConfiguredFeatureCreator::bootstrap)
-        // Custom
+        // Nullium
         gen.add(NulRegistryKeys.VILLAGER_FOOD, VillagerFoodCreator::bootstrap)
+        gen.add(NulRegistryKeys.MOB_SCALER, MobScalerCreator::bootstrap)
     }
 
     class DynFabricReg(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
@@ -47,8 +49,15 @@ class NulliumData : DataGeneratorEntrypoint {
         override fun getName(): String = "Nullium/DynReg"
         override fun configure(reg: HolderLookup.Provider, entries: Entries) {
             entries.addAll(reg.getLookupOrThrow(RegistryKeys.CONFIGURED_FEATURE))
-            // Custom
+            // Nullium
             entries.addAll(reg.getLookupOrThrow(NulRegistryKeys.VILLAGER_FOOD))
+            entries.addFull(reg.getLookupOrThrow(NulRegistryKeys.MOB_SCALER))
+        }
+
+        fun <T> Entries.addFull(lookup: HolderLookup.RegistryLookup<T>) {
+            for (key in lookup.streamElementKeys()) {
+                add(lookup, key)
+            }
         }
     }
 }

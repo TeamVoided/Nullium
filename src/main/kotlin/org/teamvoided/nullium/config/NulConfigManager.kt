@@ -7,7 +7,6 @@ import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.config.module.BlacksmithCfg
 import org.teamvoided.nullium.config.module.MainCfg
-import org.teamvoided.nullium.config.module.MobScaleCfg
 import org.teamvoided.nullium.util.getTimeFileName
 import java.io.File
 import java.nio.file.Path
@@ -29,7 +28,6 @@ object NulConfigManager {
     @JvmStatic
     val main = MainCfg()
 
-    val bigSalmon: MobScaleCfg by lazy { MobScaleCfg() }
     val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
 
 
@@ -52,7 +50,6 @@ object NulConfigManager {
         main.load()
 
         return listOf(
-            bigSalmon.load(),
             blacksmith.load(),
         ).count { !it }
     }

@@ -33,6 +33,9 @@ class NulConfig : Config(id(MODID)) {
     @Comment("If enabled, Endermen can spawn holding a block")
     var endermanBlocksSpawn = true
 
+    @Comment("If enabled, mob scale can be changed with datapacks")
+    var customizableMobScale = true
+
     // region Composting
     var composting = ConfigGroup("composting", false)
 

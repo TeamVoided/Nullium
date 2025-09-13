@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.teamvoided.nullium.data.custom.VillagerFood;
+import org.teamvoided.nullium.data.nullium.data.VillagerFood;
 
 import static org.teamvoided.nullium.Nullium.CONFIG;
 

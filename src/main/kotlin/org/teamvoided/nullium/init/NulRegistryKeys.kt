@@ -4,8 +4,8 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import org.teamvoided.nullium.Nullium.id
-import org.teamvoided.nullium.data.custom.MobScaler
-import org.teamvoided.nullium.data.custom.VillagerFood
+import org.teamvoided.nullium.data.nullium.data.MobScaler
+import org.teamvoided.nullium.data.nullium.data.VillagerFood
 
 object NulRegistryKeys {
     @JvmField

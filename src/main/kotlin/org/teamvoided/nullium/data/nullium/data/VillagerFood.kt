@@ -1,4 +1,4 @@
-package org.teamvoided.nullium.data.custom
+package org.teamvoided.nullium.data.nullium.data
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder

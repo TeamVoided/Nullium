@@ -1,8 +1,9 @@
-package org.teamvoided.nullium.data.custom
+package org.teamvoided.nullium.data.nullium
 
 import net.minecraft.entity.EntityType
 import net.minecraft.registry.RegistryKey
 import net.minecraft.util.Identifier
+import org.teamvoided.nullium.data.nullium.data.MobScaler
 import org.teamvoided.nullium.init.NulRegistryKeys
 
 object NulMobScalers {

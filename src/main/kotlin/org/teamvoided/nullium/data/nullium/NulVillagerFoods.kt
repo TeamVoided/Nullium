@@ -1,7 +1,8 @@
-package org.teamvoided.nullium.data.custom
+package org.teamvoided.nullium.data.nullium
 
 import net.minecraft.registry.RegistryKey
 import org.teamvoided.nullium.Nullium.id
+import org.teamvoided.nullium.data.nullium.data.VillagerFood
 import org.teamvoided.nullium.init.NulRegistryKeys
 
 object NulVillagerFoods {

@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttributes.GENERIC_SCALE
 import org.teamvoided.nullium.Nullium.CONFIG
-import org.teamvoided.nullium.data.custom.MobScaler.Companion.getScaler
+import org.teamvoided.nullium.data.nullium.data.MobScaler.Companion.getScaler
 import org.teamvoided.nullium.util.attributeAsSet
 
 object MobScale {

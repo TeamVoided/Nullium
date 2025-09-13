@@ -8,8 +8,8 @@ import net.minecraft.registry.HolderSet
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
-import org.teamvoided.nullium.data.custom.NulVillagerFoods
-import org.teamvoided.nullium.data.custom.VillagerFood
+import org.teamvoided.nullium.data.nullium.NulVillagerFoods
+import org.teamvoided.nullium.data.nullium.data.VillagerFood
 
 object VillagerFoodCreator {
     fun bootstrap(c: BootstrapContext<VillagerFood>) {

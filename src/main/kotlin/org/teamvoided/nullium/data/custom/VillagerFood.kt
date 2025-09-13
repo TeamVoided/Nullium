@@ -50,7 +50,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         fun canEatFood(original: Integer?, stack: ItemStack, world: World): Integer? {
             val food = world.getFood(stack)
             if (food == null) {
-                return if (CONFIG.moddedFoodFallback && stack.isNotMC()) original
+                return if (CONFIG.entities.moddedFoodFallback && stack.isNotMC()) original
                 else null
             }
             val amount = food.getAmount(stack)
@@ -66,7 +66,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
             for (stack in inventory.stacks) {
                 var amount = world.getFood(stack)?.hungerAmount
                 if (amount == null) {
-                    if (CONFIG.moddedFoodFallback && stack.isNotMC()) {
+                    if (CONFIG.entities.moddedFoodFallback && stack.isNotMC()) {
                         amount = ITEM_FOOD_VALUES[stack.item]
                     } else continue
                 }
@@ -80,7 +80,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         fun canPickUp(stack: ItemStack, world: World, original: Boolean): Boolean {
             val food = world.getFood(stack)
             if (food != null) return food.canEat(stack)
-            if (CONFIG.moddedFoodFallback && stack.isNotMC()) {
+            if (CONFIG.entities.moddedFoodFallback && stack.isNotMC()) {
                 return ITEM_FOOD_VALUES.contains(stack.item)
             }
             return if (ITEM_FOOD_VALUES.contains(stack.item)) false else original

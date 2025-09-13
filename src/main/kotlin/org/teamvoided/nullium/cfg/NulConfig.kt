@@ -5,6 +5,7 @@ import me.fzzyhmstrs.fzzy_config.annotations.Comment
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction
 import me.fzzyhmstrs.fzzy_config.config.Config
 import me.fzzyhmstrs.fzzy_config.config.ConfigGroup
+import me.fzzyhmstrs.fzzy_config.config.ConfigSection
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedRegistryType
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat
@@ -17,24 +18,29 @@ import org.teamvoided.nullium.Nullium.id
 
 @Suppress("unused")
 class NulConfig : Config(id(MODID)) {
-
-    // region VillagerChanges
-    var villagerChanges = ConfigGroup("villager_changes", false)
-
     @JvmField
-    var customVillagerFood = true
+    var entities = EntitiesSection()
 
-    @ConfigGroup.Pop
-    @Comment("If enabled, will do a check for modded items that don't have registered a custom Villager Food")
-    var moddedFoodFallback = true
-    // endregion
+    class EntitiesSection : ConfigSection() {
+        // region VillagerChanges
+        var villagerChanges = ConfigGroup("villager_changes" )
 
-    @JvmField
-    @Comment("If enabled, Endermen can spawn holding a block")
-    var endermanBlocksSpawn = true
+        @JvmField
+        @Comment("If enabled, villager food can be customized with datapacks")
+        var customVillagerFood = true
 
-    @Comment("If enabled, mob scale can be changed with datapacks")
-    var customizableMobScale = true
+        @ConfigGroup.Pop
+        @Comment("If enabled, modded items are not with nullium to be custom foods. Will preform the vanilla food check")
+        var moddedFoodFallback = true
+        // endregion
+
+        @JvmField
+        @Comment("If enabled, Endermen can spawn holding a block")
+        var endermanBlocksSpawn = true
+
+        @Comment("If enabled, mob scale can be changed with datapacks")
+        var customizableMobScale = true
+    }
 
     // region Composting
     var composting = ConfigGroup("composting", false)
@@ -70,7 +76,7 @@ class NulConfig : Config(id(MODID)) {
     var copperBulbRevert = true
 
     @JvmField
-    @Comment("If enabled moss will be able to spread inder blocks in the #nullium:moss_grows_under tag")
+    @Comment("If enabled moss will be able to spread under blocks in the #nullium:moss_grows_under tag")
     var betterMoss = true
     // endregion
 

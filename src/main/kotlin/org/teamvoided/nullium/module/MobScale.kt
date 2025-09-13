@@ -9,7 +9,7 @@ import org.teamvoided.nullium.util.attributeAsSet
 
 object MobScale {
     fun init(entity: Entity) {
-        if (!CONFIG.customizableMobScale) return
+        if (!CONFIG.entities.customizableMobScale) return
         if (entity !is LivingEntity) return
 
         val scaler = entity.getScaler() ?: return

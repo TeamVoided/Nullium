@@ -31,7 +31,7 @@ abstract class EndermanEntityMixin extends MobEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         entityData = super.initialize(world, difficulty, spawnReason, entityData);
-        if (CONFIG.endermanBlocksSpawn) {
+        if (CONFIG.entities.endermanBlocksSpawn) {
             if (this.getCarriedBlock() == null && !SpawnReason.isSpawner(spawnReason)) {
                 HolderMan.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
             }

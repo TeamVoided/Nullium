@@ -24,16 +24,16 @@ public abstract class VillagerEntityMixin extends MerchantEntity {
     @SuppressWarnings({"unchecked", "LocalMayBeArgsOnly"})
     @ModifyExpressionValue(method = "consumeAvailableFood", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
     <V> V customCanEatFood(V original, @Local ItemStack stack) {
-        return CONFIG.customVillagerFood ? (V) VillagerFood.canEatFood((Integer) original, stack, getWorld()) : original;
+        return CONFIG.entities.customVillagerFood ? (V) VillagerFood.canEatFood((Integer) original, stack, getWorld()) : original;
     }
 
     @ModifyReturnValue(method = "getAvailableFood", at = @At("RETURN"))
     int gatherCustomFoods(int original, @Local SimpleInventory inventory) {
-        return CONFIG.customVillagerFood ? VillagerFood.getFoodValues(inventory, getWorld()) : original;
+        return CONFIG.entities.customVillagerFood ? VillagerFood.getFoodValues(inventory, getWorld()) : original;
     }
 
     @ModifyReturnValue(method = "canGather", at = @At("RETURN"))
     boolean canPickUpCustom(boolean original, ItemStack stack) {
-        return CONFIG.customVillagerFood ? VillagerFood.canPickUp(stack, getWorld(), original) : original;
+        return CONFIG.entities.customVillagerFood ? VillagerFood.canPickUp(stack, getWorld(), original) : original;
     }
 }

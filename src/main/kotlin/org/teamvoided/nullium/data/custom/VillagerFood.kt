@@ -8,6 +8,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.HolderSet
 import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryCodecs
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier.DEFAULT_NAMESPACE
@@ -15,7 +16,7 @@ import net.minecraft.util.dynamic.Codecs
 import net.minecraft.world.World
 import org.teamvoided.nullium.Nullium.CONFIG
 import org.teamvoided.nullium.Nullium.MODID
-import org.teamvoided.nullium.init.NulRegistryKeys.getVillagerFood
+import org.teamvoided.nullium.init.NulRegistryKeys.VILLAGER_FOOD
 
 data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
     fun getAmount(stack: ItemStack) = if (contains(stack)) hungerAmount else null
@@ -36,7 +37,7 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
             val food = visitedFoods[stack.item]
             if (food != null) return food
 
-            for (food in this.getVillagerFood()) {
+            for (food in getVillagerFood()) {
                 if (stack.isIn(food.items)) {
                     visitedFoods[stack.item] = food
                     return food
@@ -86,5 +87,6 @@ data class VillagerFood(val items: HolderSet<Item>, val hungerAmount: Int) {
         }
 
         fun ItemStack.isNotMC() = Registries.ITEM.getId(this.item).namespace != DEFAULT_NAMESPACE
+        fun World.getVillagerFood(): Registry<VillagerFood> = this.registryManager.get(VILLAGER_FOOD)
     }
 }

@@ -11,8 +11,8 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
 import net.minecraft.unmapped.C_fudcfuiw
 import org.teamvoided.nullium.data.tags.NulProfessionTags.REPAIRS_GOLEM
-import org.teamvoided.nullium.module.NulliumGameRules.GOLEM_REPAIR
-import org.teamvoided.nullium.module.NulliumGameRules.getBoolRule
+import org.teamvoided.nullium.init.NulGameRules.GOLEM_REPAIR
+import org.teamvoided.nullium.init.NulGameRules.getBoolRule
 import kotlin.jvm.optionals.getOrNull
 
 class RepairGolemTask : Task<VillagerEntity>(

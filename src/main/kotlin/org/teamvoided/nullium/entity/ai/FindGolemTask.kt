@@ -14,8 +14,8 @@ import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.registry.Registries.VILLAGER_PROFESSION
 import net.minecraft.unmapped.C_fudcfuiw
 import org.teamvoided.nullium.data.tags.NulProfessionTags.REPAIRS_GOLEM
-import org.teamvoided.nullium.module.NulliumGameRules.GOLEM_REPAIR
-import org.teamvoided.nullium.module.NulliumGameRules.getBoolRule
+import org.teamvoided.nullium.init.NulGameRules.GOLEM_REPAIR
+import org.teamvoided.nullium.init.NulGameRules.getBoolRule
 import java.util.function.Consumer
 import java.util.function.Predicate
 
@@ -46,6 +46,7 @@ object FindGolemTask {
                         val optional = visibleEntitiesCache
                             .getFirst { it.squaredDistanceTo(villager) <= dist.toDouble() && predicate.test(it) }
                         optional.ifPresent(Consumer {
+                            @Suppress("UNCHECKED_CAST")
                             memTarget.remember(it as T)
                             memeLookAt.remember(EntityLookTarget(it, true))
                             memeWalk.remember(WalkTarget(EntityLookTarget(it, false), speed, completionRange))

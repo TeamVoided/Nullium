@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.teamvoided.nullium.module.NulliumGameRules;
+import org.teamvoided.nullium.init.NulGameRules;
 
 import java.util.Objects;
 
@@ -18,8 +18,8 @@ public class SculkVeinBlockMixin {
 
     @Inject(method = "tryPlaceSculk", at = @At("HEAD"), cancellable = true)
     private void nullium$spreadGameRule(SculkBehavior sculkBehavior, WorldAccess world, BlockPos pos, RandomGenerator random, CallbackInfoReturnable<Boolean> cir) {
-        var spreadType = Objects.requireNonNull(world.getServer()).getGameRules().get(org.teamvoided.nullium.module.NulliumGameRules.SCULK_SPREAD).get();
-        if (spreadType != NulliumGameRules.SpreadType.ALL) {
+        var spreadType = Objects.requireNonNull(world.getServer()).getGameRules().get(NulGameRules.SCULK_SPREAD).get();
+        if (spreadType != NulGameRules.SpreadType.ALL) {
             cir.setReturnValue(true);
         }
     }

@@ -12,8 +12,6 @@ import org.teamvoided.nullium.mixin.accessors.ArmorMaterialsAccessor
 import org.teamvoided.nullium.mixin.accessors.ToolMaterialsAccessor
 import java.util.function.Supplier
 
-//Blacksmith Helpers
-
 // ToolMaterials
 fun ToolMaterials.set(tag: TagKey<Item>) = this.set { Ingredient.ofTag(tag) }
 fun ToolMaterials.set(repairIngredient: Supplier<Ingredient>) =

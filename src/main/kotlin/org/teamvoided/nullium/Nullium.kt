@@ -10,7 +10,7 @@ import org.teamvoided.nullium.cfg.NulConfig
 import org.teamvoided.nullium.init.*
 import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.Compostable
-import org.teamvoided.nullium.module.NulliumGameRules
+import org.teamvoided.nullium.init.NulGameRules
 
 @Suppress("unused")
 object Nullium {
@@ -30,12 +30,15 @@ object Nullium {
 
     fun commonInit() {
         log.info("Nulls your ium!")
+
+        // Move to voidlib
+        VoidLibNumberProviderTypes.init()
+
         // Reg init
         NulFeatures.init()
         NulRegistryKeys.init()
         NulCommandRegistry.init()
-        NulliumGameRules.init()
-        VoidLibNumberProviderTypes.init()
+        NulGameRules.init()
         // Events
         NulFabricEvents.init()
         // Mod init

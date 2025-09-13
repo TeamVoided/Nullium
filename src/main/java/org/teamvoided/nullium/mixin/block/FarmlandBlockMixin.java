@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static org.teamvoided.nullium.module.NulliumGameRules.*;
+import static org.teamvoided.nullium.init.NulGameRules.*;
 
 @Mixin(FarmlandBlock.class)
 public class FarmlandBlockMixin {

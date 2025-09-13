@@ -49,7 +49,7 @@ object NulFabricEvents {
 
 
     private fun onEntityLoad(entity: Entity, ignored: ServerWorld) {
-        if (cfg.enableMobScale()) MobScale.init(entity)
+        MobScale.init(entity)
     }
 
     private fun modifyLootTable(

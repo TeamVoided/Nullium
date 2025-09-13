@@ -21,12 +21,9 @@ data class MainData(
     )
 
     constructor(data1: MainData1_1) : this() {
-        stopping["mobScale"] = data1.stopping.enableMobScale
         stopping["blacksmith"] = data1.stopping.enableBlacksmith
     }
 
-    // 1.1 options
-    fun enableMobScale() = stopping["mobScale"] ?: handleMissingStopping("mobScale")
     fun enableBlacksmith() = stopping["blacksmith"] ?: handleMissingStopping("blacksmith")
 
     private fun handleMissingStopping(name: String): Boolean {
@@ -36,10 +33,10 @@ data class MainData(
         NulConfigManager.main.save()
         return true
     }
+
     companion object {
         val STOPPING_DEFAULT = mutableMapOf(
             // 1.1 options
-            "mobScale" to true,
             "blacksmith" to true,
         )
     }
@@ -53,17 +50,8 @@ data class MainData1_1(
     val stopping: Stopping1_1,
     val reloadableInfo: String,
     @JvmField
-    val reloadable: Reloadable1_1
+    val reloadable: Reloadable1_1,
 ) {
-
-//    constructor() : this(
-//        "Hello I'm the main config!",
-//        "If you change a value the Stopping category, you will need to restart your game (or server).",
-//        Stopping1_1(),
-//        "If you change anything in Reloadable category, you will need to run /reload",
-//        Reloadable1_1()
-//    )
-
     @Serializable
     data class Stopping1_1(
         val enableStackablePotions: Boolean,
@@ -76,7 +64,7 @@ data class MainData1_1(
         val enableGlowBerriesGlow: Boolean,
         @JvmField
         val enableCopperBulbRevert: Boolean,
-        val enableCompostable: Boolean
+        val enableCompostable: Boolean,
     ) {
         constructor() : this(
             true,

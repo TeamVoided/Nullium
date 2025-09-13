@@ -3,44 +3,30 @@ package org.teamvoided.nullium.mixin;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import org.teamvoided.nullium.config.NulConfigManager;
-import org.teamvoided.nullium.config.data.MainData;
 
 public class NulliumMixinPlugin implements IMixinConfigPlugin {
 
-	public NulliumMixinPlugin() {
-		NulConfigManager.loadMain();
-	}
+    public NulliumMixinPlugin() { }
 
-	@Override
-	public void onLoad(String mixinPackage) {}
+    @Override
+    public void onLoad(String mixinPackage) { }
 
-	@Override
-	public String getRefMapperConfig() {
-		return null;
-	}
+    @Override
+    public String getRefMapperConfig() { return null; }
 
-	@Override
-	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		MainData cfg = NulConfigManager.getMain().data();
-		return switch (mixinClassName) {
-			case "org.teamvoided.nullium.mixin.AnvilScreenHandlerMixin" -> cfg.enableBlacksmith();
-			default -> true;
-		};
-	}
+    @Override
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) { return true; }
 
-	@Override
-	public void acceptTargets(java.util.Set<String> myTargets, java.util.Set<String> otherTargets) {}
+    @Override
+    public void acceptTargets(java.util.Set<String> myTargets, java.util.Set<String> otherTargets) { }
 
-	@Override
-	public java.util.List<String> getMixins() {
-		return null;
-	}
+    @Override
+    public java.util.List<String> getMixins() { return null; }
 
-	@Override
-	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
+    @Override
+    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) { }
 
-	@Override
-	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
+    @Override
+    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) { }
 }
 

@@ -3,7 +3,6 @@ package org.teamvoided.nullium.init
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
-import net.minecraft.world.World
 import org.teamvoided.nullium.Nullium.id
 import org.teamvoided.nullium.data.custom.MobScaler
 import org.teamvoided.nullium.data.custom.VillagerFood

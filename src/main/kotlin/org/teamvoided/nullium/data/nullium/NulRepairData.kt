@@ -2,7 +2,6 @@ package org.teamvoided.nullium.data.nullium
 
 import net.minecraft.registry.RegistryKey
 import org.teamvoided.nullium.Nullium.id
-import org.teamvoided.nullium.data.nullium.data.MobScaler
 import org.teamvoided.nullium.data.nullium.data.RepairData
 import org.teamvoided.nullium.init.NulRegistryKeys
 

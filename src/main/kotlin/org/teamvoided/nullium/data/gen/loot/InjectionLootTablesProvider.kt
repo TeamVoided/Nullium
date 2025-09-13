@@ -57,7 +57,7 @@ object InjectionLootTablesProvider {
     }
 
     fun simpleLootTableProvider(
-        c: LootContextType, fn: (gen: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) -> Unit
+        c: LootContextType, fn: (gen: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) -> Unit,
     ): SimpleLootProviderFactory {
         return { o, r ->
             object : SimpleFabricLootTableProvider(o, r, c) {

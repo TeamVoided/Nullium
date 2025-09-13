@@ -6,11 +6,7 @@ import net.minecraft.entity.passive.VillagerEntity.ITEM_FOOD_VALUES
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.registry.HolderSet
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.registry.RegistryCodecs
-import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.*
 import net.minecraft.util.Identifier.DEFAULT_NAMESPACE
 import net.minecraft.util.dynamic.Codecs
 import net.minecraft.world.World

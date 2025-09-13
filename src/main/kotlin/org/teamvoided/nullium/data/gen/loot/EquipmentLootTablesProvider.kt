@@ -18,7 +18,8 @@ class EquipmentLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<
     SimpleFabricLootTableProvider(o, r, LootContextTypes.EQUIPMENT) {
     override fun generate(gen: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         val biomes = r.get().getLookupOrThrow(RegistryKeys.BIOME)
-        gen.accept(NulliumLootTables.ENDERMAN_HOLDS,
+        gen.accept(
+            NulliumLootTables.ENDERMAN_HOLDS,
             lootTable {
                 pool {
                     rolls(1)
@@ -46,7 +47,8 @@ class EquipmentLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<
             }
         )
 
-        gen.accept(NulliumLootTables.ENDERMAN_OVERWORLD_GENERIC,
+        gen.accept(
+            NulliumLootTables.ENDERMAN_OVERWORLD_GENERIC,
             lootTable {
                 pool {
                     rolls(1)
@@ -81,7 +83,8 @@ class EquipmentLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<
             }
         )
 
-        gen.accept(NulliumLootTables.ENDERMAN_END_GENERIC,
+        gen.accept(
+            NulliumLootTables.ENDERMAN_END_GENERIC,
             lootTable {
                 pool {
                     rolls(1)
@@ -92,7 +95,8 @@ class EquipmentLootTablesProvider(o: FabricDataOutput, val r: CompletableFuture<
             }
         )
 
-        gen.accept(NulliumLootTables.ENDERMAN_OVERWORLD_FLOWER,
+        gen.accept(
+            NulliumLootTables.ENDERMAN_OVERWORLD_FLOWER,
             lootTable {
                 pool {
                     rolls(1)

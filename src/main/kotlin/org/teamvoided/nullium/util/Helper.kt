@@ -1,16 +1,11 @@
 package org.teamvoided.nullium.util
 
 import com.mojang.brigadier.tree.CommandNode
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.EntityAttributeInstance
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.loot.LootTable
-import net.minecraft.loot.context.LootContextParameterSet
-import net.minecraft.loot.context.LootContextType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
@@ -38,11 +33,6 @@ fun <S> CommandNode<S>.childOf(node: CommandNode<S>): CommandNode<S> {
 
 fun <T> T.supply() = Supplier { this }
 
-fun getNow() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-fun getTimeFileName(): String {
-    val time = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-    return "${time.date}=${time.time.toString().replace(":", "-")}"
-}
 //mc
 
 fun <T, Y : Registry<T>> RegistryKey<Y>.key(id: Identifier): RegistryKey<T> = RegistryKey.of(this, id)
@@ -53,7 +43,5 @@ fun Item.id() = Registries.ITEM.getId(this)
 fun Item.isAir() = this == Items.AIR
 
 fun ServerWorld.getLootTable(key: RegistryKey<LootTable>): LootTable = this.server.method_58576().getLootTable(key)
-fun LootContextParameterSet(world: ServerWorld, type: LootContextType): LootContextParameterSet =
-    LootContextParameterSet.Builder(world).build(type)
 
 fun LivingEntity.attributeAsSet(): Set<EntityAttributeInstance> = this.attributes.attributesToSync

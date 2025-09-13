@@ -14,6 +14,7 @@ class ItemsSection : ConfigSection() {
     @RequiresAction(Action.RESTART)
     var glowBerriesGlowing = true
 
+    @Suppress("unused")
     var repairing = ConfigGroup("repairing")
 
     @JvmField

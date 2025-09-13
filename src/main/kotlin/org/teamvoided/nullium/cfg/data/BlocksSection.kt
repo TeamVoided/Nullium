@@ -15,6 +15,7 @@ import net.minecraft.registry.Registries
 
 class BlocksSection : ConfigSection() {
     // region Composting
+    @Suppress("unused")
     var composting = ConfigGroup("composting", false)
 
     @Comment("Controls if composting changes are applied")

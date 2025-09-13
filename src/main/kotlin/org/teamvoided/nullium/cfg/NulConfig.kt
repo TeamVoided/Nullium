@@ -10,7 +10,6 @@ import org.teamvoided.nullium.cfg.data.BlocksSection
 import org.teamvoided.nullium.cfg.data.EntitiesSection
 import org.teamvoided.nullium.cfg.data.ItemsSection
 
-@Suppress("unused")
 class NulConfig : Config(id(MODID)) {
     @JvmField
     var entities = EntitiesSection()

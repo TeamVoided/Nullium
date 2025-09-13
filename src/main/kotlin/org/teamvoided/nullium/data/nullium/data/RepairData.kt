@@ -28,8 +28,9 @@ data class RepairData(
             return null
         }
 
-        fun dataFromConfig() =
-            RepairData(HolderSet.empty(), CONFIG.items.defaultBaseCost.get(), CONFIG.items.defaultEnchantmentMultiplier.get())
+        fun dataFromConfig() = RepairData(
+            HolderSet.empty(), CONFIG.items.defaultBaseCost.get(), CONFIG.items.defaultEnchantmentMultiplier.get()
+        )
 
         val CODEC: Codec<RepairData> = RecordCodecBuilder.create<RepairData> { instance ->
             instance.group(

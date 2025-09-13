@@ -7,8 +7,8 @@ import net.minecraft.util.collection.DataPool
 import net.minecraft.util.math.float_provider.ConstantFloatProvider
 import net.minecraft.util.math.float_provider.FloatProvider
 import net.minecraft.util.math.float_provider.UniformFloatProvider
-import org.teamvoided.nullium.data.nullium.data.MobScaler
 import org.teamvoided.nullium.data.nullium.NulMobScalers
+import org.teamvoided.nullium.data.nullium.data.MobScaler
 import org.teamvoided.nullium.util.math.float_provider.WeightedListFloatProvider
 
 object MobScalerCreator {

@@ -6,6 +6,7 @@ import me.fzzyhmstrs.fzzy_config.config.ConfigSection
 
 class EntitiesSection : ConfigSection() {
     // region VillagerChanges
+    @Suppress("unused")
     var villagerChanges = ConfigGroup("villager_changes")
 
     @JvmField

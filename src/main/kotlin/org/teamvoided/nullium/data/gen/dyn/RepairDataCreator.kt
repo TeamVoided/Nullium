@@ -4,7 +4,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.registry.*
 import net.minecraft.registry.tag.TagKey
-import org.teamvoided.nullium.data.gen.dyn.RepairDataCreator.make
 import org.teamvoided.nullium.data.nullium.NulRepairData
 import org.teamvoided.nullium.data.nullium.data.RepairData
 import org.teamvoided.nullium.data.tags.NulliumMaterialTags

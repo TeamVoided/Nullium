@@ -54,7 +54,7 @@ object NulFabricEvents {
         table: RegistryKey<LootTable>, builder: LootTable.Builder,
         ignored: LootTableSource, provider: HolderLookup.Provider,
     ) {
-        if (CONFIG.cakeDrops && table == Blocks.CAKE.lootTableId) {
+        if (CONFIG.blocks.cakeDrops && table == Blocks.CAKE.lootTableId) {
             builder.pool(lootPool { lootTable(NulliumInjections.CAKE_DROPS) {} })
         }
 
@@ -64,7 +64,7 @@ object NulFabricEvents {
     }
 
     private fun modifyDefaultItemComponent(ctx: DefaultItemComponentEvents.ModifyContext) {
-        if (CONFIG.glowBerriesGlowing) ctx.modify(Items.GLOW_BERRIES) {
+        if (CONFIG.items.glowBerriesGlowing) ctx.modify(Items.GLOW_BERRIES) {
             it.put(
                 DataComponentTypes.FOOD, FoodComponent.Builder()
                     .hunger(2)

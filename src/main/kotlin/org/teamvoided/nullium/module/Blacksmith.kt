@@ -15,7 +15,7 @@ import org.teamvoided.nullium.util.set
 object Blacksmith {
 
     fun repairOverrides() {
-        if (!CONFIG.customRepairCosts) return
+        if (!CONFIG.items.customRepairCosts) return
         ToolMaterials.WOOD.set(NulliumMaterialTags.REPAIR_WOOD)
         ToolMaterials.STONE.set(NulliumMaterialTags.REPAIR_STONE)
         ToolMaterials.GOLD.set(NulliumMaterialTags.REPAIR_GOLD)

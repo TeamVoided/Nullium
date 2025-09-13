@@ -43,7 +43,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                           @Local(ordinal = 0) ItemStack originalItem,
                           @Local(ordinal = 1) ItemStack copyItem,
                           @Local(ordinal = 2) ItemStack modifierItem) {
-        if (!CONFIG.customRepairCosts) {
+        if (!CONFIG.items.customRepairCosts) {
             nullium$isRepairing = false;
             return original;
         }

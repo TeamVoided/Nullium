@@ -22,13 +22,13 @@ public class MossBlockMixin {
 
     @ModifyReturnValue(method = "isFertilizable", at = @At("RETURN"))
     boolean makeFertilizable(boolean original, WorldView world, BlockPos pos, BlockState state) {
-        return original || (CONFIG.betterMoss && world.getBlockState(pos.up()).isIn(MOSS_GROWS_UNDER));
+        return original || (CONFIG.blocks.betterMoss && world.getBlockState(pos.up()).isIn(MOSS_GROWS_UNDER));
     }
 
     @SuppressWarnings({"unchecked", "OptionalUsedAsFieldOrParameterType", "rawtypes"})
     @ModifyExpressionValue(method = "method_46685", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;getHolder(Lnet/minecraft/registry/RegistryKey;)Ljava/util/Optional;"))
     private static <T> Optional<Holder.Reference<T>> theSecond(Optional<Holder.Reference<T>> original, Registry registry) {
-        if (CONFIG.betterMoss) {
+        if (CONFIG.blocks.betterMoss) {
             return registry.getHolder(NulConfiguredFeatures.ENHANCED_MOSS_PATCH_BONEMEAL);
         }
         return original;

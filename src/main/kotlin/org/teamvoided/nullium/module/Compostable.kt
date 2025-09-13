@@ -15,16 +15,16 @@ object Compostable {
             }
             defaults.clear()
         }
-        if (!CONFIG.compostingChanges) return
+        if (!CONFIG.blocks.compostingChanges) return
 
-        CONFIG.compostEntries.forEach { (item, layerChance) ->
+        CONFIG.blocks.compostEntries.forEach { (item, layerChance) ->
             if (!item.isAir()) {
                 val oldChance = ITEM_TO_LEVEL_INCREASE_CHANCE.put(item, layerChance)
                 defaults[item] = oldChance
             }
         }
 
-        CONFIG.entriesToRemove.forEach { item ->
+        CONFIG.blocks.entriesToRemove.forEach { item ->
             val oldChance = ITEM_TO_LEVEL_INCREASE_CHANCE.removeFloat(item)
             defaults.putIfAbsent(item, oldChance)
         }

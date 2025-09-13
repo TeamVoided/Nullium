@@ -25,7 +25,7 @@ public class FarmlandBlockMixin {
     @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
     private void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
         if (!world.isClient && entity instanceof LivingEntity livingEntity) {
-            if (!getBoolRule(world, FRAMERS_TRAMPL) && livingEntity instanceof VillagerEntity villager && villager.getVillagerData().getProfession() == VillagerProfession.FARMER) {
+            if (!getBoolRule(world, FRAMERS_TRAMPLE) && livingEntity instanceof VillagerEntity villager && villager.getVillagerData().getProfession() == VillagerProfession.FARMER) {
                 ci.cancel();
             }
             if (!getBoolRule(world, FEATHER_FALLING_TRAMPLE)) {

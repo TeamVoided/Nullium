@@ -15,7 +15,7 @@ object NulliumGameRules {
     val SCULK_SPREAD = register("nullium.sculkSpread", Category.MISC, createEnumRule(SpreadType.ALL))
 
     @JvmField
-    val FRAMERS_TRAMPL = register("nullium.framersTrampleFarmland", Category.MOBS, createBooleanRule(false))
+    val FRAMERS_TRAMPLE = register("nullium.framersTrampleFarmland", Category.MOBS, createBooleanRule(false))
 
     @JvmField
     val FEATHER_FALLING_TRAMPLE =

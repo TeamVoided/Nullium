@@ -63,7 +63,6 @@ loom {
 
         create("TestWorld") {
             client()
-            ideConfigGenerated(true)
             runDir("run")
             programArgs("--quickPlaySingleplayer", "test", "--username", username)
             uuid?.let { programArgs("--uuid", uuid) }
@@ -71,7 +70,6 @@ loom {
 
         create("DataGen") {
             client()
-            ideConfigGenerated(true)
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
             vmArg("-Dfabric-api.datagen.modid=${modSettings.modId()}")

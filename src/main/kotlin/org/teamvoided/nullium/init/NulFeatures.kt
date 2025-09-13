@@ -12,11 +12,10 @@ object NulFeatures {
     fun init() {}
 
     @Suppress("unused")
-    val ENHANCED_VEGETATION_PATCH =
-        register(
-            "enhanced_vegetation_patch",
-            EnhancedVegetationPatchFeature(EnhancedVegetationPatchFeatureConfig.CODEC)
-        )
+    val ENHANCED_VEGETATION_PATCH = register(
+        "enhanced_vegetation_patch",
+        EnhancedVegetationPatchFeature(EnhancedVegetationPatchFeatureConfig.CODEC)
+    )
 
 
     @Suppress("SameParameterValue")

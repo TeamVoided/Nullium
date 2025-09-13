@@ -17,10 +17,10 @@ import java.util.function.Supplier
 // ToolMaterials
 fun ToolMaterials.set(tag: TagKey<Item>) = this.set { Ingredient.ofTag(tag) }
 fun ToolMaterials.set(repairIngredient: Supplier<Ingredient>) =
-    (this as ToolMaterialsAccessor).setRepairIngredient(repairIngredient)
+    (this as ToolMaterialsAccessor).nullium_setRepairIngredient(repairIngredient)
 
 // ArmorMaterials
 fun Holder<ArmorMaterial>.set(tag: TagKey<Item>) = this.value().set { Ingredient.ofTag(tag) }
 fun ArmorMaterial.set(tag: TagKey<Item>) = this.set { Ingredient.ofTag(tag) }
 fun ArmorMaterial.set(repairIngredient: Supplier<Ingredient>) =
-    (this as ArmorMaterialsAccessor).setRepairIngredient(repairIngredient)
+    (this as ArmorMaterialsAccessor).nullium_setRepairIngredient(repairIngredient)

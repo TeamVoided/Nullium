@@ -11,6 +11,6 @@ import java.util.function.Supplier;
 @Mixin(ArmorMaterial.class)
 public interface ArmorMaterialsAccessor {
     @Mutable
-    @Accessor
-    void setRepairIngredient(Supplier<Ingredient> repairIngredient);
+    @Accessor("repairIngredient")
+    void nullium_setRepairIngredient(Supplier<Ingredient> repairIngredient);
 }

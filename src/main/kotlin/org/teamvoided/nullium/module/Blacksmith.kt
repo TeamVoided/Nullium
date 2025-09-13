@@ -5,18 +5,17 @@ import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ToolMaterials
 import net.minecraft.registry.tag.EnchantmentTags
-import org.teamvoided.nullium.config.NulConfigManager.blacksmith
-import org.teamvoided.nullium.config.data.IdentifierType
+import net.minecraft.world.World
+import org.teamvoided.nullium.Nullium.CONFIG
+import org.teamvoided.nullium.data.nullium.data.RepairData.Companion.dataFromConfig
+import org.teamvoided.nullium.data.nullium.data.RepairData.Companion.getRepairData
 import org.teamvoided.nullium.data.tags.NulliumMaterialTags
-import org.teamvoided.nullium.init.NulFabricEvents.cfg
-import org.teamvoided.nullium.util.item
-import org.teamvoided.nullium.util.itemTag
 import org.teamvoided.nullium.util.set
 
 object Blacksmith {
 
     fun repairOverrides() {
-        if (!cfg.enableBlacksmith()) return
+        if (!CONFIG.customRepairCosts) return
         ToolMaterials.WOOD.set(NulliumMaterialTags.REPAIR_WOOD)
         ToolMaterials.STONE.set(NulliumMaterialTags.REPAIR_STONE)
         ToolMaterials.GOLD.set(NulliumMaterialTags.REPAIR_GOLD)
@@ -34,28 +33,18 @@ object Blacksmith {
 
 
     @JvmStatic
-    fun calculateCost(stack: ItemStack): Int {
-        val cfg = blacksmith.data()
-        val data = cfg.materialRepairCosts
-            .filter {
-                when (it.type) {
-                    IdentifierType.ITEM -> it.id.item() == stack.item
-                    IdentifierType.TAG -> stack.isIn(it.id.itemTag())
-                }
-            }
-            .toList()
-            .firstOrNull()
-            ?.data ?: cfg.defaultRepairCost
+    fun calculateCost(world: World, stack: ItemStack): Int {
+        val data = world.getRepairData(stack) ?: dataFromConfig()
 
         var enchantmentCosts = 0
-        val enchantments = stack.get(DataComponentTypes.ENCHANTMENTS)
-        if (enchantments != null) {
-            val curses = enchantments.enchantmentEntries.filter { it.key.isIn(EnchantmentTags.CURSE) }
-            val notCurses = enchantments.enchantmentEntries.filter { !it.key.isIn(EnchantmentTags.CURSE) }
+        val enchantments = stack.get(DataComponentTypes.ENCHANTMENTS)?.enchantmentEntries
+        if (enchantments != null && enchantments.isNotEmpty()) {
+            val curses = enchantments.filter { it.key.isIn(EnchantmentTags.CURSE) }
             if (curses.isNotEmpty()) {
                 enchantmentCosts -= curses.map { it.key.value().anvilCost * it.intValue }
                     .reduce { acc, i -> (acc + i) / 2 }
             }
+            val notCurses = enchantments.filter { !it.key.isIn(EnchantmentTags.CURSE) }
             if (notCurses.isNotEmpty()) {
                 enchantmentCosts += notCurses.map { it.key.value().anvilCost * it.intValue }
                     .reduce { acc, i -> (acc + i) / 2 }

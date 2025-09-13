@@ -8,7 +8,9 @@ import me.fzzyhmstrs.fzzy_config.config.ConfigGroup
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedMap
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedRegistryType
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedDouble
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat
+import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedNumber.WidgetType
 import net.minecraft.item.Item
 import net.minecraft.item.Items
@@ -23,7 +25,7 @@ class NulConfig : Config(id(MODID)) {
 
     class EntitiesSection : ConfigSection() {
         // region VillagerChanges
-        var villagerChanges = ConfigGroup("villager_changes" )
+        var villagerChanges = ConfigGroup("villager_changes")
 
         @JvmField
         @Comment("If enabled, villager food can be customized with datapacks")
@@ -67,7 +69,22 @@ class NulConfig : Config(id(MODID)) {
 
     // region Item
     @Comment("If enabled glow berries, when eaten will apply glowing")
+    @RequiresAction(Action.RESTART)
     var glowBerriesGlowing = true
+
+    var repairing = ConfigGroup("repairing")
+
+    @JvmField
+    @Comment("If enabled, item repair costs can be customized with datapacks")
+    @RequiresAction(Action.RESTART)
+    var customRepairCosts = true
+
+    @Comment("Default base cost of repairing, will be used if none is set for an item with datapacks")
+    var defaultBaseCost = ValidatedInt(1, 1024, 1, WidgetType.TEXTBOX)
+
+    @ConfigGroup.Pop
+    @Comment("Default enchantment multiplier of repair cost, will be used if none is set for an item with datapacks")
+    var defaultEnchantmentMultiplier = ValidatedDouble(0.6, 100.0, 0.0, WidgetType.TEXTBOX)
     // endregion
 
     // region Block

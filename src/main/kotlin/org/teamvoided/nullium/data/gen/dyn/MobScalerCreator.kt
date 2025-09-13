@@ -24,12 +24,10 @@ object MobScalerCreator {
     fun BootstrapContext<MobScaler>.make(
         key: RegistryKey<MobScaler>, vararg weightedEntry: Pair<Number, Int>,
     ): Holder.Reference<MobScaler> {
-
         val dataPool = DataPool.builder<FloatProvider>()
         for ((num, weight) in weightedEntry) {
             dataPool.addWeighted(ConstantFloatProvider.create(num.toFloat()), weight)
         }
-
         return create(key, WeightedListFloatProvider(dataPool.build()))
     }
 

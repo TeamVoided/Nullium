@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistrySetBuilder
 import org.teamvoided.nullium.Nullium.log
 import org.teamvoided.nullium.data.gen.dyn.MobScalerCreator
+import org.teamvoided.nullium.data.gen.dyn.RepairDataCreator
 import org.teamvoided.nullium.data.gen.dyn.VillagerFoodCreator
 import org.teamvoided.nullium.data.gen.loot.EquipmentLootTablesProvider
 import org.teamvoided.nullium.data.gen.loot.InjectionLootTablesProvider
@@ -42,6 +43,7 @@ class NulliumData : DataGeneratorEntrypoint {
         // Nullium
         gen.add(NulRegistryKeys.VILLAGER_FOOD, VillagerFoodCreator::bootstrap)
         gen.add(NulRegistryKeys.MOB_SCALER, MobScalerCreator::bootstrap)
+        gen.add(NulRegistryKeys.REPAIR_DATA, RepairDataCreator::bootstrap)
     }
 
     class DynFabricReg(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
@@ -50,6 +52,7 @@ class NulliumData : DataGeneratorEntrypoint {
         override fun configure(reg: HolderLookup.Provider, entries: Entries) {
             entries.addAll(reg.getLookupOrThrow(RegistryKeys.CONFIGURED_FEATURE))
             // Nullium
+            entries.addAll(reg.getLookupOrThrow(NulRegistryKeys.REPAIR_DATA))
             entries.addAll(reg.getLookupOrThrow(NulRegistryKeys.VILLAGER_FOOD))
             entries.addFull(reg.getLookupOrThrow(NulRegistryKeys.MOB_SCALER))
         }

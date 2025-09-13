@@ -5,7 +5,6 @@ import net.fabricmc.loader.api.FabricLoader
 import org.teamvoided.nullium.Nullium.JSON
 import org.teamvoided.nullium.Nullium.MODID
 import org.teamvoided.nullium.Nullium.log
-import org.teamvoided.nullium.config.module.BlacksmithCfg
 import org.teamvoided.nullium.config.module.MainCfg
 import org.teamvoided.nullium.util.getTimeFileName
 import java.io.File
@@ -28,9 +27,6 @@ object NulConfigManager {
     @JvmStatic
     val main = MainCfg()
 
-    val blacksmith: BlacksmithCfg by lazy { BlacksmithCfg() }
-
-
     fun init() {
         if (!configDir.exists()) configDir.createDirectories()
         loadAll()
@@ -49,9 +45,7 @@ object NulConfigManager {
         loadInfo()
         main.load()
 
-        return listOf(
-            blacksmith.load(),
-        ).count { !it }
+        return 1
     }
 
     private fun backupAndClear() {

@@ -7,7 +7,6 @@ import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.teamvoided.nullium.cfg.NulConfig
-import org.teamvoided.nullium.config.NulConfigManager
 import org.teamvoided.nullium.init.*
 import org.teamvoided.nullium.module.Blacksmith
 import org.teamvoided.nullium.module.Compostable
@@ -31,7 +30,6 @@ object Nullium {
 
     fun commonInit() {
         log.info("Nulls your ium!")
-        NulConfigManager.init()
         // Reg init
         NulFeatures.init()
         NulRegistryKeys.init()

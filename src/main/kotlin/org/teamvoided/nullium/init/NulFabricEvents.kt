@@ -20,16 +20,14 @@ import net.minecraft.resource.AutoCloseableResourceManager
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.world.ServerWorld
 import org.teamvoided.nullium.Nullium.CONFIG
-import org.teamvoided.nullium.config.NulConfigManager
-import org.teamvoided.nullium.data.nullium.data.VillagerFood
 import org.teamvoided.nullium.data.loot.NulliumInjections
+import org.teamvoided.nullium.data.nullium.data.VillagerFood
 import org.teamvoided.nullium.module.Compostable
 import org.teamvoided.nullium.module.MobScale
 import org.teamvoided.nullium.util.lootPool
 
 @Suppress("UNUSED_PARAMETER")
 object NulFabricEvents {
-    val cfg = NulConfigManager.main.data()
 
     fun init() {
         ServerLifecycleEvents.START_DATA_PACK_RELOAD.register(::onStartDataPackReload)

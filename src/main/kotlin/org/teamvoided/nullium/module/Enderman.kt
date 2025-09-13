@@ -10,7 +10,7 @@ import net.minecraft.server.world.ServerWorld
 import org.teamvoided.nullium.data.loot.NulliumLootTables
 import org.teamvoided.nullium.util.getLootTable
 
-object HolderMan {
+object Enderman {
     @JvmStatic
     fun getBlocks(world: ServerWorld, enderman: EndermanEntity) {
         val states = world.getLootTable(NulliumLootTables.ENDERMAN_HOLDS)

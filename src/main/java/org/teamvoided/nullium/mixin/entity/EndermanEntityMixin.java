@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.teamvoided.nullium.module.HolderMan;
+import org.teamvoided.nullium.module.Enderman;
 
 import static org.teamvoided.nullium.Nullium.CONFIG;
 
@@ -33,7 +33,7 @@ abstract class EndermanEntityMixin extends MobEntity {
         entityData = super.initialize(world, difficulty, spawnReason, entityData);
         if (CONFIG.entities.endermanBlocksSpawn) {
             if (this.getCarriedBlock() == null && !SpawnReason.isSpawner(spawnReason)) {
-                HolderMan.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
+                Enderman.getBlocks(world.toServerWorld(), (EndermanEntity) (Object) this);
             }
         }
         return entityData;

@@ -13,12 +13,11 @@ import org.teamvoided.nullium.util.math.float_provider.WeightedListFloatProvider
 
 object MobScalerCreator {
     fun bootstrap(c: BootstrapContext<MobScaler>) {
-        c.make(NulMobScalers.SALMON, 0.8, 1.2)
-        c.make(NulMobScalers.COD, 0.9, 1.1)
-        c.make(NulMobScalers.TROPICAL_FISH, 0.9, 1.1)
-        c.make(NulMobScalers.SQUID, (1 to 5), (0.5 to 1))
-        c.make(NulMobScalers.GLOW_SQUID, 0.7)
-
+        c.make(NulMobScalers.SALMON, -0.2, 0.2)
+        c.make(NulMobScalers.COD, -0.1, 0.1)
+        c.make(NulMobScalers.TROPICAL_FISH, -0.1, 0.1)
+        c.make(NulMobScalers.SQUID, (0 to 5), (-0.5 to 1))
+        c.make(NulMobScalers.GLOW_SQUID, -0.3)
     }
 
     fun BootstrapContext<MobScaler>.make(

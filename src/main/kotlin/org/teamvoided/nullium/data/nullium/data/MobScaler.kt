@@ -15,7 +15,7 @@ data class MobScaler(val provider: FloatProvider) {
         fun Entity.getScaler(): MobScaler? = registryManager.get(MOB_SCALER).get(EntityType.getId(type))
         val CODEC: Codec<MobScaler> = RecordCodecBuilder.create<MobScaler> { instance ->
             instance.group(
-                FloatProvider.createValidatedCodec(0.1f, 64f).fieldOf("scale").forGetter(MobScaler::provider)
+                FloatProvider.createValidatedCodec(-64f, 64f).fieldOf("scale").forGetter(MobScaler::provider)
             ).apply(instance, ::MobScaler)
         }
     }
